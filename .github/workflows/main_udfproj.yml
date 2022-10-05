@@ -56,5 +56,5 @@ jobs:
         with:
           app-name: 'UdfProj'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_962C7E88C38A4FC78ABDFEBED97C3FA7 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3ACE3648EDE449F1B74257D8E8A538DC }}
           package: .
