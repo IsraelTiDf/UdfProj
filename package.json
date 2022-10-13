@@ -29,6 +29,7 @@
         "@mui/styled-engine-sc": "^5.10.6",
         "@mui/x-data-grid": "^5.17.5",
         "cpf-cnpj-validator": "^1.0.3",
+        "material-paper": "^0.0.8",
         "react-hook-form": "^7.36.1",
         "styled-components": "^5.3.6",
         "sweetalert2": "^11.4.37"
