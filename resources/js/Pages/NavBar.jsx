@@ -14,6 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 import { Link, Head } from '@inertiajs/inertia-react';
+import Img from '/resources/js/Pages/ImgBack.jsx';
 
 const pages = ['Home', 'Sobre nós', 'Contato'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -52,7 +53,7 @@ const ResponsiveAppBar = (props) => {
   console.log(props.props.auth.user);
 
   return (
-    <AppBar position="static" style={{ background: '#ffebee' }}>
+    <AppBar position="fixed" style={{ background: '#FFFFFF' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <LocalHospitalIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -134,7 +135,7 @@ const ResponsiveAppBar = (props) => {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: 'red', display: 'block' }}
               >
                 {page}
               </Button>
@@ -171,7 +172,7 @@ const ResponsiveAppBar = (props) => {
             </Menu> */}
             {props.props.auth.user ? (
             <Link href={route('dashboard')} className="text-sm text-gray-700 dark:text-gray-500 underline">
-                Dashboard
+                Minha conta
             </Link>
                 ) : (
                     <>

@@ -5,10 +5,11 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/inertia-react';
+import NavBar from '/resources/js/Pages/NavBar.jsx';
 
-export default function Register() {
+export default function Register(props) {
     const { data, setData, post, processing, errors, reset } = useForm({
-        name: '',
+        name:'',
         email: '',
         password: '',
         password_confirmation: '',
@@ -31,12 +32,15 @@ export default function Register() {
     };
 
     return (
+        <>
+        <NavBar props = {props}>
+        </NavBar>
         <GuestLayout>
             <Head title="Register" />
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel forInput="name" value="Name" />
+                    <InputLabel forInput="name" value="Nome" />
 
                     <TextInput
                         type="text"
@@ -69,7 +73,7 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel forInput="password" value="Password" />
+                    <InputLabel forInput="password" value="Senha" />
 
                     <TextInput
                         type="password"
@@ -85,7 +89,7 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel forInput="password_confirmation" value="Confirm Password" />
+                    <InputLabel forInput="password_confirmation" value="Confirmar Senha" />
 
                     <TextInput
                         type="password"
@@ -101,14 +105,16 @@ export default function Register() {
 
                 <div className="flex items-center justify-end mt-4">
                     <Link href={route('login')} className="underline text-sm text-gray-600 hover:text-gray-900">
-                        Already registered?
+                        Ja sou cadastrado
                     </Link>
 
-                    <PrimaryButton className="ml-4" processing={processing}>
-                        Register
+                    
+                    <PrimaryButton className="ml-5" processing={processing}>
+                        CADASTRAR
                     </PrimaryButton>
                 </div>
             </form>
         </GuestLayout>
+        </>
     );
 }
