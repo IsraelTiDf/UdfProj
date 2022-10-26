@@ -6,10 +6,14 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/inertia-react';
 import NavBar from '/resources/js/Pages/NavBar.jsx';
+// import TabPainel from '/resources/js/Pages/TabPainel.jsx';
 
 export default function Register(props) {
     const { data, setData, post, processing, errors, reset } = useForm({
         name:'',
+        cpf:'',
+        telefone:'',
+        dt_nascimento:'',
         email: '',
         password: '',
         password_confirmation: '',
@@ -33,8 +37,8 @@ export default function Register(props) {
 
     return (
         <>
-        <NavBar props = {props}>
-        </NavBar>
+        <NavBar props = {props}/>
+        {/* <TabPainel/> */}
         <GuestLayout>
             <Head title="Register" />
 
@@ -48,6 +52,57 @@ export default function Register(props) {
                         value={data.name}
                         className="mt-1 block w-full"
                         autoComplete="name"
+                        isFocused={true}
+                        handleChange={onHandleChange}
+                        required
+                    />
+
+                    <InputError message={errors.name} className="mt-2" />
+                </div>
+
+                <div>
+                    <InputLabel forInput="cpf" value="CPF" />
+
+                    <TextInput
+                        type="text"
+                        name="cpf"
+                        value={data.cpf}
+                        className="mt-1 block w-full"
+                        autoComplete="cpf"
+                        isFocused={true}
+                        handleChange={onHandleChange}
+                        required
+                    />
+
+                    <InputError message={errors.name} className="mt-2" />
+                </div>
+
+                <div>
+                    <InputLabel forInput="telefone" value="Telefone" />
+
+                    <TextInput
+                        type="text"
+                        name="telefone"
+                        value={data.cpf}
+                        className="mt-1 block w-full"
+                        autoComplete="telefone"
+                        isFocused={true}
+                        handleChange={onHandleChange}
+                        required
+                    />
+
+                    <InputError message={errors.name} className="mt-2" />
+                </div>
+
+                <div>
+                    <InputLabel forInput="dt_nascimento" value="Data de nascimento" />
+
+                    <TextInput
+                        type="date"
+                        name="dt_nascimento"
+                        value={data.cpf}
+                        className="mt-1 block w-full"
+                        autoComplete="dt_nascimento"
                         isFocused={true}
                         handleChange={onHandleChange}
                         required
@@ -108,7 +163,7 @@ export default function Register(props) {
                         Ja sou cadastrado
                     </Link>
 
-                    
+
                     <PrimaryButton className="ml-5" processing={processing}>
                         CADASTRAR
                     </PrimaryButton>

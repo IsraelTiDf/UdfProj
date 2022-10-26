@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('tb_especialidade', function (Blueprint $table) {
             $table->integerIncrements('id_especialidade');
             $table->string('nome', 50)->nullable();
+            $table->longText('ds_especialidade')->nullable();
             $table->string('emergencia', 3)->nullable();
             $table->timestamps();
         });
@@ -28,6 +29,8 @@ return new class extends Migration
      */
     public function down()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::dropIfExists('tb_especialidade');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 };

@@ -29,6 +29,9 @@ return new class extends Migration
      */
     public function down()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::dropIfExists('tb_especialidade_has_tb_clinica');
+        // Schema::dropIfExists('tb_especialidade_tb_clinica');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 };

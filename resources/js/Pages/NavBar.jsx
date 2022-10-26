@@ -11,10 +11,11 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
 import AdbIcon from '@mui/icons-material/Adb';
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 import { Link, Head } from '@inertiajs/inertia-react';
-import Img from '/resources/js/Pages/ImgBack.jsx';
 
 const pages = ['Home', 'Sobre nós', 'Contato'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -53,7 +54,7 @@ const ResponsiveAppBar = (props) => {
   console.log(props.props.auth.user);
 
   return (
-    <AppBar position="fixed" style={{ background: '#FFFFFF' }}>
+    <AppBar position="static" style={{ background: '#ffebee' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <LocalHospitalIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -135,7 +136,7 @@ const ResponsiveAppBar = (props) => {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'red', display: 'block' }}
+                sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
               </Button>
@@ -143,11 +144,26 @@ const ResponsiveAppBar = (props) => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            {/* <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
+
+            {props.props.auth.user ? (
+            <Link href={route('dashboard')} className="text-sm text-gray-700 dark:text-gray-500 underline">
+                {/* Dashboard */}
+
+
+            {props.props.auth.user.cpf && (
+                <Tooltip title="Usuario">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <AccountCircleIcon alt="Remy Sharp" />
+                </IconButton>
+                </Tooltip>
+            )}
+            {props.props.auth.user.cnpj && (
+                <Tooltip title="clinica">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <MedicalServicesIcon alt="Remy Sharp"/>
+                </IconButton>
+                </Tooltip>
+            )}
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
@@ -169,10 +185,8 @@ const ResponsiveAppBar = (props) => {
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
-            </Menu> */}
-            {props.props.auth.user ? (
-            <Link href={route('dashboard')} className="text-sm text-gray-700 dark:text-gray-500 underline">
-                Minha conta
+            </Menu>
+
             </Link>
                 ) : (
                     <>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+// use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -24,6 +25,11 @@ class RegisteredUserController extends Controller
         return Inertia::render('Auth/Register');
     }
 
+    public function create_clin()
+    {
+        return Inertia::render('Auth/Register');
+    }
+
     /**
      * Handle an incoming registration request.
      *
@@ -36,6 +42,9 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'cpf' => 'required',
+            'dt_nascimento' => 'required',
+            'telefone' => 'required',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
@@ -43,6 +52,36 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'cpf' => $request->cpf,
+            'telefone' => $request->telefone,
+            'dt_nascimento' => $request->dt_nascimento,
+            'password' => Hash::make($request->password),
+        ]);
+
+        event(new Registered($user));
+
+        Auth::login($user);
+
+        return redirect(RouteServiceProvider::HOME);
+    }
+
+    public function store_clin(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'cpf' => 'required',
+            'dt_nascimento' => 'required',
+            'telefone' => 'required',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'cpf' => $request->cpf,
+            'telefone' => $request->telefone,
+            'dt_nascimento' => $request->dt_nascimento,
             'password' => Hash::make($request->password),
         ]);
 

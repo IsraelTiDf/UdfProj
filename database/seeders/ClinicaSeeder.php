@@ -23,7 +23,7 @@ class ClinicaSeeder extends Seeder
             'telefone' => '994103232',
             'email' => Str::random(10).'@gmail.com',
             'senha' => Hash::make('password'),
-            'emergencia' => '1',
+            // 'emergencia' => '1',
             'longitude' => '-47.9292',
             'latitude' => '-15.7801',
         ],
@@ -33,7 +33,7 @@ class ClinicaSeeder extends Seeder
             'telefone' => '994103232',
             'email' => Str::random(10).'@gmail.com',
             'senha' => Hash::make('password'),
-            'emergencia' => '1',
+            // 'emergencia' => '1',
             'longitude' => '-15.7801',
             'latitude' => '-47.9292',
         ]]);
