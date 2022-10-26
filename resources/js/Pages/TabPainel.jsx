@@ -1,31 +1,66 @@
-// import * as React from 'react';
-// import {Box,Tab } from '@mui/material';
-// // import TabContext from '@mui/lab/TabContext';
-// // import TabList from '@mui/lab/TabList';
-// // import TabPanel from '@mui/lab/TabPanel';
-// import { TabPanel, TabList, TabContext } from "@mui/lab";
+import * as React from 'react';
+import PropTypes from 'prop-types';
+import {Tabs, Tab, Typography, Box } from '@mui/material';
+import Register from './Auth/Register.jsx';
 
-// export default function TabPainel() {
-//   const [value, setValue] = React.useState('1');
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
 
-//   const handleChange = (event, newValue) => {
-//     setValue(newValue);
-//   };
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
 
-//   return (
-//     <Box sx={{ width: '100%', typography: 'body1' }}>
-//       <TabContext value={value}>
-//         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-//           <TabList onChange={handleChange} aria-label="lab API tabs example">
-//             <Tab label="Item One" value="1" />
-//             <Tab label="Item Two" value="2" />
-//             <Tab label="Item Three" value="3" />
-//           </TabList>
-//         </Box>
-//         <TabPanel value="1">Item One</TabPanel>
-//         <TabPanel value="2">Item Two</TabPanel>
-//         <TabPanel value="3">Item Three</TabPanel>
-//       </TabContext>
-//     </Box>
-//   );
-// }
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
+
+export default function BasicTabs() {
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  return (
+
+    <Box sx={{ width: '100%' }}>
+      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+          <Tab label="Usuario" {...a11yProps(0)} />
+          <Tab label="Clinica" {...a11yProps(1)} />
+        </Tabs>
+      </Box>
+      <TabPanel value={value} index={0}>
+            {/* <Register/> */}
+
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+
+      </TabPanel>
+
+    </Box>
+
+  );
+}

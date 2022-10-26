@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use App\Models\clinica;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -14,7 +13,7 @@ use Illuminate\Validation\Rules;
 use App\Traits\ApiResponse;
 use Inertia\Inertia;
 
-class RegisteredUserController extends Controller
+class RegisterClinicaController extends Controller
 {
     /**
      * Display the registration view.
@@ -24,9 +23,11 @@ class RegisteredUserController extends Controller
 
     use ApiResponse;
 
-    public function create()
+
+    public function create_clin()
     {
-        return Inertia::render('Auth/Register');
+        // return "oi";
+        return Inertia::render('Auth/RegisterClinica');
     }
 
     /**
@@ -37,31 +38,35 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request)
+
+
+    public function store_clin(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'cpf' => 'required',
-            'dt_nascimento' => 'required',
+            'nome' => 'required|string|max:255',
+            'cnpj' => 'required',
+            // // 'dt_nascimento' => 'required',
             'telefone' => 'required',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
+
+        $user = clinica::create([
+            'nome' => $request->nome,
             'email' => $request->email,
-            'cpf' => $request->cpf,
+            'cnpj' => $request->cnpj,
             'telefone' => $request->telefone,
-            'dt_nascimento' => $request->dt_nascimento,
-            'password' => Hash::make($request->password),
+            // 'dt_nascimento' => $request->dt_nascimento,
+            'senha' => Hash::make($request->password),
         ]);
+        // dd($request->all());
 
-        event(new Registered($user));
+        // event(new Registered($user));
 
-        Auth::login($user);
+        // Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        // return redirect(RouteServiceProvider::HOME);
+        return $this->respondSuccess($user);
     }
-
 }

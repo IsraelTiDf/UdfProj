@@ -9,11 +9,12 @@ class clinica extends Model
     use HasFactory;
     protected $table = 'tb_clinica';
     protected $primaryKey = 'id_clinica';
+    public $timestamps = false;
     protected $fillable = [
         'nome',
-        'cpf',
+        'cnpj',
         'telefone',
-        'id_user',
+        // 'id_user',
         'email',
         'senha',
         'longitude',

@@ -51,7 +51,7 @@ const ResponsiveAppBar = (props) => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  console.log(props.props.auth.user);
+//   console.log(props.props.auth.user);
 
   return (
     <AppBar position="static" style={{ background: '#ffebee' }}>
@@ -201,6 +201,13 @@ const ResponsiveAppBar = (props) => {
                         >
                             /Register
                         </Link>
+
+                        {/* <Link
+                            href={route('register-clinica')}
+                            style={styles.textFont}
+                        >
+                           / Register-Clinica
+                        </Link> */}
                     </>
                 )}
 

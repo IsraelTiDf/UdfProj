@@ -6,18 +6,30 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/inertia-react';
 import NavBar from '/resources/js/Pages/NavBar.jsx';
-import TabPainel from '/resources/js/Pages/TabPainel.jsx';
+import axios from "axios";
+// import TabPainel from '/resources/js/Pages/TabPainel.jsx';
 
 export default function Register(props) {
     const { data, setData, post, processing, errors, reset } = useForm({
-        name:'',
-        cpf:'',
+        nome:'',
+        cnpj:'',
         telefone:'',
-        dt_nascimento:'',
         email: '',
         password: '',
         password_confirmation: '',
     });
+
+    const axiosRout = axios.create({
+        headers: {
+          "Content-Type": "application/json",
+          "X-Requested-With": "XMLHttpRequest",
+          Accept: "application/json",
+        },
+        validateStatus(status) {
+          return status >= 200 && status < 300; // default
+        },
+      });
+    //   const sucesso = window.location.replace("/dashboard");
 
     useEffect(() => {
         return () => {
@@ -31,44 +43,50 @@ export default function Register(props) {
 
     const submit = (e) => {
         e.preventDefault();
-
-        post(route('register'));
+        console.log(data);
+        axiosRout.post('/register/clinica1',data).then();
+        //   .then(function (response) {
+        //     console.log(response);
+        //   })
+        //   .catch(function (error) {
+        //     console.log(error);
+        //   });
     };
 
     return (
         <>
         <NavBar props = {props}/>
-        <GuestLayout>
         {/* <TabPainel/> */}
+        <GuestLayout>
             <Head title="Register" />
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel forInput="name" value="Nome" />
+                    <InputLabel forInput="nome" value="Nome" />
 
                     <TextInput
                         type="text"
-                        name="name"
-                        value={data.name}
+                        name="nome"
+                        value={data.nome}
                         className="mt-1 block w-full"
-                        autoComplete="name"
+                        autoComplete="nome"
                         isFocused={true}
                         handleChange={onHandleChange}
                         required
                     />
 
-                    <InputError message={errors.name} className="mt-2" />
+                    <InputError message={errors.nome} className="mt-2" />
                 </div>
 
                 <div>
-                    <InputLabel forInput="cpf" value="CPF" />
+                    <InputLabel forInput="cnpj" value="CNPJ" />
 
                     <TextInput
                         type="text"
-                        name="cpf"
-                        value={data.cpf}
+                        name="cnpj"
+                        value={data.cnpj}
                         className="mt-1 block w-full"
-                        autoComplete="cpf"
+                        autoComplete="cnpj"
                         isFocused={true}
                         handleChange={onHandleChange}
                         required
@@ -83,7 +101,7 @@ export default function Register(props) {
                     <TextInput
                         type="text"
                         name="telefone"
-                        value={data.telefone}
+                        value={data.cpf}
                         className="mt-1 block w-full"
                         autoComplete="telefone"
                         isFocused={true}
@@ -94,22 +112,6 @@ export default function Register(props) {
                     <InputError message={errors.name} className="mt-2" />
                 </div>
 
-                <div>
-                    <InputLabel forInput="dt_nascimento" value="Data de nascimento" />
-
-                    <TextInput
-                        type="date"
-                        name="dt_nascimento"
-                        value={data.dt_nascimento}
-                        className="mt-1 block w-full"
-                        autoComplete="dt_nascimento"
-                        isFocused={true}
-                        handleChange={onHandleChange}
-                        required
-                    />
-
-                    <InputError message={errors.name} className="mt-2" />
-                </div>
 
                 <div className="mt-4">
                     <InputLabel forInput="email" value="Email" />

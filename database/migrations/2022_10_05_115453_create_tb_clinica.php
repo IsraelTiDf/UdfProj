@@ -18,12 +18,13 @@ return new class extends Migration
             $table->string('nome', 50);
             $table->string('email', 50);
             $table->string('senha');
-            $table->integer('id_user')->unsigned();
+            $table->string('cnpj', 20);
+            $table->integer('id_user')->unsigned()->nullable();
             $table->foreign('id_user')->references('id')->on('users');
             $table->string('telefone', 11);
-            $table->string('emergencia', 3);
-            $table->decimal('longitude', 10,4);
-            $table->decimal('latitude', 10,4);
+            $table->string('emergencia', 3)->nullable();
+            $table->decimal('longitude', 10,4)->nullable();
+            $table->decimal('latitude', 10,4)->nullable();
 
         });
     }
