@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\clinica;
+use App\Models\User;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Validator;
 
 class RegisterClinicaController extends Controller
 {
@@ -116,6 +118,58 @@ class RegisterClinicaController extends Controller
 
         } catch (Throwable $e) {
             Log:error('Index Pedidos do Processo.', ['processo_id' => $processo->idDocumento]);
+            throw $e;
+        }
+    }
+
+    // public function __invoke(Request $request)
+    // {
+    //     dd($request);
+    //     return "Welcome to our homepage";
+    // }
+
+    public function update(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'nome' => 'required|max:200',
+            'email' => 'nullable|email',
+            'dt_nascimento' => 'nullable',
+            'telefone' => 'nullable|',
+            'cpf' => 'nullable|',
+        ], [
+            'email.email' => 'E-mail inválido.',
+            // 'email2.email' => 'E-mail secundário inválido',
+            'cpf.cpf' => 'CPF inválido',
+            'telefone.telefone' => 'Telefone fixo inválido',
+        ]);
+
+        $input = $validator->validate();
+
+
+        try {
+            if ($request->input('cpf')) {
+                $pessoa = User::findOrFail($id);
+                $pessoa->name = $input['nome'];
+                $pessoa->email = $input['email'];
+                $pessoa->dt_nascimento = $input['dt_nascimento'];
+                $pessoa->telefone = $input['telefone'];
+                $pessoa->cpf = $input['cpf'];
+                // dd($input);
+                $pessoa->save();
+
+            } else {
+                $clinica = Clinica::findOrFail($id);
+                dd($clinica);
+                $clinica->nome = $request->input('nome');
+                $clinica->cnpj = $request->input('cnpj');
+                $clinica->sigla = $request->input('sigla');
+
+                $clinica->save();
+            }
+
+            return $this->respondSuccess(null, 'Usuario alterado.');
+        } catch (Throwable $e) {
+            Log::error('Editando usuario.', ['Usuario_id' => $id]);
             throw $e;
         }
     }

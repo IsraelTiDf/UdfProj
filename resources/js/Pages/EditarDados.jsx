@@ -9,7 +9,7 @@ import { useForm, Controller } from "react-hook-form";
 // } from "@/shared/utils/input-mask";
 import Modal from "../Layouts/Modal.jsx";
 
-// import useEditar from "./useEditar";
+import useEditar from "./clinica/useEditar";
 
 function EditarDados({
   formValues,
@@ -22,37 +22,38 @@ function EditarDados({
     mode: "onChange",
     defaultValues: formValues,
   });
-//   const [{ error }, editar] = useEditar();
+//   console.log(interessadoId);
+  const [{ error }, editar] = useEditar();
 
-//   const { isSubmitting, isValid, isDirty } = formState;
+  const { isSubmitting, isValid, isDirty } = formState;
 
-//   useEffect(() => {
-//     if (!error) {
-//       reset(formValues);
-//     }
-//   }, [reset, error, formValues]);
+  useEffect(() => {
+    if (!error) {
+      reset(formValues);
+    }
+  }, [reset, error, formValues]);
 
-//   const handleInputChange = (event) => {
-//     const { name } = event.target;
-//     let { value } = event.target;
+  const handleInputChange = (event) => {
+    const { name } = event.target;
+    let { value } = event.target;
 
-//     switch (name) {
-//       case "cpf":
-//         value = cpfMask(value);
-//         break;
-//       case "celular":
-//         value = celularMask(value);
-//         break;
-//       case "telefone_fixo":
-//         value = telefoneFixoMask(value);
-//         break;
-//       default:
-//         break;
-//     }
+    switch (name) {
+      case "cpf":
+        value = cpfMask(value);
+        break;
+      case "celular":
+        value = celularMask(value);
+        break;
+      case "telefone":
+        value = telefoneFixoMask(value);
+        break;
+      default:
+        break;
+    }
 
-//     // eslint-disable-next-line no-param-reassign
-//     event.target.value = value;
-//   };
+    // eslint-disable-next-line no-param-reassign
+    event.target.value = value;
+  };
 
   const handleInputBlur = (event) => {
     const { value } = event.target;
@@ -62,9 +63,16 @@ function EditarDados({
 
   const handleFormSubmit = async (data, event) => {
     // event.preventDefault();
-    alert('Ainda nao');
+    // alert('Ainda nao');
 
-    // await editar(interessadoId, data, resultDispatch, onClose);
+    await editar(interessadoId, data, resultDispatch, onClose);
+
+    // await axios({
+    //     method: "post",
+    //     url: `/editar-usuario/${interessadoId}`,
+    //     data: data,
+    // });
+    // });
   };
   console.log(formValues);
   return (

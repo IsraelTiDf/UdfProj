@@ -136,6 +136,9 @@ return [
     'uploaded'             => 'Ocorreu uma falha no upload do campo :attribute.',
     'url'                  => 'O campo :attribute tem um formato inválido.',
     'uuid' => 'O campo :attribute deve ser um UUID válido.',
+    'cpf' => 'O campo CPF não é um CPF válido.',
+    'cnpj' => 'O campo CNPJ não é um CNPJ válido.',
+    'telefone' => 'O campo telefone não é um telefone válido.',
 
     /*
     |--------------------------------------------------------------------------
