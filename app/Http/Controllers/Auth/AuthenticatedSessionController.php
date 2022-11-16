@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Models\User;
+use App\Models\clinica;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -33,11 +35,33 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
-        $request->authenticate();
+        $all =$request->all();
+        $all['email'];
+        $clinica = clinica::where('email',$all['email'])->first();
+        $usuario = User::where('email',$all['email'])->first();
+        // dd($usuario);
+        if($usuario){
+            $request->authenticate();
 
-        $request->session()->regenerate();
+            $request->session()->regenerate();
 
         return redirect()->intended(RouteServiceProvider::HOME);
+        }
+        if($clinica){
+            $request->authenticate();
+
+            $request->session()->regenerate();
+
+        return redirect()->intended(RouteServiceProvider::HOME);
+        }
+
+        // // dd();
+        // $request->authenticate();
+
+        // $request->session()->regenerate();
+
+        // return redirect()->intended(RouteServiceProvider::HOME);
+        // return redirect()->intended(RouteServiceProvider::HOME);
     }
 
     /**

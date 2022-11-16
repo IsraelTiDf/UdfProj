@@ -20,6 +20,7 @@ class ClinicaSeeder extends Seeder
         DB::table('tb_clinica')->insert([[
             'nome' => 'saporra funfa clinica',
             'id_user' => '1',
+            'cnpj' => '444454',
             'telefone' => '994103232',
             'email' => Str::random(10).'@gmail.com',
             'senha' => Hash::make('password'),
@@ -29,7 +30,8 @@ class ClinicaSeeder extends Seeder
         ],
         [
             'nome' => 'clinica 2',
-            'id_user' => '1',
+            'id_user' => '2',
+            'cnpj' => '41717',
             'telefone' => '994103232',
             'email' => Str::random(10).'@gmail.com',
             'senha' => Hash::make('password'),

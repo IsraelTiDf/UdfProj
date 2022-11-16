@@ -145,12 +145,12 @@ const ResponsiveAppBar = (props) => {
 
           <Box sx={{ flexGrow: 0 }}>
 
-            {props.props.auth.user ? (
+            {/* {props.props.auth.user ? ( */}
             <Link href={route('dashboard')} className="text-sm text-gray-700 dark:text-gray-500 underline">
-                {/* Dashboard */}
+                Dashboard
 
 
-            {props.props.auth.user.cpf && (
+            {/* {props.props.auth.user.cpf && (
                 <Tooltip title="Usuario">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <AccountCircleIcon alt="Remy Sharp" />
@@ -163,7 +163,7 @@ const ResponsiveAppBar = (props) => {
                     <MedicalServicesIcon alt="Remy Sharp"/>
                 </IconButton>
                 </Tooltip>
-            )}
+            )} */}
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"

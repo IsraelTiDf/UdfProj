@@ -36,6 +36,8 @@ Route::middleware('guest')->group(function () {
                 //-------------------------------
                 Route::post('register/clinica1', [RegisterClinicaController::class, 'store_clin']);
 
+                Route::get('view/clinica', [RegisterClinicaController::class, 'index'])->name('view-clinica');
+
                 Route::get('register/clinica', [RegisterClinicaController::class, 'create_clin'])
                 ->name('register-clinica');
                 //-------------------------------

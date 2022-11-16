@@ -7,6 +7,9 @@ import { Link } from '@inertiajs/inertia-react';
 
 export default function Authenticated({ auth, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
+    const cpf= auth.user.cpf;
+    const cnpj= auth.user.cnpj;
+    // console.log(cpf);
 
     return (
         <div className="min-h-screen bg-gray-100">
@@ -20,11 +23,26 @@ export default function Authenticated({ auth, header, children }) {
                                 </Link>
                             </div>
 
-                            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                    Dashboard
-                                </NavLink>
-                            </div>
+                            {cpf && (
+                                <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                    <NavLink href={route('dashboard')} active={route().current('dashboard')}>
+                                        Area Usuario
+                                    </NavLink>
+                                    <NavLink href={route('usuario')} active={route().current('usuario')}>
+                                        Clinicas
+                                    </NavLink>
+                                </div>
+                            )}
+                            {cnpj && (
+                                <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                    <NavLink href={route('dashboard')} active={route().current('dashboard')}>
+                                        Area Clinica
+                                    </NavLink>
+                                    <NavLink href={route('usuario')} active={route().current('usuario')}>
+                                        Usuarios
+                                    </NavLink>
+                                </div>
+                            )}
                         </div>
 
                         <div className="hidden sm:flex sm:items-center sm:ml-6">

@@ -4,13 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\clinica;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Auth\Events\Registered;
+use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
-use App\Traits\ApiResponse;
 use Inertia\Inertia;
 
 class RegisterClinicaController extends Controller
@@ -22,7 +20,6 @@ class RegisterClinicaController extends Controller
      */
 
     use ApiResponse;
-
 
     public function create_clin()
     {
@@ -39,7 +36,6 @@ class RegisterClinicaController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      */
 
-
     public function store_clin(Request $request)
     {
         $request->validate([
@@ -50,7 +46,6 @@ class RegisterClinicaController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-
 
         $user = clinica::create([
             'nome' => $request->nome,
@@ -67,6 +62,62 @@ class RegisterClinicaController extends Controller
         // Auth::login($user);
 
         // return redirect(RouteServiceProvider::HOME);
+        // dd($user);
         return $this->respondSuccess($user);
     }
+
+    use ApiResponse;
+
+    public function index()
+    {
+
+        try {
+            $usuario
+            = clinica::select(
+                'nome',
+                'cpf',
+                'name',
+                'cnpj',
+                'users.telefone',
+                // 'id_user',
+                'users.email',
+                // 'senha',
+                'longitude',
+                'latitude'
+            )
+            // ->join(
+            ->join('users', 'users.id', '=', 'tb_clinica.id_user')
+                // ->with([
+                //     'usuario' => function ($query) {
+                //         $query->select(
+                //             'name',
+                //             'cpf',
+                //             'telefone',
+                //             'email',
+                //             'dt_nascimento',
+                //             'sexo'
+                //         );
+                //     },
+                //     // 'usuario',
+                // ])
+                ->first();
+
+                // return $this->respondWithResource(PedidoResource::collection($processo->pedidos));
+                // dd($usuario);
+                return Inertia::render('EditUsu', [
+                    'id' => $usuario->cnpj,
+                    'nome' => $usuario->nome,
+                ]);
+                // return [
+                //     'id' => $usuario->cnpj,
+                //     'nome' => $usuario->nome,
+
+                // ];
+
+        } catch (Throwable $e) {
+            Log:error('Index Pedidos do Processo.', ['processo_id' => $processo->idDocumento]);
+            throw $e;
+        }
+    }
+
 }

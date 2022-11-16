@@ -2,9 +2,13 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import {Tabs, Tab, Typography, Box } from '@mui/material';
 import Register from './Auth/Register.jsx';
+import RegisterClinica from './Auth/RegisterClinica.jsx';
+import GuestLayout from '@/Layouts/GuestLayout';
+import NavBar from './NavBar.jsx';
 
 function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+    const { children, value, index, ...other } = props;
+    // const props = props;
 
   return (
     <div
@@ -45,7 +49,7 @@ export default function BasicTabs() {
 
   return (
 
-    <Box sx={{ width: '100%' }}>
+    <GuestLayout>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label="Usuario" {...a11yProps(0)} />
@@ -53,14 +57,14 @@ export default function BasicTabs() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-            {/* <Register/> */}
+            <Register props = {value}/>
 
       </TabPanel>
       <TabPanel value={value} index={1}>
-
+            <RegisterClinica props = {value}/>
       </TabPanel>
 
-    </Box>
+    </GuestLayout>
 
   );
 }

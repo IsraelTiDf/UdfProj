@@ -9,7 +9,7 @@ import NavBar from '/resources/js/Pages/NavBar.jsx';
 import axios from "axios";
 // import TabPainel from '/resources/js/Pages/TabPainel.jsx';
 
-export default function Register(props) {
+export default function RegisterClinica(props) {
     const { data, setData, post, processing, errors, reset } = useForm({
         nome:'',
         cnpj:'',
@@ -55,7 +55,7 @@ export default function Register(props) {
 
     return (
         <>
-        <NavBar props = {props}/>
+        {/* <NavBar props = {props}/> */}
         {/* <TabPainel/> */}
         <GuestLayout>
             <Head title="Register" />
