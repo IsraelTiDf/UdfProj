@@ -54,17 +54,17 @@ const ResponsiveAppBar = (props) => {
 //   console.log(props.props.auth.user);
 
   return (
-    <AppBar position="static" style={{ background: '#ffebee' }}>
+    <AppBar position="fixed" style={{ background: '#FFFFFF' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <LocalHospitalIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
-            variant="h6"
             noWrap
             component="a"
             href="/"
             sx={{
               mr: 2,
+              fontSize: '20px',
               display: { xs: 'none', md: 'flex' },
               fontFamily: 'monospace',
               fontWeight: 700,
@@ -136,7 +136,7 @@ const ResponsiveAppBar = (props) => {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, display: 'block', fontFamily: 'arial', color: 'red',fontSize: '14px', fontWeight: 600, letterSpacing: '.1rem',}}
               >
                 {page}
               </Button>
@@ -145,12 +145,12 @@ const ResponsiveAppBar = (props) => {
 
           <Box sx={{ flexGrow: 0 }}>
 
-            {/* {props.props.auth.user ? ( */}
+            {props.props.auth.user ? (
             <Link href={route('dashboard')} className="text-sm text-gray-700 dark:text-gray-500 underline">
-                Dashboard
+                {/* Dashboard */}
 
 
-            {/* {props.props.auth.user.cpf && (
+            {props.props.auth.user.cpf && (
                 <Tooltip title="Usuario">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <AccountCircleIcon alt="Remy Sharp" />
@@ -163,7 +163,7 @@ const ResponsiveAppBar = (props) => {
                     <MedicalServicesIcon alt="Remy Sharp"/>
                 </IconButton>
                 </Tooltip>
-            )} */}
+            )}
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
@@ -210,7 +210,7 @@ const ResponsiveAppBar = (props) => {
                         </Link> */}
                     </>
                 )}
-
+          
           </Box>
         </Toolbar>
       </Container>

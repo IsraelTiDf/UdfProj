@@ -4,25 +4,40 @@ import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link } from '@inertiajs/inertia-react';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 
 export default function Authenticated({ auth, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
-    const cpf= auth.user.cpf;
-    const cnpj= auth.user.cnpj;
-    // console.log(cpf);
+    const cpf = auth.user.cpf;
+    const cnpj = auth.user.cnpj;
+    console.log(auth);
 
     return (
-        <div className="min-h-screen bg-gray-100">
-            <nav className="bg-white border-b border-gray-100">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex justify-between h-16">
-                        <div className="flex">
-                            <div className="shrink-0 flex items-center">
+        <div className=" min-h-screen bg-yellow-100">
+            <nav className="position-fixed bg-white border-b border-black-100">
+                <div >
+                    <div className="flex justify-between h-16.8">
+                        <div className="flex sm:ml-48" >
+                        <div className="hidden sm:flex  sm:items-center sm:my-5 sm:ml-12">
                                 <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto text-gray-500" />
+                                    <div style={{
+                                        marginLeft: '-0.5px',
+                                        marginTop: '-1px',
+                                        width: "145px",
+                                        fontFamily: 'monospace',
+                                        color: '#591010',
+                                        fontSize: '20px',
+                                        fontWeight: 600,
+                                        letterSpacing: '.3rem',
+                                        textDecoration: 'none',
+                                         }}> DOCinHAND
+                                    </div>
                                 </Link>
                             </div>
 
+                           
+                        </div>
                             {cpf && (
                                 <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                     <NavLink href={route('dashboard')} active={route().current('dashboard')}>
@@ -43,9 +58,8 @@ export default function Authenticated({ auth, header, children }) {
                                     </NavLink>
                                 </div>
                             )}
-                        </div>
 
-                        <div className="hidden sm:flex sm:items-center sm:ml-6">
+                        <div className="hidden sm:flex sm:items-center mr-32">
                             <div className="ml-3 relative">
                                 <Dropdown>
                                     <Dropdown.Trigger>
