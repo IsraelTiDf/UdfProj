@@ -23,7 +23,7 @@ class clinica extends Model
 
     public function usuario()
     {
-        return $this->belongsToMany('App\Models\User', 'id', 'id_user');
+        return $this->belongsToMany(User::class, 'id', 'id_user');
     }
 
 

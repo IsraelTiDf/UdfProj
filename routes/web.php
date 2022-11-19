@@ -40,6 +40,7 @@ Route::get('/dashboard', function () {
 Route::get('/usuario', [RegisterClinicaController::class, 'index'])->name('usuario');
 
 Route::post('/editar-usuario/{id}', [RegisterClinicaController::class,'update'])->name('editar-usuario');
+Route::post('/delete-clinica/{id}', [RegisterClinicaController::class,'delete'])->name('editar-clinica');
 // ->only(['store'  , 'update']);
 
 // Route::apiResource('interessados', InteressadosController::class)

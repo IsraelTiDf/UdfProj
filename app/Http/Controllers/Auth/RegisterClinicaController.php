@@ -74,41 +74,16 @@ class RegisterClinicaController extends Controller
     {
 
         try {
-            $usuario
-            = clinica::select(
-                'nome',
-                'cpf',
-                'name',
-                'cnpj',
-                'users.telefone',
-                // 'id_user',
-                'users.email',
-                // 'senha',
-                'longitude',
-                'latitude'
-            )
-            // ->join(
-            ->join('users', 'users.id', '=', 'tb_clinica.id_user')
-                // ->with([
-                //     'usuario' => function ($query) {
-                //         $query->select(
-                //             'name',
-                //             'cpf',
-                //             'telefone',
-                //             'email',
-                //             'dt_nascimento',
-                //             'sexo'
-                //         );
-                //     },
-                //     // 'usuario',
-                // ])
-                ->first();
 
-                // return $this->respondWithResource(PedidoResource::collection($processo->pedidos));
+            $usuario = Auth::user();
+            $usuario->load([ 'clinica']);
+
                 // dd($usuario);
-                return Inertia::render('EditUsu', [
-                    'id' => $usuario->cnpj,
-                    'nome' => $usuario->nome,
+                return Inertia::render('Area', [
+                    'id' => $usuario->id,
+                    'cpf' => $usuario->cpf,
+                    'nome' => $usuario->name,
+                    'clinica' => $usuario->clinica,
                 ]);
                 // return [
                 //     'id' => $usuario->cnpj,
@@ -117,7 +92,7 @@ class RegisterClinicaController extends Controller
                 // ];
 
         } catch (Throwable $e) {
-            Log:error('Index Pedidos do Processo.', ['processo_id' => $processo->idDocumento]);
+            Log:error('Index das clinicas.', ['id' => $usuario->id]);
             throw $e;
         }
     }
@@ -130,6 +105,53 @@ class RegisterClinicaController extends Controller
 
     public function update(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+            'nome' => 'required|max:200',
+            'email' => 'nullable|email',
+            'dt_nascimento' => 'nullable',
+            'telefone' => 'nullable|',
+            'cpf' => 'nullable|',
+        ], [
+            'email.email' => 'E-mail inválido.',
+            // 'email2.email' => 'E-mail secundário inválido',
+            'cpf.cpf' => 'CPF inválido',
+            'telefone.telefone' => 'Telefone fixo inválido',
+        ]);
+
+        $input = $validator->validate();
+
+
+        try {
+            if ($request->input('cpf')) {
+                $pessoa = User::findOrFail($id);
+                $pessoa->name = $input['nome'];
+                $pessoa->email = $input['email'];
+                $pessoa->dt_nascimento = $input['dt_nascimento'];
+                $pessoa->telefone = $input['telefone'];
+                $pessoa->cpf = $input['cpf'];
+                // dd($input);
+                $pessoa->save();
+
+            } else {
+                $clinica = Clinica::findOrFail($id);
+                dd($clinica);
+                $clinica->nome = $request->input('nome');
+                $clinica->cnpj = $request->input('cnpj');
+                $clinica->sigla = $request->input('sigla');
+
+                $clinica->save();
+            }
+
+            return $this->respondSuccess(null, 'Usuario alterado.');
+        } catch (Throwable $e) {
+            Log::error('Editando usuario.', ['Usuario_id' => $id]);
+            throw $e;
+        }
+    }
+
+    public function delete(Request $request, $id)
+    {
+        dd($id);
         $validator = Validator::make($request->all(), [
             'nome' => 'required|max:200',
             'email' => 'nullable|email',

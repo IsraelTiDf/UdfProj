@@ -8,11 +8,12 @@ import { Head, Link, useForm } from '@inertiajs/inertia-react';
 import NavBar from '/resources/js/Pages/NavBar.jsx';
 import TabPainel from '/resources/js/Pages/TabPainel.jsx';
 import { cpf } from 'cpf-cnpj-validator';
+import { cpfMask } from '@/Layouts/input-mask';
 
 const rules = {
     cpf: {
         required: "CPF é obrigatória",
-        pattern: "A CPF inserida e invalido"
+        pattern: "A CPF inserida é invalido"
     }
 };
 export default function Register(props) {
@@ -34,6 +35,8 @@ export default function Register(props) {
 
     const onHandleChange = (event) => {
         setData(event.target.name, event.target.type === 'checkbox' ? event.target.checked : event.target.value);
+        // alert(event.target.value);
+        event.target.value = cpfMask(event.target.value);
     };
 
     const submit = (e) => {
@@ -41,6 +44,13 @@ export default function Register(props) {
 
         post(route('register'));
     };
+
+    const handleCPFChange = (event) => {
+        // alert(event.target.value);
+        // eslint-disable-next-line no-param-reassign
+        event.target.value = cpfMask(event.target.value);
+      };
+    // const cpfField = register("cpf", rules.cpf);
 
     return (
         <>
@@ -68,7 +78,7 @@ export default function Register(props) {
                 </div>
 
                 <div>
-                    <InputLabel forInput="cpf" value="CPF" />
+                    <InputLabel forInput="cpf" value="CPF" inputProps={{ minLength: 14, maxLength: 14 }} />
 
                     <TextInput
                         type="text"
@@ -77,13 +87,19 @@ export default function Register(props) {
                         className="mt-1 block w-full"
                         autoComplete="cpf"
                         isFocused={true}
-                        handleChange={onHandleChange}
-                        rules={{
-                            required: true,
-                        }}
+                        // inputRef={cpfField.ref}
+                        // inputProps={{ minLength: 14, maxLength: 14 }}
+                        handleChange={handleCPFChange}
+                        // onChange={(event) => {
+                        //     // cpfField.onChange(event);
+                        //     handleCPFChange(event);
+                        //   }}
+                        // rules={{
+                        //     required: true,
+                        // }}
                     />
 
-                    <InputError message={errors ? rules.cpf[errors.type] : ""} className="mt-2" />
+                    <InputError message={rules.cpf[errors.type]} className="mt-2" />
                 </div>
 
                 <div>

@@ -24,7 +24,7 @@ export default function useEditar() {
       };
 
       const onSuccess = () => {
-        // enqueueSnackbar("Dados alterados");
+        enqueueSnackbar("Dados alterados");
         resultDispatch({
           type: "UPDATE_INTERESSADO",
           ...formData,
