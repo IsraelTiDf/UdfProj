@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { useForm, Controller, FormProvider } from "react-hook-form";
-import { Container, Paper, Grid, Box, Typography, useMediaQuery, Tab, Tabs, TextField, Autocomplete  } from "@mui/material";
+import { Container, Paper, Button, Grid, Box, Typography, useMediaQuery, Tab, Tabs, TextField, Autocomplete  } from "@mui/material";
 
 // import IconButton from 'material-ui/IconButton';
 // import ActionHome from 'material-ui/svg-icons/action/home';
@@ -23,7 +23,7 @@ const styles = {
     img: {
         // height: 1356,
         backgroundImage: `url(${Image})`,
-        height: 1000,
+        height: 930,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         // width: `calc(100vw + 100px)`,
@@ -72,31 +72,49 @@ export default function Img(props) {
                         opacity: [0.9, 0.8, 0.7],
                     },
                 }}> */}
-                    {valueFodac}
                 {/* </Paper> */}
-                        <Controller
+                    </Grid>
+                </Grid>
+                <Grid container spacing={3} style={{marginTop: '200px', marginBottom: '200px', padding: '120px'}}>
+                <Grid item xs={4} style={{}}>
+                <Box style={{}}>
+                        <Controller 
                             name="especialidade"
                             control={control}
                             defaultValue=""
                             render={({ field }) => (
-                                <Autocomplete
-                                {...field}
-                                freeSolo
-                                options={dados}
-                                getOptionLabel={(option) => option.nome || ""}
-                                isOptionEqualToValue={(option, value) => option.id_especialidade === value.id_especialidade}
-                                renderInput={(params) => (
+                                <Autocomplete 
+                                    {...field}
+                                    freeSolo
+                                    options={dados}
+                                    getOptionLabel={(option) => option.nome || ""}
+                                    isOptionEqualToValue={(option, value) => option.id_especialidade === value.id_especialidade}
+                                    renderInput={(params) => (
                                     <TextField
-                                    {...params}
-                                    label="Pesquisa as Especialidade"
-                                    variant="outlined"
-                                    />
-                                    )}
-                                    onChange={(_, data) => handleChange(data)}
-                                    />
-                                    )}
-                                    />
+                                            {...params}
+                                            label="Pesquisa as Especialidade"
+                                            variant="outlined"
+                                            />
+                                            )}
+                                            onChange={(_, data) => handleChange(data)}
+                                            />
+                                            )}
+                                />
+                    </Box>
+                </Grid>
+                    <Grid item xs={2} style={{ paddingTop: '32px', paddingRight: '100px'}}>
+                        <Box  style={{backgroundColor:'red', textAlign: 'center',}}>
+                            <Button style={{color:'white'}}>Buscar</Button>
+                        </Box>
                     </Grid>
+                    <Grid item xs={6} style={{margin: '-30px'}}>
+                        <Box style={{ fontFamily: 'arial', color: '#FF1010', fontSize: '20px', fontWeight: 600, letterSpacing: '.1rem', marginBottom: '10px' 
+                                }}>VISÃO GERAL
+                        </Box>
+                            <Box style={{textIndent: 'justify', fontFamily: 'calibri', color: '#591010', fontSize: '19px', fontWeight: 600, letterSpacing: '.1rem',
+                                }}>{valueFodac}
+                        </Box>
+                    </Grid>    
                 </Grid>
             </Box>
 
