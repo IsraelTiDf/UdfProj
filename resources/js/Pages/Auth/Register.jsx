@@ -7,7 +7,14 @@ import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/inertia-react';
 import NavBar from '/resources/js/Pages/NavBar.jsx';
 import TabPainel from '/resources/js/Pages/TabPainel.jsx';
+import { cpf } from 'cpf-cnpj-validator';
 
+const rules = {
+    cpf: {
+        required: "CPF é obrigatória",
+        pattern: "A CPF inserida e invalido"
+    }
+};
 export default function Register(props) {
     const { data, setData, post, processing, errors, reset } = useForm({
         name:'',
@@ -37,7 +44,7 @@ export default function Register(props) {
 
     return (
         <>
-        <NavBar props = {props}/>
+        {/* <NavBar props = {props}/> */}
         <GuestLayout>
         {/* <TabPainel/> */}
             <Head title="Register" />
@@ -71,10 +78,12 @@ export default function Register(props) {
                         autoComplete="cpf"
                         isFocused={true}
                         handleChange={onHandleChange}
-                        required
+                        rules={{
+                            required: true,
+                        }}
                     />
 
-                    <InputError message={errors.name} className="mt-2" />
+                    <InputError message={errors ? rules.cpf[errors.type] : ""} className="mt-2" />
                 </div>
 
                 <div>

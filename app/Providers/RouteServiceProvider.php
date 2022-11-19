@@ -7,6 +7,7 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use App\Traits\ApiResponse;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -18,6 +19,44 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/dashboard';
+    // public const HOME = '/dashboard';
+
+    use ApiResponse;
+
+    /**
+     * Pedidos
+     *
+     * @param Documento $processo
+     * @return Illuminate\Http\Response;
+     */
+    public function index()
+    {
+        dd("oi");
+        return ;
+        try {
+            $processo->load([
+                'pedidos' => function ($query) {
+                    $query->select(
+                        'idDocumento',
+                        'numeroOrgao',
+                        'sequencial',
+                        'ano',
+                        'fkDocumentoPai',
+                        'fkAssunto',
+                        'dtReferencia',
+                        'dtCriacao'
+                    );
+                },
+                'pedidos.assunto',
+            ]);
+
+            return $this->respondWithResource(PedidoResource::collection($processo->pedidos));
+
+        } catch (Throwable $e) {
+            Log:error('Index Pedidos do Processo.', ['processo_id' => $processo->idDocumento]);
+            throw $e;
+        }
+    }
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.

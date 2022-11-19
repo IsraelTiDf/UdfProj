@@ -14,12 +14,17 @@ class clinica extends Model
         'nome',
         'cnpj',
         'telefone',
-        // 'id_user',
+        'id_user',
         'email',
         'senha',
         'longitude',
         'latitude'
     ];
+
+    public function usuario()
+    {
+        return $this->belongsToMany('App\Models\User', 'id', 'id_user');
+    }
 
 
 }

@@ -4,6 +4,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Models\Especialidade;
 use Inertia\Inertia;
+use App\Models\User;
+use App\Http\Controllers\Auth\RegisterClinicaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,8 +29,21 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth', 'verified'])->group(function () {
 
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard',[
+        'usuario' => User::all()
+    ]);
+})->name('dashboard');
+
+Route::get('/usuario', [RegisterClinicaController::class, 'index'])->name('usuario');
+
+Route::post('/editar-usuario/{id}', [RegisterClinicaController::class,'update'])->name('editar-usuario');
+// ->only(['store'  , 'update']);
+
+// Route::apiResource('interessados', InteressadosController::class)
+// ->only(['update']);
+
+});
 require __DIR__.'/auth.php';
