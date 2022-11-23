@@ -168,12 +168,12 @@ function EditarDados({
                 )}
               /> */}
               <TextField
-                key="cpf"
+                key="email"
                 fullWidth
-                label="CPF"
+                label="EMAIL"
                 variant="standard"
                 inputProps={{ readOnly: true }}
-                defaultValue={formValues.cpf}
+                defaultValue={formValues.email}
               />
             </Grid>
 

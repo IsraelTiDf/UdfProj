@@ -1,5 +1,5 @@
 import React, { Component,useState } from "react";
-import { Grid, List, ListItem, ListItemText, Tooltip ,IconButton,Button
+import { Grid, List, ListItem, TextField, ListItemText, Tooltip ,IconButton,Button
     ,Dialog ,DialogActions,DialogContent,DialogContentText,DialogTitle
 } from "@mui/material";
 import CreateData from "./CreateData.jsx";
@@ -7,6 +7,11 @@ import DataLists from "./DataLists.jsx";
 import {Edit as EditIcon,} from "@mui/icons-material";
 import {Delete as DeleteIcon,} from "@mui/icons-material";
 import useExcluir from "../Pages/clinica/useExcluir";
+import PersonIcon from '@mui/icons-material/Person';
+import EmailIcon from '@mui/icons-material/Email';
+import SmartphoneIcon from '@mui/icons-material/Smartphone';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import BadgeIcon from '@mui/icons-material/Badge';
 // import DeleteIcon from '@mui/icons-material/Delete';
 export default function Crud(props) {
     console.log(props);
@@ -31,50 +36,83 @@ export default function Crud(props) {
     //     excluir;
     //   };
 
-    // const handleExcluir = async (data) => {
+    const handleExcluir = async (data) => {
 
-    //     // return useExcluir(clinicaId);
+        // return useExcluir(clinicaId);
 
-    //     // setOpen(false);
+        // setOpen(false);
 
-    //         await axios({
-    //         method: "post",
-    //         url: `/delete-clinica/${clinicaId}`,
-    //         // data: data,
-    //     });
-    //     // });
+            await axios({
+            method: "post",
+            url: `/delete-clinica/${clinicaId}`,
+            // data: data,
+        });
+        // });
 
-    // };
+    };
     return (
-        <List>
-            <ListItem>
-                <ListItemText
-                    primary="Nome"
-                    secondary={value.nome}
-                />
-
-                <ListItemText
-                    primary="CNPJ"
-                    secondary={value.cnpj || "Nenhuma"}
-                />
-                <ListItemText
-                    primary="Data de nascimento"
-                    secondary={value.dt_nascimento || "Nenhuma"}
-                />
+        <List style={{paddingLeft:"420px", paddingTop:"100px"}}>
+            <ListItem style={{ textAlign:"center" }}>
+                <Grid style={{ width:"70%", }}>
+                    <TextField style={{width:'90%', }}
+                        label= <PersonIcon style={{fontSize:"35px",}}/>
+                        defaultValue={value.nome}
+                        InputProps={{
+                        readOnly: true,
+                        }}
+                        />
+                </Grid>
+            </ListItem>
+            <ListItem style={{ textAlign:"center" }}>
+                <Grid style={{width:"70%", marginTop:'30px',}}>
+                    <TextField style={{width:'90%', fontSize:"40px"}}
+                        label= <BadgeIcon style={{fontSize:"35px"}}/>
+                        defaultValue={value.cnpj || "Nenhuma"}
+                        InputProps={{
+                            readOnly: true,
+                        }}
+                    />  
+                </Grid> 
             </ListItem>
 
-            <ListItem>
-                <ListItemText
-                    primary="Email"
-                    secondary={value.email || "Nenhum"}
+            <ListItem style={{ textAlign:"center" }}>
+                <Grid style={{width:"70%", marginTop:'30px',}}>
+                    <TextField style={{width:'90%', fontSize:"40px"}}
+                        label= <EmailIcon style={{fontSize:"35px"}}/>
+                        defaultValue={value.email || "Nenhum"}
+                        InputProps={{
+                            readOnly: true,
+                        }}
                 />
-                <ListItemText
-                    primary="Telefone"
-                    secondary={value.telefone || "Nenhum"}
-                />
+                </Grid>
             </ListItem>
 
-            <ListItem>
+            <ListItem style={{ textAlign:"center" }}>
+                <Grid style={{width:"70%", marginTop:'30px',}}>
+                    <TextField style={{width:'90%', fontSize:"40px"}}
+                        label= <CalendarMonthIcon style={{fontSize:"35px"}}/>
+                        defaultValue={value.dt_nascimento || "Nenhuma"}
+                        InputProps={{
+                                readOnly: true,
+                        }}
+                />
+                </Grid>
+            </ListItem>
+
+            <ListItem style={{ textAlign:"center" }}>
+                <Grid style={{width:"70%", marginTop:'30px',}}>
+                    <TextField style={{width:'90%', fontSize:"40px"}}
+                        label= <SmartphoneIcon style={{fontSize:"35px"}}/>
+                        defaultValue={value.telefone || "Nenhum"}
+                        InputProps={{
+                            readOnly: true,
+                        }}
+                />
+                </Grid>
+            </ListItem>
+
+            <ListItem style={{ textAlign:"center" }}>
+                <Grid style={{width:"70%", marginTop:'30px',}}>
 
             {/* <Button variant="outlined" onClick={handleClickOpen}>
                 Open alert dialog
@@ -86,7 +124,7 @@ export default function Crud(props) {
                         size="small"
                         color="inherit"
                     >
-                        <DeleteIcon fontSize="small" color="inherit" />
+                        <DeleteIcon style={{ fontSize:"40px", }} fontSize="small" color="inherit" />
                     </IconButton>
                     </Tooltip>
             <Dialog
@@ -117,6 +155,7 @@ export default function Crud(props) {
                         <EditIcon fontSize="small" color="inherit" />
                     </IconButton>
                     </Tooltip> */}
+                </Grid>
             </ListItem>
         </List>
     );

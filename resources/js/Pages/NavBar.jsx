@@ -64,7 +64,7 @@ const ResponsiveAppBar = (props) => {
             href="/"
             sx={{
               mr: 2,
-              fontSize: '20px',
+              fontSize: '30px',
               display: { xs: 'none', md: 'flex' },
               fontFamily: 'monospace',
               fontWeight: 700,
@@ -73,7 +73,7 @@ const ResponsiveAppBar = (props) => {
               textDecoration: 'none',
             }}
           >
-            DOCinHAND
+            DIND
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>

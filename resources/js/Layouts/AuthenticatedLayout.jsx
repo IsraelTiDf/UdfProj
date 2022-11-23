@@ -14,7 +14,7 @@ export default function Authenticated({ auth, header, children }) {
     console.log(auth);
 
     return (
-        <div className=" min-h-screen bg-yellow-100">
+        <div style={{backgroundColor:"#FFFFF0"}} className=" min-h-screen -100">
             <nav className="position-fixed bg-white border-b border-black-100">
                 <div >
                     <div className="flex justify-between h-16.8">
@@ -23,41 +23,22 @@ export default function Authenticated({ auth, header, children }) {
                                 <Link href="/">
                                     <div style={{
                                         marginLeft: '-0.5px',
-                                        marginTop: '-1px',
+                                        marginTop: '-8px',
+                                        marginBottom: '-8px',
                                         width: "145px",
                                         fontFamily: 'monospace',
                                         color: '#591010',
-                                        fontSize: '20px',
+                                        fontSize: '30px',
                                         fontWeight: 600,
                                         letterSpacing: '.3rem',
                                         textDecoration: 'none',
-                                         }}> DOCinHAND
+                                         }}> DIND
                                     </div>
                                 </Link>
                             </div>
 
                            
                         </div>
-                            {cpf && (
-                                <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                    <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                        Area Usuario
-                                    </NavLink>
-                                    <NavLink href={route('usuario')} active={route().current('usuario')}>
-                                        Clinicas
-                                    </NavLink>
-                                </div>
-                            )}
-                            {cnpj && (
-                                <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                    <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                        Area Clinica
-                                    </NavLink>
-                                    <NavLink href={route('usuario')} active={route().current('usuario')}>
-                                        Usuarios
-                                    </NavLink>
-                                </div>
-                            )}
 
                         <div className="hidden sm:flex sm:items-center mr-32">
                             <div className="ml-3 relative">
@@ -66,7 +47,7 @@ export default function Authenticated({ auth, header, children }) {
                                         <span className="inline-flex rounded-md">
                                             <button
                                                 type="button"
-                                                className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
+                                                className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text--500 bg-white hover:text-red-700 focus:outline-none transition ease-in-out duration-150"
                                             >
                                                 {auth.user.name}
 
@@ -144,8 +125,30 @@ export default function Authenticated({ auth, header, children }) {
             </nav>
 
             {header && (
-                <header className="bg-white shadow">
-                    <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">{header}</div>
+                <header style={{padding:"15px", textAlign:"center"}} className="bg-white shadow">
+                    <div>
+              {cpf && (
+                <div  style={{marginLeft:"200px"}} className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <NavLink href={route('dashboard')} active={route().current('dashboard')}>
+                        Area Usuario
+                    </NavLink>
+                    <NavLink href={route('usuario')} active={route().current('usuario')}>
+                        Clinicas
+                    </NavLink>
+                </div>
+            )}
+            {cnpj && (
+                <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <NavLink href={route('dashboard')} active={route().current('dashboard')}>
+                        Area Clinica
+                    </NavLink>
+                    <NavLink href={route('clinica')} active={route().current('clinica')}>
+                        Usuarios
+                    </NavLink>
+                </div>
+            )}
+            </div>
+                    <div>{header}</div>
                 </header>
             )}
 
