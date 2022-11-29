@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\clinica;
 use App\Models\User;
+use App\Models\Especialidade;
 use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
 use App\Traits\ApiResponse;
@@ -81,10 +82,14 @@ class RegisterClinicaController extends Controller
         try {
 
             $usuario = Auth::user();
-            $usuario->load([ 'clinica']);
+            $usuario->load([ 'clinica.especialidade']);
+            // $clinica = clinica::where('id_user',$usuario->clinica->id_user)->get();
 
+                // dd($clinica);
                 // dd($usuario);
                 return Inertia::render('Area', [
+                    'dados' => Especialidade::all(),
+                    'clinicas' => Clinica::all(),
                     'id' => $usuario->id,
                     'cpf' => $usuario->cpf,
                     'nome' => $usuario->name,
@@ -109,12 +114,12 @@ class RegisterClinicaController extends Controller
 
             $usuario = Auth::user();
             $usuario->load([ 'usuario']);
+            // dd($usuario);s
 
-                // dd($usuario);
                 return Inertia::render('Area', [
                     'id' => $usuario->id,
                     'cpf' => $usuario->cpf,
-                    'nome' => $usuario->name,
+                    'name' => $usuario->nome,
                     'usuario' => $usuario->usuario,
                 ]);
                 // return [
@@ -187,7 +192,7 @@ class RegisterClinicaController extends Controller
 
 
         try {
-            dd('oi');
+            // dd('oi');
             $usuario = Clinica::findOrFail($id);
 
             $usuario->delete();
@@ -198,7 +203,7 @@ class RegisterClinicaController extends Controller
 
             return redirect(RouteServiceProvider::HOME)
             // ->route('user.index')
-                        ->with('success','User deleted successfully');
+                        ->with('success','Clinica deletada');
 
             // return $this->respondSuccess(null, 'Usuario alterado.');
         } catch (Throwable $e) {

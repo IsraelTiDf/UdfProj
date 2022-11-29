@@ -1,5 +1,5 @@
 import { useCallback,useReducer,useEffect } from "react";
-// import { useSnackbar } from "notistack";
+import { useSnackbar } from "notistack";
 import client from "@/api/client";
 import useModalRecuder from "@/Layouts/useModalReducer";
 
@@ -42,6 +42,7 @@ import useModalRecuder from "@/Layouts/useModalReducer";
 
 export default function useExcluir() {
 
+const { enqueueSnackbar } = useSnackbar();
 const [state, dispatch] = useReducer();
   const excluir = (clinicaId) => {
     dispatch({ type: "LOADING" });
@@ -53,10 +54,11 @@ const [state, dispatch] = useReducer();
         return client
         .post(`/delete-clinica/${clinicaId}`)
         .then(onSuccess)
+        .enqueueSnackbar("Dados Excluidos");
 
 
     };
-    return [state, excluir];
+    return [state, excluir ,enqueueSnackbar];
 
 //   export default useEditar;
 }

@@ -84,6 +84,7 @@ const onPlaceChanged = () => {
                             isLoading={isLoading}
                             childClicked={childClicked}
                             clinicas={clinicas}
+                            places={places}
                             type={type}
                             setType={setType}
                             rating={rating}

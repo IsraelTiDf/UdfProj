@@ -29,6 +29,7 @@ class clinica extends Authenticatable
         'telefone',
         'endereco',
         'id_user',
+        'id_especialidade',
         'email',
         'password',
         'longitude',
@@ -37,8 +38,12 @@ class clinica extends Authenticatable
 
     public function usuario()
     {
-        return $this->belongsToMany(User::class, 'id', 'id_user');
+        return $this->belongsTo(User::class, 'id', 'id_user');
     }
 
+    public function especialidade()
+    {
+        return $this->hasOne(especialidade::class, 'id_especialidade', 'id_especialidade');
+    }
 
 }

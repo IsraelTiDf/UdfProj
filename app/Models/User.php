@@ -56,8 +56,8 @@ class User extends Authenticatable
         return $this->belongsTo(clinica::class, 'id', 'id_user');
     }
 
-    public function especialidade()
-    {
-        return $this->belongsTo(especialidade::class, 'id', 'id_user');
-    }
+    // public function especialidade()
+    // {
+    //     return $this->belongsTo(especialidade::class, 'id', 'id_user');
+    // }
 }

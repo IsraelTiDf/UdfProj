@@ -130,37 +130,34 @@ const ResponsiveAppBar = (props) => {
             >
               Sobre nós
             </Button>
-            <Select style={{defaultValue:"ewfg" , marginTop:"15px", marginLeft:"5px", marginRight:"5px", width:"10%", height:"40px"}}
 
-              >
-                <menuItem>
                   <Button
                     href="#especialidade"
                     onClick={handleCloseNavMenu}
                     sx={{
-                      my: 2,
-                      display: 'block',
-                      fontFamily: 'arial',
-                      color: 'red',
-                      fontSize: '12px',
-                      fontWeight: 700,
+                        my: 2,
+                        display: 'block',
+                        fontFamily: 'arial',
+                        color: 'red',
+                        fontSize: '14px',
+                        fontWeight: 600,
+                        letterSpacing: '.1rem',
                     }}>Especialidade médica</Button>
-                </menuItem>
-                <menuItem>
+
+
                   <Button
                     href="#emergencia"
                     onClick={handleCloseNavMenu}
                     sx={{
-                      textAlign:"center",
-                      my: 2,
-                      display: 'block',
-                      fontFamily: 'arial',
-                      color: 'red',
-                      fontSize: '12px',
-                      fontWeight: 700,
+                        my: 2,
+                        display: 'block',
+                        fontFamily: 'arial',
+                        color: 'red',
+                        fontSize: '14px',
+                        fontWeight: 600,
+                        letterSpacing: '.1rem',
                     }}>Emergência</Button>
-                </menuItem>
-            </Select>
+
             <Button
               href="#contatos"
               onClick={handleCloseNavMenu}

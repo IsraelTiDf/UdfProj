@@ -28,7 +28,7 @@ class MapaController extends Controller
         // return Inertia::render('Auth/MapView');
 
         return Inertia::render('Auth/MapView',[
-            'clinca' => clinica::all()
+            'clinca' => clinica::all()->load('especialidade')
         ]);
 
     }

@@ -33,8 +33,8 @@ const PlaceDetails = ({ place, selected, refProp,clinica }) => {
       <CardContent>
         <Typography gutterBottom variant="h5">{clinica.nome}</Typography>
         <Box display="flex" justifyContent="space-between" my={2}>
-          {/* <Rating name="read-only" value={Number(place.rating)} readOnly /> */}
-          <Typography component="legend">{''} review{''}</Typography>
+          <Rating name="read-only" value={Number(5)} readOnly />
+          <Typography component="legend">{''}  {''}</Typography>
         </Box>
         {/* <Box display="flex" justifyContent="space-between">
           <Typography component="legend">Price</Typography>
@@ -56,7 +56,7 @@ const PlaceDetails = ({ place, selected, refProp,clinica }) => {
         )}
 
         <Typography variant="body2" color="textSecondary" className={classes.spacing}>
-            <LocalHospitalIcon /> {clinica.phone}
+            <LocalHospitalIcon /> {clinica.especialidade.nome}
         </Typography>
 
       </CardContent>

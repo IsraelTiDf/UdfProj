@@ -14,7 +14,11 @@ import {
     DialogContent,
     DialogContentText,
     DialogTitle,
+    Modal,
+    Typography,
+    Autocomplete,
 } from "@mui/material";
+import { useForm, Controller, FormProvider} from "react-hook-form";
 import CreateData from "./CreateData.jsx";
 import DataLists from "./DataLists.jsx";
 import { Edit as EditIcon } from "@mui/icons-material";
@@ -29,6 +33,7 @@ import BadgeIcon from "@mui/icons-material/Badge";
 export default function Crud(props) {
     // console.log(props);
     const { value, onEditarClick } = props;
+    const dados = props.dados;
     // const clinicaId = props.value.id_clinica;
 
     const [excluir] = useExcluir();
@@ -42,6 +47,27 @@ export default function Crud(props) {
         setOpen(false);
         //   await editar(clinicaId);
     };
+
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+      };
+
+    const [openModal, setOpenModal] = React.useState(false);
+    const handleOpenModal = () => setOpenModal(true);
+    const handleCloseModal = () => setOpenModal(false);
+    const { handleSubmit, reset, setValue, control } = useForm();
+    const methods = useForm({
+        mode: "all",
+        shouldUnregister: false,
+    });
 
     // console.log(clinicaId);
 
@@ -68,6 +94,57 @@ export default function Crud(props) {
                     <Grid style={{ width: "70%" }}>
 
                         {"Nenhuma"}
+
+                        <Box>
+                            <Button style={{backgroundColor:'Green',color:'Black'}} onClick={handleOpenModal}>Cadastrar Clinica</Button>
+                        </Box>
+                        <FormProvider {...methods}>
+                        <Modal
+                            open={openModal}
+                            onClose={handleCloseModal}
+                            aria-labelledby="modal-modal-title"
+                            aria-describedby="modal-modal-description"
+                        >
+                            <Box sx={style}>
+                            <Typography id="modal-modal-title" variant="h6" component="h2">
+                                Especialidade
+                            </Typography>
+                            <Grid item xs={4} style={{}}>
+                            <Box style={{ backgroundColor: "white" }}>
+                                <Controller
+                                    name="especialidade"
+                                    control={control}
+                                    defaultValue=""
+                                    render={({ field }) => (
+                                        <Autocomplete
+                                            {...field}
+                                            freeSolo
+                                            options={dados}
+                                            getOptionLabel={(option) =>
+                                                option.nome || ""
+                                            }
+                                            isOptionEqualToValue={(option, value) =>
+                                                option.id_especialidade ===
+                                                value.id_especialidade
+                                            }
+                                            renderInput={(params) => (
+                                                <TextField
+                                                    {...params}
+                                                    label="Pesquisa as Especialidade"
+                                                    variant="outlined"
+                                                />
+                                            )}
+                                            onChange={(_, data) =>
+                                                handleChange(data)
+                                            }
+                                        />
+                                    )}
+                                />
+                            </Box>
+                            </Grid>
+                            </Box>
+                        </Modal>
+                    </FormProvider>
                     </Grid>
                 </ListItem>
             </List>
@@ -83,8 +160,55 @@ export default function Crud(props) {
                         </Box>
                         <Grid style={{marginTop: "30px"}}/>
                         {/* <Box>
-                            <Button style={{backgroundColor:'Green',color:'Black'}} href={route('mapa')}>Cadastrar Clinica</Button>
-                        </Box> */}
+                            <Button style={{backgroundColor:'Green',color:'Black'}} onClick={handleOpenModal}>Cadastrar Clinica</Button>
+                        </Box>
+                        <FormProvider {...methods}>
+                        <Modal
+                            open={openModal}
+                            onClose={handleCloseModal}
+                            aria-labelledby="modal-modal-title"
+                            aria-describedby="modal-modal-description"
+                        >
+                            <Box sx={style}>
+                            <Typography id="modal-modal-title" variant="h6" component="h2">
+                                Especialidade
+                            </Typography>
+                            <Grid item xs={4} style={{}}>
+                            <Box style={{ backgroundColor: "white" }}>
+                                <Controller
+                                    name="especialidade"
+                                    control={control}
+                                    defaultValue=""
+                                    render={({ field }) => (
+                                        <Autocomplete
+                                            {...field}
+                                            freeSolo
+                                            options={dados}
+                                            getOptionLabel={(option) =>
+                                                option.nome || ""
+                                            }
+                                            isOptionEqualToValue={(option, value) =>
+                                                option.id_especialidade ===
+                                                value.id_especialidade
+                                            }
+                                            renderInput={(params) => (
+                                                <TextField
+                                                    {...params}
+                                                    label="Pesquisa as Especialidade"
+                                                    variant="outlined"
+                                                />
+                                            )}
+                                            onChange={(_, data) =>
+                                                handleChange(data)
+                                            }
+                                        />
+                                    )}
+                                />
+                            </Box>
+                            </Grid>
+                            </Box>
+                        </Modal>
+                    </FormProvider> */}
             {/* </Grid> */}
                 <ListItem style={{ textAlign: "center" }}>
                     <Grid style={{ width: "70%" }}>

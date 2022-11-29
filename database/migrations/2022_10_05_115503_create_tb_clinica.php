@@ -23,12 +23,15 @@ return new class extends Migration
             $table->integer('id_user')->unsigned()->nullable();
             $table->foreign('id_user')->references('id')->on('users');
             $table->string('telefone', 11);
-            $table->string('emergencia', 3)->nullable();
+            // $table->string('emergencia', 3)->nullable();
+            $table->integer('id_especialidade')->unsigned()->nullable();
+            $table->foreign('id_especialidade')->references('id_especialidade')->on('tb_especialidade');
             $table->decimal('longitude', 10,4)->nullable();
             $table->decimal('latitude', 10,4)->nullable();
 
         });
     }
+    //115453
 
     /**
      * Reverse the migrations.

@@ -18,12 +18,12 @@ return new class extends Migration
             $table->string('nome', 50)->nullable();
             $table->longText('ds_especialidade')->nullable();
             $table->string('emergencia', 3)->nullable();
-            $table->integer('id_clinica')->unsigned()->nullable();
-            $table->foreign('id_clinica')->references('id_clinica')->on('tb_clinica');
+            // $table->integer('id_clinica')->unsigned()->nullable();
             $table->timestamps();
         });
     }
 
+    //115503
     /**
      * Reverse the migrations.
      *

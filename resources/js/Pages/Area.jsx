@@ -6,10 +6,10 @@ import AreaClinica from '../Components/AreaClinica';
 import EditarInteressadoModal from './EditarDados';
 
 export default function Area(props) {
-// console.log(props.auth[0].user.cpf);
+
+console.log(props);
 const cpf= props.auth.cpf;
 const cnpj= props.auth.cnpj;
-// console.log(props.auth.user.clinica.id_clinica);
 
 const modalEditarInteressadoDefault = {
     open: false,
@@ -59,7 +59,7 @@ const handleEditarClick = (interessado) => {
                     </div>
                 </div>
             </div> */}
-            <AreaClinica value={props.auth.user.clinica} onEditarClick={handleEditarClick}
+            <AreaClinica value={props.auth.user.clinica} dados={props.clinicas} onEditarClick={handleEditarClick}
             // clinicaId={props.auth.user.clinica.id_clinica}
             />
             {/* <EditarInteressadoModal

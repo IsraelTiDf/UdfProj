@@ -1,11 +1,11 @@
 import { useCallback } from "react";
-// import { useSnackbar } from "notistack";
+import { useSnackbar } from "notistack";
 import client from "@/api/client";
 import useModalRecuder from "@/Layouts/useModalReducer";
 
 export default function useEditar() {
   const [state, dispatch] = useModalRecuder();
-//   const { enqueueSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
 
   const editar = useCallback(
     (interessadoId, formData, resultDispatch, closeModal) => {
@@ -25,20 +25,19 @@ export default function useEditar() {
 
       const onSuccess = () => {
         enqueueSnackbar("Dados alterados");
-        resultDispatch({
-          type: "UPDATE_INTERESSADO",
-          ...formData,
-          interessadoId,
-        });
+        // resultDispatch({
+        //   type: "UPDATE_INTERESSADO",
+        //   ...formData,
+        //   interessadoId,
+        // });
         dispatch({ type: "MODAL_CLOSED" });
         closeModal();
+        window.location.reload();
       };
 
       return client.post(url, formData).then(onSuccess, onError);
     },
-    [dispatch
-        // , enqueueSnackbar
-    ]
+    [dispatch,enqueueSnackbar]
   );
 
   return [state, editar];

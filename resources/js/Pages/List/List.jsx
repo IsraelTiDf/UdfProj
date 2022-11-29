@@ -33,6 +33,7 @@ const List = ({ places, type, setType, rating, setRating, childClicked, isLoadin
     setElRefs((refs) => Array(clinicas.length).fill().map((_, i) => refs[i] || createRef()));
   }, [clinicas]);
 
+  console.log(places);
   return (
     <div className={classes.container}>
       <Typography variant="h4">Clinicas & Especialidades</Typography>

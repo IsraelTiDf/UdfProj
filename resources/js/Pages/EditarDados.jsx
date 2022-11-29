@@ -74,7 +74,7 @@ function EditarDados({
     // });
     // });
   };
-  console.log(formValues);
+
   return (
     <Modal
       open={open}
@@ -98,7 +98,7 @@ function EditarDados({
         <Grid container spacing={2}>
           {/* nome */}
           <Grid item xs={12}>
-            {/* <Controller
+            <Controller
               control={control}
               name="nome"
               rules={{ required: true }}
@@ -119,15 +119,15 @@ function EditarDados({
                   }}
                 />
               )}
-            /> */}
-            <TextField
+            />
+            {/* <TextField
                 key="name"
                 fullWidth
                 label="Nome"
                 variant="standard"
                 inputProps={{ readOnly: true }}
                 defaultValue={formValues.nome}
-              />
+              /> */}
           </Grid>
           <Box width="100%" />
           <>
@@ -147,7 +147,7 @@ function EditarDados({
 
             {/* email */}
             <Grid item xs={12}>
-              {/* <Controller
+              <Controller
                 control={control}
                 name="email"
                 render={({ field: { value, name, ref, onBlur, onChange } }) => (
@@ -166,15 +166,15 @@ function EditarDados({
                     }}
                   />
                 )}
-              /> */}
-              <TextField
+              />
+              {/* <TextField
                 key="email"
                 fullWidth
                 label="EMAIL"
                 variant="standard"
                 inputProps={{ readOnly: true }}
                 defaultValue={formValues.email}
-              />
+              /> */}
             </Grid>
 
 
