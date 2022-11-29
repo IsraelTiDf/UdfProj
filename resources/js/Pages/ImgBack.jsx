@@ -1,11 +1,15 @@
 import React, {useState} from 'react';
 import { useForm, Controller, FormProvider } from "react-hook-form";
 import { Container, Paper, Button, Grid, Box, Typography, useMediaQuery, Tab, Tabs, TextField, Autocomplete  } from "@mui/material";
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import FacebookIcon from '@mui/icons-material/Facebook';
 
 // import IconButton from 'material-ui/IconButton';
 // import ActionHome from 'material-ui/svg-icons/action/home';
 
 import Image from '/public/img/mapa.png';
+import Imagem from '/public/img/amb.png';
 
 // imports
 import IconButton from "@mui/material/IconButton";
@@ -32,6 +36,22 @@ const styles = {
         padding: 100,
     }
 };
+const stylou = {
+    img: {
+        // height: 1356,
+        backgroundImage: `url(${Imagem})`,
+        height: 900,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        // width: `calc(100vw + 100px)`,
+        width: '100%',
+        margin: -1,
+        marginTop: 250,
+
+
+    }
+};
+
 
 export default function Img(props) {
     const { handleSubmit, reset, setValue, control } = useForm();
@@ -53,13 +73,13 @@ export default function Img(props) {
 
     return (
         <FormProvider {...methods}>
-            <Box component="form" onSubmit={handleSubmit}>
-                <Grid
+            <Box style={{backgroundColor:"#FFFFF5"}} component="form" onSubmit={handleSubmit}>
+                <Grid id = "sobrenos"
                     container
                     direction="column"
                     justify="flex-end"
                     alignItems="right"
-                    style={styles.img} >
+                    style={styles.img}>
                     <Grid item xs={12} sm={12} lg={12}>
                 {/* <Paper
                 sx={{
@@ -73,17 +93,43 @@ export default function Img(props) {
                     },
                 }}> */}
                 {/* </Paper> */}
+                <Grid container spacing={1} style={{paddingTop:"100px",}}>
+                    <Grid item xs={6.5} style={{}}>
+                        <Box style={{  color:"#591010", fontSize: '50px',fontFamily: 'inter',fontWeight: 900, color: '#591010', textAlign:"center",}}>
+                            <text>Médico</text>
+                            <text style={{color:"red",}}> na palma da sua mão</text>
+                        </Box>
+                    </Grid>
+
+                    <Grid item xs={6.5} >
+                        <Box style={{ marginBottom:'15px', textAlign:"justify",color:"#591010", fontSize: '30px',fontWeight: 500,}}>
+                        Nossa ferramenta de busca de especialidades médicas, irá reunir as principais clinicas do Distrito Federal.
+                        Além disso dará uma resumida descrição das especialidades medicas regulamentadas no Brasil.</Box>
+                    </Grid>
+
+                    <Grid item xs={6.5} style={{marginLeft:"5px"}}>
+                        <Box style={{textAlign: "justify",color:"#591010", marginBottom:'15px', fontSize: '30px',fontWeight: 500,}}>
+                            • Esta ferramenta de busca localiza apenas os médicos que são associados ao nosso Site;</Box>
+                    </Grid>
+
+                    <Grid item xs={6.5} style={{marginLeft:"5px"}}>
+                        <Box style={{textAlign: "justify",color:"#591010", fontSize: '30px',fontWeight: 500,}}>
+                            • Selecione a especialidade de sua preferencia e localize a unidade credenciada mais próxima.</Box>
                     </Grid>
                 </Grid>
-                <Grid container spacing={3} style={{marginTop: '200px', marginBottom: '200px', padding: '120px'}}>
+                </Grid>
+                <Grid id="especialidade"></Grid>
+                </Grid>
+
+                <Grid  container spacing={3} style={{ marginTop: '220px', marginBottom: '', padding: '100px'}}>
                 <Grid item xs={4} style={{}}>
-                <Box style={{}}>
-                        <Controller 
+                <Box  style={{backgroundColor:"white", }}>
+                        <Controller
                             name="especialidade"
                             control={control}
                             defaultValue=""
                             render={({ field }) => (
-                                <Autocomplete 
+                                <Autocomplete
                                     {...field}
                                     freeSolo
                                     options={dados}
@@ -104,20 +150,65 @@ export default function Img(props) {
                 </Grid>
                     <Grid item xs={2} style={{ paddingTop: '32px', paddingRight: '100px'}}>
                         <Box  style={{backgroundColor:'red', textAlign: 'center',}}>
-                            <Button style={{color:'white'}}>Buscar</Button>
+                            <Button style={{color:'white'}} href={route('mapa')}>Buscar</Button>
                         </Box>
                     </Grid>
                     <Grid item xs={6} style={{margin: '-30px'}}>
-                        <Box style={{ fontFamily: 'arial', color: '#FF1010', fontSize: '20px', fontWeight: 600, letterSpacing: '.1rem', marginBottom: '10px' 
+                        <Box style={{ fontFamily: 'arial', color: '#FF1010', fontSize: '20px', fontWeight: 600, letterSpacing: '.1rem'
                                 }}>VISÃO GERAL
                         </Box>
                             <Box style={{textIndent: 'justify', fontFamily: 'calibri', color: '#591010', fontSize: '19px', fontWeight: 600, letterSpacing: '.1rem',
                                 }}>{valueFodac}
                         </Box>
-                    </Grid>    
+                    </Grid>
                 </Grid>
-            </Box>
+                <Grid
+                    container
+                    direction="column"
+                    justify="flex-end"
+                    alignItems="right"
+                    style={stylou.img}>
 
+                    <Grid id="emergencia" container spacing={1} style={{paddingTop:"170px"}}>
+                        <Grid item xs={12} style={{}}>
+                            <Box style={{  color:"#591010", fontSize: '50px',fontFamily: 'inter',fontWeight: 900, color: '#591010', textAlign:"center",}}>
+                                <text>Transporte</text>
+                                <text style={{color:"red",}}> de  urgência</text>
+                            </Box>
+                        </Grid>
+
+                        <Grid item xs={12} style={{marginTop:"50px"}}>
+                            <Box style={{ marginBottom:'15px', textAlign:"justify", color:"#591010", fontSize: '30px',fontWeight: 500, textAlign:"center"}}>
+                            Precisa de uma ambulância para se locomover até o serviço de urgência mais proximo?</Box>
+                        </Grid>
+
+                        <Grid item xs={12} style={{paddingLeft:"150px", paddingRight:"150px",}}>
+                            <Box style={{textAlign: "center",color:"#591010", marginBottom:'15px', fontSize: '30px',fontWeight: 500, textAlign:"center"}}>
+                            Solicite o transporte de emergência, que é uma ocorrência imprevista com ou sem risco potencial à vida,
+                            onde o indivíduo necessita de assistência médica imediata.</Box>
+                        </Grid>
+                        <Grid item xs={12} style={{ paddingTop: '32px', width:"40%", paddingLeft:"750px", paddingRight:"750px",  marginTop:"20px"}}>
+                            <Box  style={{backgroundColor:'red', textAlign: 'center',}}>
+                                <Button style={{color:'white'}}>Solicite uma ambulância</Button>
+                            </Box>
+                        </Grid>
+                    </Grid>
+                </Grid>
+
+
+            <Grid id="contatos" container spacing={3} style={{paddingTop:"70px", paddingLeft:"450px", paddingRight:"200px", paddingBottom:"150px"}}>
+                <Grid  item xs={12} style={{marginLeft:"-160px", fontSize:"45px", textAlign:"center", fontWeight: 700, color: '#591010',marginBottom:"30px"}}>Contatos</Grid>
+                <Grid item xs={4}>
+                    <Button href="https://www.facebook.com/"target="_blank"><FacebookIcon style={{fontSize:"70px",}}/></Button>
+                </Grid>
+                <Grid item xs={4} >
+                    <Button href="https://www.whatsapp.com/"target="_blank"><WhatsAppIcon style={{fontSize:"70px",}}/></Button>
+                </Grid>
+                <Grid item xs={4} >
+                    <Button href="https://www.instagram.com/"target="_blank"><InstagramIcon style={{fontSize:"70px",}}/></Button>
+                </Grid>
+            </Grid>
+        </Box>
         </FormProvider>
     )
 

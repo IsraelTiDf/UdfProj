@@ -17,11 +17,13 @@ const rules = {
     }
 };
 export default function Register(props) {
+    console.log(props);
     const { data, setData, post, processing, errors, reset } = useForm({
         name:'',
         cpf:'',
         telefone:'',
         dt_nascimento:'',
+        endereco:'',
         email: '',
         password: '',
         password_confirmation: '',
@@ -55,7 +57,7 @@ export default function Register(props) {
     return (
         <>
         {/* <NavBar props = {props}/> */}
-        <GuestLayout>
+        {/* <GuestLayout> */}
         {/* <TabPainel/> */}
             <Head title="Register" />
 
@@ -87,9 +89,11 @@ export default function Register(props) {
                         className="mt-1 block w-full"
                         autoComplete="cpf"
                         isFocused={true}
+                        handleChange={onHandleChange}
+
                         // inputRef={cpfField.ref}
                         // inputProps={{ minLength: 14, maxLength: 14 }}
-                        handleChange={handleCPFChange}
+                        // handleChange={handleCPFChange}
                         // onChange={(event) => {
                         //     // cpfField.onChange(event);
                         //     handleCPFChange(event);
@@ -134,6 +138,23 @@ export default function Register(props) {
                     />
 
                     <InputError message={errors.name} className="mt-2" />
+                </div>
+
+                <div>
+                    <InputLabel forInput="endereco" value="Endereço" />
+
+                    <TextInput
+                        type="text"
+                        name="endereco"
+                        value={data.endereco}
+                        className="mt-1 block w-full"
+                        autoComplete="endereco"
+                        isFocused={true}
+                        handleChange={onHandleChange}
+                        required
+                    />
+
+                    <InputError message={errors.endereco} className="mt-2" />
                 </div>
 
                 <div className="mt-4">
@@ -194,7 +215,7 @@ export default function Register(props) {
                     </PrimaryButton>
                 </div>
             </form>
-        </GuestLayout>
+        {/* </GuestLayout> */}
         </>
     );
 }

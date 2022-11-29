@@ -18,26 +18,43 @@ class ClinicaSeeder extends Seeder
     public function run()
     {
         DB::table('tb_clinica')->insert([[
-            'nome' => 'saporra funfa clinica',
+            'nome' => 'Clinica boa viagem',
             'id_user' => '1',
             'cnpj' => '444454',
+            'endereco' => 'JJJ 19 Conjunto F casa 01',
             'telefone' => '994103232',
             'email' => Str::random(10).'@gmail.com',
-            'senha' => Hash::make('password'),
-            // 'emergencia' => '1',
+            'password' => Hash::make('password'),
+            'emergencia' => '1',
             'longitude' => '-47.9292',
             'latitude' => '-15.7801',
         ],
         [
-            'nome' => 'clinica 2',
+            'nome' => 'Seu coracao',
             'id_user' => '2',
             'cnpj' => '41717',
+            'endereco' => 'RUA gama loja 03',
             'telefone' => '994103232',
             'email' => Str::random(10).'@gmail.com',
-            'senha' => Hash::make('password'),
-            // 'emergencia' => '1',
+            'password' => Hash::make('password'),
+            'emergencia' => '1',
             'longitude' => '-15.7801',
             'latitude' => '-47.9292',
-        ]]);
+        ],
+
+        [
+            'nome' => 'Boa vista',
+            'id_user' => '1',
+            'cnpj' => '2020202020',
+            'endereco' => 'shopping Conjunto Nacional loja 03',
+            'telefone' => '6135032983',
+            'email' => Str::random(10).'@gmail.com',
+            'password' => Hash::make('password'),
+            'emergencia' => '1',
+            'longitude' => '-15.7801',
+            'latitude' => '-47.9292',
+        ],
+
+        ]);
     }
 }

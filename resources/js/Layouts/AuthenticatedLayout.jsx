@@ -11,7 +11,7 @@ export default function Authenticated({ auth, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
     const cpf = auth.user.cpf;
     const cnpj = auth.user.cnpj;
-    console.log(auth);
+    // console.log(auth);
 
     return (
         <div style={{backgroundColor:"#FFFFF0"}} className=" min-h-screen -100">
@@ -37,7 +37,7 @@ export default function Authenticated({ auth, header, children }) {
                                 </Link>
                             </div>
 
-                           
+
                         </div>
 
                         <div className="hidden sm:flex sm:items-center mr-32">
@@ -69,7 +69,7 @@ export default function Authenticated({ auth, header, children }) {
 
                                     <Dropdown.Content>
                                         <Dropdown.Link href={route('logout')} method="post" as="button">
-                                            Log Out
+                                            Deslogar
                                         </Dropdown.Link>
                                     </Dropdown.Content>
                                 </Dropdown>
@@ -132,7 +132,7 @@ export default function Authenticated({ auth, header, children }) {
                     <NavLink href={route('dashboard')} active={route().current('dashboard')}>
                         Area Usuario
                     </NavLink>
-                    <NavLink href={route('usuario')} active={route().current('usuario')}>
+                    <NavLink href={route('usuarios')} active={route().current('usuarios')}>
                         Clinicas
                     </NavLink>
                 </div>

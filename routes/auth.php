@@ -34,7 +34,7 @@ Route::middleware('guest')->group(function () {
         Route::post('reset-password', [NewPasswordController::class, 'store'])
         ->name('password.update');
                 //-------------------------------
-                Route::post('register/clinica1', [RegisterClinicaController::class, 'store_clin']);
+                Route::post('register/clinica', [RegisterClinicaController::class, 'store_clin'])->name('clinica');
 
                 Route::get('view/clinica', [RegisterClinicaController::class, 'index'])->name('view-clinica');
 

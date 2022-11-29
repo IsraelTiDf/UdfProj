@@ -17,7 +17,8 @@ return new class extends Migration
             $table->integerIncrements('id_clinica');
             $table->string('nome', 50);
             $table->string('email', 50);
-            $table->string('senha');
+            $table->string('password');
+            $table->string('endereco', 50);
             $table->string('cnpj', 20);
             $table->integer('id_user')->unsigned()->nullable();
             $table->foreign('id_user')->references('id')->on('users');

@@ -21,10 +21,15 @@ class AuthenticatedSessionController extends Controller
      */
     public function create()
     {
+        // dd(Inertia::render('Auth/Login', [
+        //     'canResetPassword' => Route::has('password.request'),
+        //     'status' => session('status'),
+        // ]));
         return Inertia::render('Auth/Login', [
             'canResetPassword' => Route::has('password.request'),
             'status' => session('status'),
         ]);
+
     }
 
     /**
@@ -35,32 +40,34 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
-        $all =$request->all();
-        $all['email'];
-        $clinica = clinica::where('email',$all['email'])->first();
-        $usuario = User::where('email',$all['email'])->first();
-        // dd($usuario);
-        if($usuario){
-            $request->authenticate();
+        // $all =$request->all();
+        // $all['email'];
+        // $clinica = clinica::where('email',$all['email'])->first();
+        // $usuario = User::where('email',$all['email'])->first();
+        // if($usuario){
+        //     // dd($request->authenticate());
+        //     $request->authenticate();
 
-            $request->session()->regenerate();
+        //     $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
-        }
-        if($clinica){
-            $request->authenticate();
+        //     return redirect()->intended(RouteServiceProvider::HOME);
+        // }
+        // if($clinica){
+        //     // dd($request);
+        //     $request->authenticate();
 
-            $request->session()->regenerate();
-
-        return redirect()->intended(RouteServiceProvider::HOME);
-        }
-
-        // // dd();
-        // $request->authenticate();
-
-        // $request->session()->regenerate();
+        //     $request->session()->regenerate();
 
         // return redirect()->intended(RouteServiceProvider::HOME);
+        // }
+
+
+        // dd($request->session()->regenerate());
+        $request->authenticate();
+
+        $request->session()->regenerate();
+
+        return redirect(RouteServiceProvider::HOME);
         // return redirect()->intended(RouteServiceProvider::HOME);
     }
 

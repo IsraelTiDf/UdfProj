@@ -16,6 +16,7 @@
 
 
     <!-- Scripts -->
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyA2_M--Caf9AX6x-3RFtOOaaypLvOxR4yk"></script>
     @routes
     @viteReactRefresh
     @vite('resources/js/app.jsx')

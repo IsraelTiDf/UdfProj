@@ -16,6 +16,7 @@ import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
 import AdbIcon from '@mui/icons-material/Adb';
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 import { Link, Head } from '@inertiajs/inertia-react';
+import Select from '@mui/material/Select';
 
 const pages = ['Home', 'Sobre nós', 'Contato'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -25,9 +26,10 @@ const styles = {
         // height: 1356,
         mr: 2,
         display: { xs: 'none', md: 'flex' },
-        fontFamily: 'monospace',
+        fontFamily: 'arial',
         fontWeight: 700,
-        letterSpacing: '.3rem',
+        letterSpacing: '.2rem',
+        fontSize: '16px',
         color: '#591010',
         textDecoration: 'none',
     }
@@ -57,7 +59,7 @@ const ResponsiveAppBar = (props) => {
     <AppBar position="fixed" style={{ background: '#FFFFFF' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <LocalHospitalIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+
           <Typography
             noWrap
             component="a"
@@ -107,50 +109,84 @@ const ResponsiveAppBar = (props) => {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography textAlign="center" href="/">{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
           <LocalHospitalIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, display: 'block', fontFamily: 'arial', color: 'red',fontSize: '14px', fontWeight: 600, letterSpacing: '.1rem',}}
+            <Button
+              href="#sobrenos"
+              onClick={handleCloseNavMenu}
+              sx={{
+                my: 2,
+                fontFamily: 'arial',
+                color: 'red',
+                fontSize: '14px',
+                fontWeight: 600,
+                letterSpacing: '.1rem',
+              }}
+            >
+              Sobre nós
+            </Button>
+            <Select style={{defaultValue:"ewfg" , marginTop:"15px", marginLeft:"5px", marginRight:"5px", width:"10%", height:"40px"}}
+
               >
-                {page}
+                <menuItem>
+                  <Button
+                    href="#especialidade"
+                    onClick={handleCloseNavMenu}
+                    sx={{
+                      my: 2,
+                      display: 'block',
+                      fontFamily: 'arial',
+                      color: 'red',
+                      fontSize: '12px',
+                      fontWeight: 700,
+                    }}>Especialidade médica</Button>
+                </menuItem>
+                <menuItem>
+                  <Button
+                    href="#emergencia"
+                    onClick={handleCloseNavMenu}
+                    sx={{
+                      textAlign:"center",
+                      my: 2,
+                      display: 'block',
+                      fontFamily: 'arial',
+                      color: 'red',
+                      fontSize: '12px',
+                      fontWeight: 700,
+                    }}>Emergência</Button>
+                </menuItem>
+            </Select>
+            <Button
+              href="#contatos"
+              onClick={handleCloseNavMenu}
+              sx={{
+                my: 2,
+                display: 'block',
+                fontFamily: 'arial',
+                color: 'red',
+                fontSize: '14px',
+                fontWeight: 600,
+                letterSpacing: '.1rem',
+              }}
+            >
+              Contato
               </Button>
-            ))}
+
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
 
-            {props.props.auth.user ? (
+            {/* {props.props.auth.user ? ( */}
             <Link href={route('dashboard')} className="text-sm text-gray-700 dark:text-gray-500 underline">
                 {/* Dashboard */}
 
 
-            {props.props.auth.user.cpf && (
+            {/* {props.props.auth.user.cpf && (
                 <Tooltip title="Usuario">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <AccountCircleIcon alt="Remy Sharp" />
@@ -163,7 +199,7 @@ const ResponsiveAppBar = (props) => {
                     <MedicalServicesIcon alt="Remy Sharp"/>
                 </IconButton>
                 </Tooltip>
-            )}
+            )} */}
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
@@ -188,18 +224,18 @@ const ResponsiveAppBar = (props) => {
             </Menu>
 
             </Link>
-                ) : (
+                {/* ) : ( */}
                     <>
                         <Link href={route('login')}
                         style={styles.textFont}>
-                            Login
+                            Entrar
                         </Link>
 
                         <Link
                             href={route('register')}
                             style={styles.textFont}
                         >
-                            /Register
+                            /Cadastrar
                         </Link>
 
                         {/* <Link
@@ -209,8 +245,8 @@ const ResponsiveAppBar = (props) => {
                            / Register-Clinica
                         </Link> */}
                     </>
-                )}
-          
+                {/* )} */}
+
           </Box>
         </Toolbar>
       </Container>

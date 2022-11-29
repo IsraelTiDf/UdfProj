@@ -18,8 +18,9 @@ class UserSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([[
-            'name' => 'saporra funfa users',
+            'name' => 'Jose Campos',
             'cpf' => '00000000000',
+            'endereco' => 'QJ 19 Conjunto E casa 03',
             'telefone' => '994103232',
             'email' => Str::random(10).'@gmail.com',
             'password' => Hash::make('password'),
@@ -27,8 +28,9 @@ class UserSeeder extends Seeder
             'sexo' => 'MAS',
         ],
         [
-            'name' => 'Thiago 2',
+            'name' => 'Thiago Silva',
             'cpf' => '00000000000',
+            'endereco' => 'QNM 03 Conjunto H apt 22',
             'telefone' => '994103232',
             'email' => Str::random(10).'@gmail.com',
             'password' => Hash::make('password'),

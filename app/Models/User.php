@@ -24,6 +24,7 @@ class User extends Authenticatable
         'cpf',
         'telefone',
         'email',
+        'endereco',
         'password',
         'dt_nascimento',
         'sexo'
@@ -53,5 +54,10 @@ class User extends Authenticatable
     public function clinica()
     {
         return $this->belongsTo(clinica::class, 'id', 'id_user');
+    }
+
+    public function especialidade()
+    {
+        return $this->belongsTo(especialidade::class, 'id', 'id_user');
     }
 }

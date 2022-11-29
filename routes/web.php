@@ -6,6 +6,7 @@ use App\Models\Especialidade;
 use Inertia\Inertia;
 use App\Models\User;
 use App\Http\Controllers\Auth\RegisterClinicaController;
+use App\Http\Controllers\MapaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,7 @@ Route::get('/', function () {
     return Inertia::render('Welcome', [
         'dados' => Especialidade::all(),
         'canLogin' => Route::has('login'),
-        // 'canRegister' => Route::has('register'),
+        'canRegister' => Route::has('register'),
         'canRegister' => Route::has('register-clinica'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
@@ -31,17 +32,20 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard',[
-        'usuario' => User::all()
-    ]);
-})->name('dashboard');
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard',[
+            'usuario' => User::all()
+        ]);
+    })->name('dashboard');
 
-Route::get('/usuario', [RegisterClinicaController::class, 'index'])->name('usuario');
+    Route::get('/usuarios', [RegisterClinicaController::class, 'index'])->name('usuarios');
+    Route::get('/clinicas', [RegisterClinicaController::class, 'view_clinica'])->name('clinicas');
+    Route::get('/mapa', [MapaController::class,'view'])->name('mapa');
 
 Route::post('/editar-usuario/{id}', [RegisterClinicaController::class,'update'])->name('editar-usuario');
 Route::post('/delete-clinica/{id}', [RegisterClinicaController::class,'delete'])->name('editar-clinica');
 // ->only(['store'  , 'update']);
+
 
 // Route::apiResource('interessados', InteressadosController::class)
 // ->only(['update']);

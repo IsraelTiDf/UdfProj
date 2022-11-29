@@ -14,11 +14,13 @@ return new class extends Migration
     public function up()
     {
             Schema::create('tb_especialidade_tb_clinica', function (Blueprint $table) {
-                $table->primary(['id_especialidade', 'id_clinica']);
+                $table->primary(['id_especialidade', 'id_user']);
                 $table->integer('id_especialidade')->unsigned();
-                $table->integer('id_clinica')->unsigned();
+                // $table->integer('id_clinica')->unsigned();
+                $table->integer('id_user')->unsigned();
                 $table->foreign('id_especialidade')->references('id_especialidade')->on('tb_especialidade');
-                $table->foreign('id_clinica')->references('id_clinica')->on('tb_clinica');
+                // $table->foreign('id_clinica')->references('id_clinica')->on('tb_clinica');
+                $table->foreign('id_user')->references('id')->on('users');
             });
     }
 

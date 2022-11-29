@@ -9,7 +9,7 @@ export default function Dashboard(props, auth) {
 // console.log(props.auth[0].user.cpf);
 const cpf= props.auth.cpf;
 const cnpj= props.auth.cnpj;
-console.log(props);
+// console.log(props);
 
 const modalEditarInteressadoDefault = {
     open: false,
@@ -74,10 +74,10 @@ const handleEditarClick = (interessado) => {
                         <div className="p-6 bg-white border-b border-gray-200">You're logged in!</div>
                     </div>
                 </div>
-            </div> */}   
+            </div> */}
             <Crud value={props.auth.user} onEditarClick={handleEditarClick}/>
-            <EditarInteressadoModal 
-                formValues={{ 
+            <EditarInteressadoModal
+                formValues={{
                 nome: modalEditarInteressado.interessado.name,
                 cpf: modalEditarInteressado.interessado.cpf || "",
                 email: modalEditarInteressado.interessado.email || "",
@@ -88,8 +88,8 @@ const handleEditarClick = (interessado) => {
                 onClose={handleModalEditarClose}
                 open={modalEditarInteressado.open}
                 // dispatch={dispatch}
-                // dispatch={dispatch}               
-            />         
+                // dispatch={dispatch}
+            />
 
         </AuthenticatedLayout>
     );

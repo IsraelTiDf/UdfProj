@@ -20,7 +20,8 @@ class EspecialidadeSeeder extends Seeder
         DB::table('tb_especialidade')->insert([[
             'nome' => 'Acupuntura',
             'ds_especialidade' => 'Acupuntura ou acupunctura é uma forma de medicina alternativa e um ramo da medicina tradicional chinesa no qual finas agulhas são inseridas no corpo do paciente. A medicina tradicional chinesa é uma pseudociência, pois suas teorias e práticas são baseadas em crenças contrárias ao conhecimento científico.',
-            'emergencia' => '1'
+            'emergencia' => '1',
+            // 'id_clinica' => '1'
 
         ],
         [
@@ -41,7 +42,8 @@ class EspecialidadeSeeder extends Seeder
         [
             'nome' => 'Cardiologia',
             'ds_especialidade' => 'Cardiologia é a especialidade médica que se ocupa do diagnóstico e tratamento das doenças que acometem o coração bem como os outros componentes do sistema circulatório. O médico especialista nessa área é o cardiologista.',
-            'emergencia' => '0'
+            'emergencia' => '0',
+            // 'id_clinica' => '1'
 
         ],
         [

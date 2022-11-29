@@ -14,6 +14,7 @@ class especialidade extends Model
         'nome',
         'emergencia',
         'ds_especialidade',
+        'id_clinica',
         // 'created_at',
         // 'updated_at',
     ];

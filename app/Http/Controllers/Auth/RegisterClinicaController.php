@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\clinica;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
+use App\Providers\RouteServiceProvider;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,35 +42,38 @@ class RegisterClinicaController extends Controller
 
     public function store_clin(Request $request)
     {
+        // dd($request->all());
         $request->validate([
-            'nome' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'cnpj' => 'required',
+            'endereco' => 'required',
             // // 'dt_nascimento' => 'required',
             'telefone' => 'required',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-
+        // dd($request);
         $user = clinica::create([
-            'nome' => $request->nome,
+            'nome' => $request->name,
             'email' => $request->email,
+            'endereco' => $request->endereco,
             'cnpj' => $request->cnpj,
             'telefone' => $request->telefone,
             // 'dt_nascimento' => $request->dt_nascimento,
-            'senha' => Hash::make($request->password),
+            'password' => Hash::make($request->password),
         ]);
         // dd($request->all());
 
         // event(new Registered($user));
 
+        // dd(Auth::login($user));
         // Auth::login($user);
 
         // return redirect(RouteServiceProvider::HOME);
-        // dd($user);
         return $this->respondSuccess($user);
     }
 
-    use ApiResponse;
+    // use ApiResponse;
 
     public function index()
     {
@@ -84,6 +89,33 @@ class RegisterClinicaController extends Controller
                     'cpf' => $usuario->cpf,
                     'nome' => $usuario->name,
                     'clinica' => $usuario->clinica,
+                ]);
+                // return [
+                //     'id' => $usuario->cnpj,
+                //     'nome' => $usuario->nome,
+
+                // ];
+
+        } catch (Throwable $e) {
+            Log:error('Index das clinicas.', ['id' => $usuario->id]);
+            throw $e;
+        }
+    }
+
+    public function view_clinica()
+    {
+
+        try {
+
+            $usuario = Auth::user();
+            $usuario->load([ 'usuario']);
+
+                // dd($usuario);
+                return Inertia::render('Area', [
+                    'id' => $usuario->id,
+                    'cpf' => $usuario->cpf,
+                    'nome' => $usuario->name,
+                    'usuario' => $usuario->usuario,
                 ]);
                 // return [
                 //     'id' => $usuario->cnpj,
@@ -133,8 +165,8 @@ class RegisterClinicaController extends Controller
                 $pessoa->save();
 
             } else {
-                $clinica = Clinica::findOrFail($id);
                 dd($clinica);
+                $clinica = Clinica::findOrFail($id);
                 $clinica->nome = $request->input('nome');
                 $clinica->cnpj = $request->input('cnpj');
                 $clinica->sigla = $request->input('sigla');
@@ -151,45 +183,24 @@ class RegisterClinicaController extends Controller
 
     public function delete(Request $request, $id)
     {
-        dd($id);
-        $validator = Validator::make($request->all(), [
-            'nome' => 'required|max:200',
-            'email' => 'nullable|email',
-            'dt_nascimento' => 'nullable',
-            'telefone' => 'nullable|',
-            'cpf' => 'nullable|',
-        ], [
-            'email.email' => 'E-mail inválido.',
-            // 'email2.email' => 'E-mail secundário inválido',
-            'cpf.cpf' => 'CPF inválido',
-            'telefone.telefone' => 'Telefone fixo inválido',
-        ]);
 
-        $input = $validator->validate();
 
 
         try {
-            if ($request->input('cpf')) {
-                $pessoa = User::findOrFail($id);
-                $pessoa->name = $input['nome'];
-                $pessoa->email = $input['email'];
-                $pessoa->dt_nascimento = $input['dt_nascimento'];
-                $pessoa->telefone = $input['telefone'];
-                $pessoa->cpf = $input['cpf'];
-                // dd($input);
-                $pessoa->save();
+            dd('oi');
+            $usuario = Clinica::findOrFail($id);
 
-            } else {
-                $clinica = Clinica::findOrFail($id);
-                dd($clinica);
-                $clinica->nome = $request->input('nome');
-                $clinica->cnpj = $request->input('cnpj');
-                $clinica->sigla = $request->input('sigla');
+            $usuario->delete();
+            // dd($usuario);
 
-                $clinica->save();
-            }
+            return $this->respondSuccess(null, 'Usuario excluído com sucesso.');
 
-            return $this->respondSuccess(null, 'Usuario alterado.');
+
+            return redirect(RouteServiceProvider::HOME)
+            // ->route('user.index')
+                        ->with('success','User deleted successfully');
+
+            // return $this->respondSuccess(null, 'Usuario alterado.');
         } catch (Throwable $e) {
             Log::error('Editando usuario.', ['Usuario_id' => $id]);
             throw $e;

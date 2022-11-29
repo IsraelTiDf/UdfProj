@@ -11,7 +11,7 @@ import BadgeIcon from '@mui/icons-material/Badge';
 
 
 export default function Crud(props) {
-    console.log(props);
+    // console.log(props);
     const { value, onEditarClick } = props;
 
     return (
@@ -26,7 +26,7 @@ export default function Crud(props) {
                         }}
                         />
                 </Grid>
-            </ListItem> 
+            </ListItem>
             <ListItem style={{ textAlign:"center" }}>
                 <Grid style={{width:"70%", marginTop:'30px',}}>
                     <TextField style={{width:'90%', fontSize:"40px"}}
@@ -36,9 +36,9 @@ export default function Crud(props) {
                         readOnly: true,
                         }}
                         />
-                    
+
                 </Grid>
-            </ListItem>  
+            </ListItem>
             <ListItem style={{ textAlign:"center" }}>
                 <Grid style={{width:"70%", marginTop:'30px',}}>
                     <TextField style={{width:'90%', fontSize:"40px"}}
@@ -48,10 +48,10 @@ export default function Crud(props) {
                         readOnly: true,
                         }}
                         />
-                    
+
                 </Grid>
             </ListItem>
-            <ListItem style={{ textAlign:"center" }}>           
+            <ListItem style={{ textAlign:"center" }}>
                 <Grid style={{width:"70%", marginTop:'30px',}}>
                     <TextField style={{width:'90%', fontSize:"40px"}}
                         label= <CalendarMonthIcon style={{fontSize:"35px"}}/>
@@ -61,7 +61,7 @@ export default function Crud(props) {
                         }}
                         />
                 </Grid>
-            </ListItem>   
+            </ListItem>
             <ListItem style={{ textAlign:"center" }}>
                 <Grid style={{width:"70%", marginTop:'30px',}}>
                     <TextField style={{width:'90%', fontSize:"40px"}}
@@ -71,15 +71,15 @@ export default function Crud(props) {
                         readOnly: true,
                         }}
                         />
-                    
-                </Grid>  
+
+                </Grid>
             </ListItem>
             <ListItem style={{ textAlign:"center" }}>
             <Grid style={{width:"70%", marginTop:'30px',}}>
                 <Tooltip placement="top" title="Editar" >
-                    <IconButton 
+                    <IconButton
                         onClick={() => onEditarClick(value)}
-                       
+
                         size="small"
                         color="inherit"
                     >

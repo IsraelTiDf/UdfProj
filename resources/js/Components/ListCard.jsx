@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
 // import Styles from "../style/Styles";
 
 const ListCard = props => {
-    console.log(props);
+    // console.log(props);
   const {
     classes,
     Id,

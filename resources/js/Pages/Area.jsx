@@ -9,7 +9,7 @@ export default function Area(props) {
 // console.log(props.auth[0].user.cpf);
 const cpf= props.auth.cpf;
 const cnpj= props.auth.cnpj;
-console.log(props.auth.user.clinica.id_clinica);
+// console.log(props.auth.user.clinica.id_clinica);
 
 const modalEditarInteressadoDefault = {
     open: false,
@@ -59,7 +59,9 @@ const handleEditarClick = (interessado) => {
                     </div>
                 </div>
             </div> */}
-            <AreaClinica value={props.auth.user.clinica} onEditarClick={handleEditarClick} clinicaId={props.auth.user.clinica.id_clinica}/>
+            <AreaClinica value={props.auth.user.clinica} onEditarClick={handleEditarClick}
+            // clinicaId={props.auth.user.clinica.id_clinica}
+            />
             {/* <EditarInteressadoModal
                 formValues={{
                 nome: modalEditarInteressado.interessado.name,

@@ -11,8 +11,9 @@ import axios from "axios";
 
 export default function RegisterClinica(props) {
     const { data, setData, post, processing, errors, reset } = useForm({
-        nome:'',
+        name:'',
         cnpj:'',
+        endereco:'',
         telefone:'',
         email: '',
         password: '',
@@ -43,8 +44,8 @@ export default function RegisterClinica(props) {
 
     const submit = (e) => {
         e.preventDefault();
-        console.log(data);
-        axiosRout.post('/register/clinica1',data).then();
+        // axiosRout.post('/register/clinica',data).then();
+        post(route('register-clinica'));
         //   .then(function (response) {
         //     console.log(response);
         //   })
@@ -57,25 +58,25 @@ export default function RegisterClinica(props) {
         <>
         {/* <NavBar props = {props}/> */}
         {/* <TabPainel/> */}
-        <GuestLayout>
+        {/* <GuestLayout> */}
             <Head title="Register" />
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel forInput="nome" value="Nome" />
+                    <InputLabel forInput="name" value="Nome" />
 
                     <TextInput
                         type="text"
-                        name="nome"
-                        value={data.nome}
+                        name="name"
+                        value={data.name}
                         className="mt-1 block w-full"
-                        autoComplete="nome"
+                        autoComplete="name"
                         isFocused={true}
                         handleChange={onHandleChange}
                         required
                     />
 
-                    <InputError message={errors.nome} className="mt-2" />
+                    <InputError message={errors.name} className="mt-2" />
                 </div>
 
                 <div>
@@ -110,6 +111,23 @@ export default function RegisterClinica(props) {
                     />
 
                     <InputError message={errors.name} className="mt-2" />
+                </div>
+
+                <div>
+                    <InputLabel forInput="endereco" value="Endereço" />
+
+                    <TextInput
+                        type="text"
+                        name="endereco"
+                        value={data.endereco}
+                        className="mt-1 block w-full"
+                        autoComplete="endereco"
+                        isFocused={true}
+                        handleChange={onHandleChange}
+                        required
+                    />
+
+                    <InputError message={errors.endereco} className="mt-2" />
                 </div>
 
 
@@ -171,7 +189,7 @@ export default function RegisterClinica(props) {
                     </PrimaryButton>
                 </div>
             </form>
-        </GuestLayout>
+        {/* </GuestLayout> */}
         </>
     );
 }

@@ -20,3 +20,6 @@ createInertiaApp({
 });
 document.getElementById('app').removeAttribute('data-page');
 InertiaProgress.init({ color: '#4B5563' });
+
+
+
