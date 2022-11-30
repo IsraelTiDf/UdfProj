@@ -13,6 +13,8 @@ import {
     TextField,
     Autocomplete,
 } from "@mui/material";
+import gpsAmb from '../../../public/img/gps-ambulancia.png';
+
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -46,6 +48,7 @@ const styles = {
         padding: 100,
     },
 };
+
 const stylou = {
     img: {
         // height: 1356,
@@ -64,7 +67,6 @@ export default function Img(props) {
     const { handleSubmit, reset, setValue, control } = useForm();
     const [value, setValueP] = useState("");
     const dados = props.props.dados;
-    // console.log();
 
     const handleChange = (data) => {
         console.log(data);
@@ -78,58 +80,42 @@ export default function Img(props) {
     });
 
     return (
+
         <FormProvider {...methods}>
             <Box
-                style={{ backgroundColor: "#FFFFF5" }}
                 component="form"
                 onSubmit={handleSubmit}
+                sx={{ paddingTop: { lg: '150px', md: '130px', sm: '100px', xs: '100px' }, backgroundColor: "#FFFFF5" }}
             >
-                <Grid
-                    id="sobrenos"
-                    container
-                    direction="column"
-                    justify="flex-end"
-                    alignItems="right"
-                    style={styles.img}
-                >
-                    <Grid item xs={12} sm={12} lg={12}>
-                        {/* <Paper
-                sx={{
-                    width: 300,
-                    height: 300,
-                    bgcolor: '#591010',
-                    color: '#ffff',
-                    '&:hover': {
-                        backgroundColor: '#f1bbbb',
-                        opacity: [0.9, 0.8, 0.7],
-                    },
-                }}> */}
-                        {/* </Paper> */}
+                <Grid id="sobrenos" container spacing={2}>
+                    <Grid item xs={12} sm={12} lg={6} >
                         <Grid
                             container
-                            spacing={1}
-                            style={{ paddingTop: "100px" }}
+                            spacing={2}
+                            sx={{ p: { md: 10, sm: 5, xs: 4 } }}
                         >
-                            <Grid item xs={6.5} style={{}}>
+                            <Grid item xs={12}>
                                 <Box
                                     style={{
-                                        color: "#591010",
+                                        display: "flex",
+                                        justifyContent: "center",
                                         fontSize: "50px",
                                         fontFamily: "inter",
                                         fontWeight: 900,
                                         color: "#591010",
-                                        textAlign: "center",
+                                        // textAlign: "center",
                                     }}
                                 >
-                                    <text>Médico</text>
-                                    <text style={{ color: "red" }}>
-                                        {" "}
+                                    <Typography sx={{ typography: { sm: 'h4', xs: 'h5' }, mr: 1 }} >
+                                        Médico
+                                    </Typography>
+                                    <Typography sx={{ typography: { sm: 'h4', xs: 'h5' }, color: '#ea1212' }}>
                                         na palma da sua mão
-                                    </text>
+                                    </Typography>
                                 </Box>
                             </Grid>
 
-                            <Grid item xs={6.5}>
+                            <Grid item xs={12}>
                                 <Box
                                     style={{
                                         marginBottom: "15px",
@@ -139,16 +125,18 @@ export default function Img(props) {
                                         fontWeight: 500,
                                     }}
                                 >
-                                    A ferramenta de busca de especialidades
-                                    médicas tem o propósito de reunir e
-                                    disponibilizar de maneira rápida e fácil a
-                                    descrição simplificada das principais
-                                    especialidades médicas que são
-                                    regulamentadas no Brasil.
+                                    <Typography sx={{ typography: { md: 'h5', sm: 'h6', xs: 'subtitle1' } }}>
+                                        A ferramenta de busca de especialidades
+                                        médicas tem o propósito de reunir e
+                                        disponibilizar de maneira rápida e fácil a
+                                        descrição simplificada das principais
+                                        especialidades médicas que são
+                                        regulamentadas no Brasil.
+                                    </Typography>
                                 </Box>
                             </Grid>
 
-                            <Grid item xs={6.5} style={{ marginLeft: "5px" }}>
+                            <Grid item xs={12}>
                                 <Box
                                     style={{
                                         textAlign: "justify",
@@ -158,13 +146,15 @@ export default function Img(props) {
                                         fontWeight: 500,
                                     }}
                                 >
-                                    Além disso, a ferramenta localiza e traça
-                                    uma rota entre você e a unidade médica mais
-                                    próxima, ou a de sua preferência.
+                                    <Typography sx={{ typography: { md: 'h5', sm: 'h6', xs: 'subtitle1' } }}>
+                                        Além disso, a ferramenta localiza e traça
+                                        uma rota entre você e a unidade médica mais
+                                        próxima, ou a de sua preferência.
+                                    </Typography>
                                 </Box>
                             </Grid>
 
-                            <Grid item xs={6.5} style={{ marginLeft: "5px" }}>
+                            <Grid item xs={12}>
                                 <Box
                                     style={{
                                         textAlign: "justify",
@@ -173,57 +163,60 @@ export default function Img(props) {
                                         fontWeight: 500,
                                     }}
                                 >
-                                    Atenção: A ferramenta localiza apenas as
-                                    unidades médicas associadas ao nosso site.
-                                </Box>
-                            </Grid>
-
-                            <Grid item xs={6.5} style={{ marginLeft: "5px" }}>
-                                <Box
-                                    style={{
-                                        textAlign: "justify",
-                                        color: "#591010",
-                                        fontSize: "30px",
-                                        fontWeight: 500,
-                                    }}
-                                >
-                                    Selecione a especialidade médica e localize
-                                    a unidade credenciada mais próxima de você.
+                                    <Typography sx={{ typography: { md: 'h5', sm: 'h6', xs: 'subtitle1' } }}>
+                                        Selecione a especialidade médica e localize
+                                        a unidade credenciada mais próxima de você.
+                                    </Typography>
                                 </Box>
 
                             </Grid>
-                            <Grid item xs={3} style={{ marginLeft: "10px",
-                                marginTop: "80px",
-                                // marginBottom: "10px",
-                                // padding: "10px",
-                                 }}>
-                                <Box
-                                style={{
-                                    backgroundColor: "red",
-                                    textAlign: "center",
-                                }}
-                                >
-                                <Button style={{ color: "white" }} href="#especialidade" >
-                                    ir até ferramenta
-                                </Button>
-                                </Box>
+
+                            <Grid item xs={12} sx={{ mt: 3 }}>
+                                <Grid container spacing={2}>
+                                    <Grid xs>
+                                    </Grid>
+                                    <Grid xs={10} md={8} lg={6}>
+                                        <Button style={{ color: "white", backgroundColor: '#ea1212', width: '100%' }} href="#especialidade" >
+                                            ir até ferramenta
+                                        </Button>
+                                    </Grid>
+                                    <Grid xs>
+                                    </Grid>
+                                </Grid>
+
                             </Grid>
                         </Grid>
                     </Grid>
-                    {/* <Grid id="especialidade"></Grid> */}
+                    <Grid item xs={12} sm={12} lg={6} sx={{ mt: 7 }}>
+                        <Box sx={{ display: { md: 'flex', sm: 'none', xs: 'none' }, justifyContent: 'center', height: 500 }}>
+                            <img src={gpsAmb} alt="gps-amb" />;
+                        </Box>
+                    </Grid>
                 </Grid>
 
                 <Grid
                     id="especialidade"
                     container
                     spacing={3}
-                    style={{
-                        marginTop: "220px",
-                        marginBottom: "",
-                        padding: "100px",
-                    }}
+                    sx={{ p: { md: 10, sm: 5, xs: 4 }, mt: { md: 10, sm: 1, xs: 1 } }}
                 >
-                    <Grid item xs={4} style={{}}>
+                    <Grid item xs={12} sm={12} md={12} lg={12}>
+                        <Box
+                            style={{
+                                display: "flex",
+                                alignContent: "center",
+                                justifyContent: "center",
+                                fontSize: "50px",
+                                fontFamily: "inter",
+                                fontWeight: 900,
+                            }}
+                        >
+                            <Typography sx={{ typography: { sm: 'h4', xs: 'h5' }, color: '#ea1212', mb: { md: 20, sm: 10, xs: 5 } }}>
+                                Busque uma especialidade
+                            </Typography>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={12} sm={9} md={4} lg={4}>
                         <Box style={{ backgroundColor: "white" }}>
                             <Controller
                                 name="especialidade"
@@ -246,67 +239,60 @@ export default function Img(props) {
                                                 {...params}
                                                 label="Pesquisa as Especialidade"
                                                 variant="outlined"
+                                                helperText="Atenção: A ferramenta localiza apenas as
+                                                unidades médicas associadas ao nosso site."
                                             />
                                         )}
                                         onChange={(_, data) =>
                                             handleChange(data)
                                         }
+
                                     />
                                 )}
                             />
                         </Box>
                     </Grid>
-                    <Grid
-                        item
-                        xs={2}
-                        style={{ paddingTop: "32px", paddingRight: "100px" }}
-                    >
-                        <Box
-                            style={{
-                                backgroundColor: "red",
-                                textAlign: "center",
-                            }}
-                        >
-                            <Button
-                                style={{ color: "white" }}
-                                href={route("mapa")}
-                            >
-                                Buscar
-                            </Button>
-                        </Box>
+                    <Grid item xs={12} sm={3} md={2} lg={2} sx={{ mt: 1 }}>
+                        <Button style={{ color: "white", backgroundColor: '#ea1212', width: '100%' }} href={route("mapa")} >
+                            Buscar
+                        </Button>
                     </Grid>
-                    <Grid item xs={6} style={{ margin: "-30px" }}>
+                    <Grid item xs={12} sm={12} md={6} lg={6}>
                         <Box
                             style={{
+
                                 fontFamily: "arial",
                                 color: "#FF1010",
-                                fontSize: "20px",
                                 fontWeight: 600,
-                                letterSpacing: ".1rem",
                             }}
                         >
-                            VISÃO GERAL
+                            {
+                                value != "" &&
+                                <Typography sx={{
+                                    typography: { md: 'h5', sm: 'h6', xs: 'subtitle1' }, display: { md: 'inherit', sm: 'flex', xs: 'flex' },
+                                    justifyContent: { md: 'start', sm: 'center', xs: 'center' },
+                                }}>
+                                    VISÃO GERAL
+                                </Typography>
+                            }
                         </Box>
                         <Box
                             style={{
-                                textIndent: "justify",
-                                fontFamily: "calibri",
-                                color: "#591010",
-                                fontSize: "19px",
-                                fontWeight: 600,
-                                letterSpacing: ".1rem",
+                                textAlign: "justify",
+
                             }}
                         >
-                            {value}
+                            <Typography sx={{
+                                typography: { md: 'h6', sm: 'subtitle1', xs: 'subtitle1' }, fontFamily: "calibri", color: "#591010", fontWeight: 600,
+                            }}>
+                                {value}
+                            </Typography>
                         </Box>
                     </Grid>
                 </Grid>
+
                 <Grid
                     container
-                    direction="column"
-                    justify="flex-end"
-                    alignItems="right"
-                    style={stylou.img}
                 >
                     <Grid
                         id="emergencia"
@@ -314,22 +300,24 @@ export default function Img(props) {
                         spacing={1}
                         style={{ paddingTop: "170px" }}
                     >
-                        <Grid item xs={12} style={{}}>
+                        <Grid item xs={12}>
                             <Box
                                 style={{
-                                    color: "#591010",
+                                    display: "flex",
+                                    justifyContent: "center",
                                     fontSize: "50px",
                                     fontFamily: "inter",
                                     fontWeight: 900,
                                     color: "#591010",
-                                    textAlign: "center",
+                                    // textAlign: "center",
                                 }}
                             >
-                                <text>Transporte</text>
-                                <text style={{ color: "red" }}>
-                                    {" "}
+                                <Typography sx={{ typography: { sm: 'h4', xs: 'h5' }, mr: 1 }} >
+                                    Transporte
+                                </Typography>
+                                <Typography sx={{ typography: { sm: 'h4', xs: 'h5' }, color: '#ea1212' }}>
                                     de urgência
-                                </text>
+                                </Typography>
                             </Box>
                         </Grid>
 
@@ -337,29 +325,26 @@ export default function Img(props) {
                             <Box
                                 style={{
                                     marginBottom: "15px",
-                                    textAlign: "justify",
                                     color: "#591010",
                                     fontSize: "30px",
                                     fontWeight: 500,
                                     textAlign: "center",
                                 }}
                             >
-                                Precisa de uma ambulância para se locomover até
-                                o serviço de urgência mais proximo?
+                                <Typography sx={{ typography: { md: 'h5', sm: 'h6', xs: 'subtitle1' } }}>
+                                    Precisa de uma ambulância para se locomover até
+                                    o serviço de urgência mais proximo?
+                                </Typography>
                             </Box>
                         </Grid>
 
                         <Grid
                             item
                             xs={12}
-                            style={{
-                                paddingLeft: "150px",
-                                paddingRight: "150px",
-                            }}
+
                         >
                             <Box
                                 style={{
-                                    textAlign: "center",
                                     color: "#591010",
                                     marginBottom: "15px",
                                     fontSize: "30px",
@@ -367,33 +352,30 @@ export default function Img(props) {
                                     textAlign: "center",
                                 }}
                             >
-                                Solicite o transporte de emergência, que é uma
-                                ocorrência imprevista com ou sem risco potencial
-                                à vida, onde o indivíduo necessita de
-                                assistência médica imediata.
+                                <Typography sx={{ typography: { md: 'h5', sm: 'h6', xs: 'subtitle1' } }}>
+                                    Solicite o transporte de emergência, que é uma
+                                    ocorrência imprevista com ou sem risco potencial
+                                    à vida, onde o indivíduo necessita de
+                                    assistência médica imediata.
+                                </Typography>
                             </Box>
                         </Grid>
                         <Grid
                             item
                             xs={12}
-                            style={{
-                                paddingTop: "32px",
-                                width: "40%",
-                                paddingLeft: "750px",
-                                paddingRight: "750px",
-                                marginTop: "20px",
-                            }}
+                            sx={{ mt: 5 }}
                         >
-                            <Box
-                                style={{
-                                    backgroundColor: "red",
-                                    textAlign: "center",
-                                }}
-                            >
-                                <Button style={{ color: "white" }}>
-                                    Solicite uma ambulância
-                                </Button>
-                            </Box>
+                            <Grid container spacing={2}>
+                                <Grid xs>
+                                </Grid>
+                                <Grid xs={10} md={6} lg={4}>
+                                    <Button style={{ color: "white", backgroundColor: '#ea1212', width: '100%' }}>
+                                        Solicite uma ambulância
+                                    </Button>
+                                </Grid>
+                                <Grid xs>
+                                </Grid>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -402,28 +384,18 @@ export default function Img(props) {
                     id="contatos"
                     container
                     spacing={3}
-                    style={{
-                        paddingTop: "70px",
-                        paddingLeft: "450px",
-                        paddingRight: "200px",
-                        paddingBottom: "150px",
-                    }}
+
                 >
                     <Grid
                         item
-                        xs={12}
-                        style={{
-                            marginLeft: "-160px",
-                            fontSize: "45px",
-                            textAlign: "center",
-                            fontWeight: 700,
-                            color: "#591010",
-                            marginBottom: "30px",
-                        }}
+                        xs={12} sm={12} lg={12}
+                        sx={{ display: 'flex', justifyContent: 'center', mt: 15, mb: 3 }}
                     >
-                        Contatos
+                        <Typography sx={{ typography: { sm: 'h4', xs: 'h5' }, color: "#1976D2 " }}>
+                            Contatos
+                        </Typography>
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={4} sm={4} lg={4} sx={{ display: 'flex', justifyContent: 'center' }}>
                         <Button
                             href="https://www.facebook.com/"
                             target="_blank"
@@ -431,7 +403,7 @@ export default function Img(props) {
                             <FacebookIcon style={{ fontSize: "70px" }} />
                         </Button>
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={4} sm={4} lg={4} sx={{ display: 'flex', justifyContent: 'center' }}>
                         <Button
                             href="https://www.whatsapp.com/"
                             target="_blank"
@@ -439,7 +411,7 @@ export default function Img(props) {
                             <WhatsAppIcon style={{ fontSize: "70px" }} />
                         </Button>
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={4} sm={4} lg={4} sx={{ display: 'flex', justifyContent: 'center' }}>
                         <Button
                             href="https://www.instagram.com/"
                             target="_blank"
@@ -449,6 +421,7 @@ export default function Img(props) {
                     </Grid>
                 </Grid>
             </Box>
-        </FormProvider>
+        </FormProvider >
     );
 }
+
