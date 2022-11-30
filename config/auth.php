@@ -40,10 +40,6 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        // 'clinica' => [
-        //     'driver' => 'session',
-        //     'provider' => 'clinicas',
-        // ],
     ],
 
     /*
@@ -67,18 +63,7 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
-            // 'model' =>
         ],
-        // 'clinicas' => [
-        //     'driver' => 'eloquent',
-        //     'model' => App\Models\Clinica::class,
-        //     // 'model' =>
-        // ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
     ],
 
     /*

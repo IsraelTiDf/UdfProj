@@ -22,12 +22,12 @@ class User extends Authenticatable
         'name',
         'id',
         'cpf',
+        'flg_admin',
         'telefone',
         'email',
         'endereco',
         'password',
         'dt_nascimento',
-        'sexo'
     ];
 
     /**

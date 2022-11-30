@@ -42,8 +42,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/clinicas', [RegisterClinicaController::class, 'view_clinica'])->name('clinicas');
     Route::get('/mapa', [MapaController::class,'view'])->name('mapa');
 
-Route::post('/editar-usuario/{id}', [RegisterClinicaController::class,'update'])->name('editar-usuario');
-Route::post('/delete-clinica/{id}', [RegisterClinicaController::class,'delete'])->name('editar-clinica');
+Route::put('/editar-usuario/{id}', [RegisterClinicaController::class,'update'])->name('editar-usuario');
+// Route::put('/editar-usuario/', [RegisterClinicaController::class,'update'])->name('editar-usuario');
+Route::delete('/deletar-usuario/{id}', [RegisterClinicaController::class,'delete'])->name('deletar-usuario');
 // ->only(['store'  , 'update']);
 
 

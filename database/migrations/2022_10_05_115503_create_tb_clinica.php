@@ -16,14 +16,11 @@ return new class extends Migration
         Schema::create('tb_clinica', function (Blueprint $table) {
             $table->integerIncrements('id_clinica');
             $table->string('nome', 50);
-            $table->string('email', 50);
-            $table->string('password');
             $table->string('endereco', 50);
             $table->string('cnpj', 20);
             $table->integer('id_user')->unsigned()->nullable();
             $table->foreign('id_user')->references('id')->on('users');
             $table->string('telefone', 11);
-            // $table->string('emergencia', 3)->nullable();
             $table->integer('id_especialidade')->unsigned()->nullable();
             $table->foreign('id_especialidade')->references('id_especialidade')->on('tb_especialidade');
             $table->decimal('longitude', 10,4)->nullable();

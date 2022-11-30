@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
             'email' => Str::random(10).'@gmail.com',
             'password' => Hash::make('password'),
             'dt_nascimento' => '1986-06-02',
-            'sexo' => 'MAS',
+            'flg_admin' => '0',
         ],
         [
             'name' => 'Thiago Silva',
@@ -35,7 +35,20 @@ class UserSeeder extends Seeder
             'email' => Str::random(10).'@gmail.com',
             'password' => Hash::make('password'),
             'dt_nascimento' => '1986-06-02',
-            'sexo' => 'MAS',
-        ]]);
+            'flg_admin' => '0',
+        ],
+        [
+            'name' => 'Super Admin',
+            'cpf' => '00000000000',
+            'endereco' => 'QNM 03 Conjunto H apt 22',
+            'telefone' => '994103232',
+            'email' => Str::random(10).'@gmail.com',
+            'password' => Hash::make('password'),
+            'dt_nascimento' => '1986-06-02',
+            'flg_admin' => '1',
+                       
+        ],
+    
+        ]);
     }
 }

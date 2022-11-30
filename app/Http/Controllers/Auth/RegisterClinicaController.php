@@ -43,38 +43,22 @@ class RegisterClinicaController extends Controller
 
     public function store_clin(Request $request)
     {
-        // dd($request->all());
         $request->validate([
             'name' => 'required|string|max:255',
             'cnpj' => 'required',
             'endereco' => 'required',
-            // // 'dt_nascimento' => 'required',
             'telefone' => 'required',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-        // dd($request);
         $user = clinica::create([
             'nome' => $request->name,
             'email' => $request->email,
             'endereco' => $request->endereco,
             'cnpj' => $request->cnpj,
             'telefone' => $request->telefone,
-            // 'dt_nascimento' => $request->dt_nascimento,
-            'password' => Hash::make($request->password),
         ]);
-        // dd($request->all());
 
-        // event(new Registered($user));
-
-        // dd(Auth::login($user));
-        // Auth::login($user);
-
-        // return redirect(RouteServiceProvider::HOME);
         return $this->respondSuccess($user);
     }
-
-    // use ApiResponse;
 
     public function index()
     {
@@ -142,42 +126,50 @@ class RegisterClinicaController extends Controller
 
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [
-            'nome' => 'required|max:200',
-            'email' => 'nullable|email',
-            'dt_nascimento' => 'nullable',
-            'telefone' => 'nullable|',
-            'cpf' => 'nullable|',
-        ], [
-            'email.email' => 'E-mail inválido.',
-            // 'email2.email' => 'E-mail secundário inválido',
-            'cpf.cpf' => 'CPF inválido',
-            'telefone.telefone' => 'Telefone fixo inválido',
-        ]);
-
-        $input = $validator->validate();
-
-
         try {
-            if ($request->input('cpf')) {
-                $pessoa = User::findOrFail($id);
-                $pessoa->name = $input['nome'];
-                $pessoa->email = $input['email'];
-                $pessoa->dt_nascimento = $input['dt_nascimento'];
-                $pessoa->telefone = $input['telefone'];
-                $pessoa->cpf = $input['cpf'];
-                // dd($input);
-                $pessoa->save();
+            $input = $request->all();
+            $pessoa = User::findOrFail($id);
+            $pessoa->name = $input['name'];
+            $pessoa->save();
+            // dd($pessoa);
+            
 
-            } else {
-                dd($clinica);
-                $clinica = Clinica::findOrFail($id);
-                $clinica->nome = $request->input('nome');
-                $clinica->cnpj = $request->input('cnpj');
-                $clinica->sigla = $request->input('sigla');
+        // $validator = Validator::make($request->all(), [
+        //     'nome' => 'required|max:200',
+        //     'email' => 'nullable|email',
+        //     'dt_nascimento' => 'nullable',
+        //     'telefone' => 'nullable|',
+        //     'cpf' => 'nullable|',
+        // ], [
+        //     'email.email' => 'E-mail inválido.',
+        //     // 'email2.email' => 'E-mail secundário inválido',
+        //     'cpf.cpf' => 'CPF inválido',
+        //     'telefone.telefone' => 'Telefone fixo inválido',
+        // ]);
 
-                $clinica->save();
-            }
+        // $input = $validator->validate();
+
+
+        // try {
+        //     if ($request->input('cpf')) {
+        //         $pessoa = User::findOrFail($id);
+        //         $pessoa->name = $input['nome'];
+        //         $pessoa->email = $input['email'];
+        //         $pessoa->dt_nascimento = $input['dt_nascimento'];
+        //         $pessoa->telefone = $input['telefone'];
+        //         $pessoa->cpf = $input['cpf'];
+        //         // dd($input);
+        //         $pessoa->save();
+
+        //     } else {
+        //         dd($clinica);
+        //         $clinica = Clinica::findOrFail($id);
+        //         $clinica->nome = $request->input('nome');
+        //         $clinica->cnpj = $request->input('cnpj');
+        //         $clinica->sigla = $request->input('sigla');
+
+        //         $clinica->save();
+        //     }
 
             return $this->respondSuccess(null, 'Usuario alterado.');
         } catch (Throwable $e) {
@@ -193,17 +185,17 @@ class RegisterClinicaController extends Controller
 
         try {
             // dd('oi');
-            $usuario = Clinica::findOrFail($id);
+            $usuario = User::destroy($id);
 
-            $usuario->delete();
+            // $usuario->delete();
             // dd($usuario);
 
             return $this->respondSuccess(null, 'Usuario excluído com sucesso.');
 
 
-            return redirect(RouteServiceProvider::HOME)
-            // ->route('user.index')
-                        ->with('success','Clinica deletada');
+            // return redirect(RouteServiceProvider::HOME)
+            // // ->route('user.index')
+            //             ->with('success','Clinica deletada');
 
             // return $this->respondSuccess(null, 'Usuario alterado.');
         } catch (Throwable $e) {

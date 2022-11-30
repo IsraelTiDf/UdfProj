@@ -30,8 +30,6 @@ class clinica extends Authenticatable
         'endereco',
         'id_user',
         'id_especialidade',
-        'email',
-        'password',
         'longitude',
         'latitude'
     ];

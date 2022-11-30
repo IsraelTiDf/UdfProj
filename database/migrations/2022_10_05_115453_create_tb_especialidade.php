@@ -17,7 +17,6 @@ return new class extends Migration
             $table->integerIncrements('id_especialidade');
             $table->string('nome', 50)->nullable();
             $table->longText('ds_especialidade')->nullable();
-            $table->string('emergencia', 3)->nullable();
             // $table->integer('id_clinica')->unsigned()->nullable();
             $table->timestamps();
         });

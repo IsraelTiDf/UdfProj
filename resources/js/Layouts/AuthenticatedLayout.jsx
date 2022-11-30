@@ -10,16 +10,17 @@ import Box from '@mui/material/Box';
 export default function Authenticated({ auth, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
     const cpf = auth.user.cpf;
-    const cnpj = auth.user.cnpj;
+    // const user = auth.user;
+    const admin = auth.user.flg_admin;
     // console.log(auth);
 
     return (
-        <div style={{backgroundColor:"#FFFFF0"}} className=" min-h-screen -100">
+        <div style={{ backgroundColor: "#FFFFF0" }} className=" min-h-screen -100">
             <nav className="position-fixed bg-white border-b border-black-100">
                 <div >
                     <div className="flex justify-between h-16.8">
                         <div className="flex sm:ml-48" >
-                        <div className="hidden sm:flex  sm:items-center sm:my-5 sm:ml-12">
+                            <div className="hidden sm:flex  sm:items-center sm:my-5 sm:ml-12">
                                 <Link href="/">
                                     <div style={{
                                         marginLeft: '-0.5px',
@@ -32,7 +33,7 @@ export default function Authenticated({ auth, header, children }) {
                                         fontWeight: 600,
                                         letterSpacing: '.3rem',
                                         textDecoration: 'none',
-                                         }}> DIND
+                                    }}> DIND
                                     </div>
                                 </Link>
                             </div>
@@ -125,29 +126,26 @@ export default function Authenticated({ auth, header, children }) {
             </nav>
 
             {header && (
-                <header style={{padding:"15px", textAlign:"center"}} className="bg-white shadow">
+                <header style={{ padding: "15px", textAlign: "center" }} className="bg-white shadow">
                     <div>
-              {cpf && (
-                <div  style={{marginLeft:"200px"}} className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                        Area Usuario
-                    </NavLink>
-                    <NavLink href={route('usuarios')} active={route().current('usuarios')}>
-                        Clinicas
-                    </NavLink>
-                </div>
-            )}
-            {cnpj && (
-                <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                        Area Clinica
-                    </NavLink>
-                    <NavLink href={route('clinicas')} active={route().current('clinicas')}>
-                        Usuarios
-                    </NavLink>
-                </div>
-            )}
-            </div>
+                        {admin != 1 ? (
+                            <div style={{ marginLeft: "200px" }} className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <NavLink href={route('dashboard')} active={route().current('dashboard')}>
+                                    Area Usuario
+                                </NavLink>
+                            </div>
+                        ) : (
+                            <div style={{ marginLeft: "200px" }} className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <NavLink href={route('dashboard')} active={route().current('dashboard')}>
+                                    Area Usuario
+                                </NavLink>
+                                <NavLink href={route('usuarios')} active={route().current('usuarios')}>
+                                    Clinicas
+                                </NavLink>
+
+                            </div>)}
+
+                    </div>
                     <div>{header}</div>
                 </header>
             )}

@@ -214,7 +214,7 @@ export default function Crud(props) {
                     <Grid style={{ width: "70%" }}>
                         <TextField
                             style={{ width: "90%" }}
-                            label=<PersonIcon style={{ fontSize: "35px" }} />
+                            label={<PersonIcon style={{ fontSize: "35px" }} />}
 
                             defaultValue={value.nome || "Nenhuma"}
                             InputProps={{
@@ -227,7 +227,7 @@ export default function Crud(props) {
                     <Grid style={{ width: "70%", marginTop: "30px" }}>
                         <TextField
                             style={{ width: "90%", fontSize: "40px" }}
-                            label=<BadgeIcon style={{ fontSize: "35px" }} />
+                            label={<BadgeIcon style={{ fontSize: "35px" }} />}
                             defaultValue={value.cnpj || "Nenhuma"}
                             InputProps={{
                                 readOnly: true,
@@ -240,7 +240,7 @@ export default function Crud(props) {
                     <Grid style={{ width: "70%", marginTop: "30px" }}>
                         <TextField
                             style={{ width: "90%", fontSize: "40px" }}
-                            label=<EmailIcon style={{ fontSize: "35px" }} />
+                            label={<EmailIcon style={{ fontSize: "35px" }} />}
                             defaultValue={value.email || "Nenhum"}
                             InputProps={{
                                 readOnly: true,
@@ -253,7 +253,7 @@ export default function Crud(props) {
                     <Grid style={{ width: "70%", marginTop: "30px" }}>
                         <TextField
                             style={{ width: "90%", fontSize: "40px" }}
-                            label=<CalendarMonthIcon style={{ fontSize: "35px" }} />
+                            label={<CalendarMonthIcon style={{ fontSize: "35px" }} />}
                             defaultValue={value.dt_nascimento || "Nenhuma"}
                             InputProps={{
                                 readOnly: true,
@@ -266,7 +266,7 @@ export default function Crud(props) {
                     <Grid style={{ width: "70%", marginTop: "30px" }}>
                         <TextField
                             style={{ width: "90%", fontSize: "40px" }}
-                            label=<SmartphoneIcon style={{ fontSize: "35px" }} />
+                            label={<SmartphoneIcon style={{ fontSize: "35px" }} />}
                             defaultValue={value.telefone || "Nenhum"}
                             InputProps={{
                                 readOnly: true,

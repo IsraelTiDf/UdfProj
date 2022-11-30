@@ -17,14 +17,13 @@ return new class extends Migration
             $table->integerIncrements('id');
             $table->string('name', 50);
             $table->string('cpf', 14);
+            $table->string('flg_admin', 1)->nullable();
             $table->string('telefone', 11);
             $table->string('email', 50);
             $table->string('endereco', 50);
             $table->string('password');
             $table->date('dt_nascimento');
-            $table->string('sexo', 3)->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('emergencia', 3)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
