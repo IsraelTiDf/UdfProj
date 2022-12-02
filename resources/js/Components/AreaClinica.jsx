@@ -1,330 +1,330 @@
-import React, { Component, useState } from "react";
+import React, { useState, useEffect } from "react";
+// import './App.css';
+import { forwardRef } from "react";
+// import Avatar from 'react-avatar';
+import { Grid } from "@mui/material";
+import MaterialTable from "material-table";
 import {
-    Box,
-    Grid,
-    List,
-    ListItem,
-    TextField,
-    ListItemText,
-    Tooltip,
-    IconButton,
-    Button,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    DialogTitle,
-    Modal,
-    Typography,
-    Autocomplete,
-} from "@mui/material";
-import { useForm, Controller, FormProvider} from "react-hook-form";
-import CreateData from "./CreateData.jsx";
-import DataLists from "./DataLists.jsx";
-import { Edit as EditIcon } from "@mui/icons-material";
-import { Delete as DeleteIcon } from "@mui/icons-material";
-import useExcluir from "../Pages/clinica/useExcluir";
-import PersonIcon from "@mui/icons-material/Person";
-import EmailIcon from "@mui/icons-material/Email";
-import SmartphoneIcon from "@mui/icons-material/Smartphone";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import BadgeIcon from "@mui/icons-material/Badge";
-// import DeleteIcon from '@mui/icons-material/Delete';
-export default function Crud(props) {
-    // console.log(props);
+    MedicalServices,
+    FilterList,
+    FirstPage,
+    LastPage,
+    Remove,
+    SaveAlt,
+    Search,
+    Edit,
+    DeleteOutline,
+    Clear,
+    ChevronRight,
+    ChevronLeft,
+    ArrowDownward,
+    AddBox,
+    ViewColumn,
+    Check,
+} from "@mui/icons-material/";
+// import ViewColumn from '@material-ui/icons/ViewColumn';
+import axios from "axios";
+import Alert from "@mui/lab/Alert";
+// import MaterialTable from "material-table";
+// @mui/material/
+// @mui/icons-material/
+import { ThemeProvider, createTheme, Box, Button } from "@mui/material";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+// import NavLink from "@/Components/NavLink";
+// import { Head } from "@inertiajs/inertia-react";
+// import Crud from "../Components/Crud.jsx";
+// import EditarInteressadoModal from "./EditarDados";
+
+const tableIcons = {
+    Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
+    Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
+    Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+    Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
+    DetailPanel: forwardRef((props, ref) => (
+        <ChevronRight {...props} ref={ref} />
+    )),
+    Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
+    Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
+    Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
+    FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
+    LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
+    NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+    PreviousPage: forwardRef((props, ref) => (
+        <ChevronLeft {...props} ref={ref} />
+    )),
+    ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+    Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
+    SortArrow: forwardRef((props, ref) => (
+        <ArrowDownward {...props} ref={ref} />
+    )),
+    ThirdStateCheck: forwardRef((props, ref) => (
+        <Remove {...props} ref={ref} />
+    )),
+    medic: forwardRef((props, ref) => <MedicalServices {...props} ref={ref} />),
+    ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
+};
+const defaultMaterialTheme = createTheme();
+
+const api = axios.create({
+    //   baseURL: `https://reqres.in/api`
+});
+
+function validateEmail(email) {
+    const re =
+        /^((?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\]))$/;
+    return re.test(String(email).toLowerCase());
+}
+
+export default function AreaClinica(props) {
     const { value, onEditarClick } = props;
-    const dados = props.dados;
-    // const clinicaId = props.value.id_clinica;
+    console.log(onEditarClick);
 
-    const [excluir] = useExcluir();
-    const [open, setOpen] = React.useState(false);
-
-    const handleClickOpen = () => {
-        setOpen(true);
+    const modalEditarInteressadoDefault = {
+        open: false,
+        interessado: {
+            id: 0,
+            id_area: 0,
+            name: "",
+            cpf: "",
+            email: "",
+            dt_nascimento: "",
+            telefone: "",
+        },
     };
+    const [modalEditarInteressado, setModalEditarInteressado] = useState(
+        modalEditarInteressadoDefault
+    );
 
-    const handleClose = () => {
-        setOpen(false);
-        //   await editar(clinicaId);
-    };
+    const handleModalEditarClose = () =>
+        setModalEditarInteressado(modalEditarInteressadoDefault);
 
-    const style = {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: 400,
-        bgcolor: 'background.paper',
-        border: '2px solid #000',
-        boxShadow: 24,
-        p: 4,
-      };
-
-    const [openModal, setOpenModal] = React.useState(false);
-    const handleOpenModal = () => setOpenModal(true);
-    const handleCloseModal = () => setOpenModal(false);
-    const { handleSubmit, reset, setValue, control } = useForm();
-    const methods = useForm({
-        mode: "all",
-        shouldUnregister: false,
-    });
-
-    // console.log(clinicaId);
-
-    // const handleExcluir = () => {
-    //     excluir;
-    //   };
-
-    const handleExcluir = async (data) => {
-        const clinicaId = props.value.id_clinica;
-
-        await axios({
-            method: "post",
-            url: `/delete-clinica/${clinicaId}`,
-            // data: data,
+    const handleEditarClick = (interessado) => {
+        setModalEditarInteressado({
+            interessado,
+            open: true,
         });
-        window.location.reload();
-        setOpen(false);
-        // });
     };
-    if(value === null){
-        return (
-            <List style={{ paddingLeft: "420px", paddingTop: "100px" }}>
-                <ListItem style={{ textAlign: "center" }}>
-                    <Grid style={{ width: "70%" }}>
 
-                        {"Nenhuma"}
+    // const admin = props.auth.user.flg_admin;
 
-                        <Box>
-                            <Button style={{backgroundColor:'Green',color:'Black'}} onClick={handleOpenModal}>Cadastrar Clinica</Button>
-                        </Box>
-                        <FormProvider {...methods}>
-                        <Modal
-                            open={openModal}
-                            onClose={handleCloseModal}
-                            aria-labelledby="modal-modal-title"
-                            aria-describedby="modal-modal-description"
-                        >
-                            <Box sx={style}>
-                            <Typography id="modal-modal-title" variant="h6" component="h2">
-                                Especialidade
-                            </Typography>
-                            <Grid item xs={4} style={{}}>
-                            <Box style={{ backgroundColor: "white" }}>
-                                <Controller
-                                    name="especialidade"
-                                    control={control}
-                                    defaultValue=""
-                                    render={({ field }) => (
-                                        <Autocomplete
-                                            {...field}
-                                            freeSolo
-                                            options={dados}
-                                            getOptionLabel={(option) =>
-                                                option.nome || ""
-                                            }
-                                            isOptionEqualToValue={(option, value) =>
-                                                option.id_especialidade ===
-                                                value.id_especialidade
-                                            }
-                                            renderInput={(params) => (
-                                                <TextField
-                                                    {...params}
-                                                    label="Pesquisa as Especialidade"
-                                                    variant="outlined"
-                                                />
-                                            )}
-                                            onChange={(_, data) =>
-                                                handleChange(data)
-                                            }
-                                        />
-                                    )}
-                                />
-                            </Box>
-                            </Grid>
-                            </Box>
-                        </Modal>
-                    </FormProvider>
-                    </Grid>
-                </ListItem>
-            </List>
-                );
-
-    }else{
-
-        return (
-            <List style={{ paddingLeft: "420px", paddingTop: "100px" }}>
-            {/* <Grid> */}
-                        <Box>
-                            <Button style={{backgroundColor:'Green',color:'Black'}} href={route('mapa')}>Buscar Clinica</Button>
-                        </Box>
-                        <Grid style={{marginTop: "30px"}}/>
-                        {/* <Box>
-                            <Button style={{backgroundColor:'Green',color:'Black'}} onClick={handleOpenModal}>Cadastrar Clinica</Button>
-                        </Box>
-                        <FormProvider {...methods}>
-                        <Modal
-                            open={openModal}
-                            onClose={handleCloseModal}
-                            aria-labelledby="modal-modal-title"
-                            aria-describedby="modal-modal-description"
-                        >
-                            <Box sx={style}>
-                            <Typography id="modal-modal-title" variant="h6" component="h2">
-                                Especialidade
-                            </Typography>
-                            <Grid item xs={4} style={{}}>
-                            <Box style={{ backgroundColor: "white" }}>
-                                <Controller
-                                    name="especialidade"
-                                    control={control}
-                                    defaultValue=""
-                                    render={({ field }) => (
-                                        <Autocomplete
-                                            {...field}
-                                            freeSolo
-                                            options={dados}
-                                            getOptionLabel={(option) =>
-                                                option.nome || ""
-                                            }
-                                            isOptionEqualToValue={(option, value) =>
-                                                option.id_especialidade ===
-                                                value.id_especialidade
-                                            }
-                                            renderInput={(params) => (
-                                                <TextField
-                                                    {...params}
-                                                    label="Pesquisa as Especialidade"
-                                                    variant="outlined"
-                                                />
-                                            )}
-                                            onChange={(_, data) =>
-                                                handleChange(data)
-                                            }
-                                        />
-                                    )}
-                                />
-                            </Box>
-                            </Grid>
-                            </Box>
-                        </Modal>
-                    </FormProvider> */}
-            {/* </Grid> */}
-                <ListItem style={{ textAlign: "center" }}>
-                    <Grid style={{ width: "70%" }}>
-                        <TextField
-                            style={{ width: "90%" }}
-                            label={<PersonIcon style={{ fontSize: "35px" }} />}
-
-                            defaultValue={value.nome || "Nenhuma"}
-                            InputProps={{
-                                readOnly: true,
-                            }}
-                        />
-                    </Grid>
-                </ListItem>
-                <ListItem style={{ textAlign: "center" }}>
-                    <Grid style={{ width: "70%", marginTop: "30px" }}>
-                        <TextField
-                            style={{ width: "90%", fontSize: "40px" }}
-                            label={<BadgeIcon style={{ fontSize: "35px" }} />}
-                            defaultValue={value.cnpj || "Nenhuma"}
-                            InputProps={{
-                                readOnly: true,
-                            }}
-                        />
-                    </Grid>
-                </ListItem>
-
-                <ListItem style={{ textAlign: "center" }}>
-                    <Grid style={{ width: "70%", marginTop: "30px" }}>
-                        <TextField
-                            style={{ width: "90%", fontSize: "40px" }}
-                            label={<EmailIcon style={{ fontSize: "35px" }} />}
-                            defaultValue={value.email || "Nenhum"}
-                            InputProps={{
-                                readOnly: true,
-                            }}
-                        />
-                    </Grid>
-                </ListItem>
-
-                <ListItem style={{ textAlign: "center" }}>
-                    <Grid style={{ width: "70%", marginTop: "30px" }}>
-                        <TextField
-                            style={{ width: "90%", fontSize: "40px" }}
-                            label={<CalendarMonthIcon style={{ fontSize: "35px" }} />}
-                            defaultValue={value.dt_nascimento || "Nenhuma"}
-                            InputProps={{
-                                readOnly: true,
-                            }}
-                        />
-                    </Grid>
-                </ListItem>
-
-                <ListItem style={{ textAlign: "center" }}>
-                    <Grid style={{ width: "70%", marginTop: "30px" }}>
-                        <TextField
-                            style={{ width: "90%", fontSize: "40px" }}
-                            label={<SmartphoneIcon style={{ fontSize: "35px" }} />}
-                            defaultValue={value.telefone || "Nenhum"}
-                            InputProps={{
-                                readOnly: true,
-                            }}
-                        />
-                    </Grid>
-                </ListItem>
-
-                <ListItem style={{ textAlign: "center" }}>
-                    <Grid style={{ width: "70%", marginTop: "30px" }}>
-                        {/* <Button variant="outlined" onClick={handleClickOpen}>
-                    Open alert dialog
-                </Button> */}
-
-                        <Tooltip placement="top" title="Editar">
-                            <IconButton
-                                onClick={handleClickOpen}
-                                size="small"
-                                color="inherit"
-                            >
-                                <DeleteIcon
-                                    style={{ fontSize: "40px" }}
-                                    fontSize="small"
-                                    color="inherit"
-                                />
-                            </IconButton>
-                        </Tooltip>
-                        <Dialog
-                            open={open}
-                            onClose={handleClose}
-                            aria-labelledby="alert-dialog-title"
-                            aria-describedby="alert-dialog-description"
-                        >
-                            <DialogTitle id="alert-dialog-title">
-                                {"Voçê realmente deseja deletar?"}
-                            </DialogTitle>
-                            <DialogContent></DialogContent>
-                            <DialogActions>
-                                <Button onClick={handleClose}>Não</Button>
-                                <Button onClick={handleExcluir} autoFocus>
-                                    Sim
-                                </Button>
-                            </DialogActions>
-                        </Dialog>
-                        {/* <Tooltip placement="top" title="Editar">
-                        <IconButton
-                            onClick={() => onEditarClick(value)}
-                            size="small"
-                            color="inherit"
-                        >
-                            <EditIcon fontSize="small" color="inherit" />
-                        </IconButton>
-                        </Tooltip> */}
-                    </Grid>
-                </ListItem>
-            </List>
-        );
-
+    var columns = [
+        { title: "id_clinica", field: "id_clinica", hidden: true },
+        // {title: "Avatar", render: rowData => <Avatar maxInitials={1} size={40} round={true} name={rowData === undefined ? " " : rowData.first_name} />  },
+        { title: "nome", field: "nome" },
+        { title: "cnpj", field: "cnpj" },
+        { title: "endereco", field: "endereco" },
+        { title: "telefone", field: "telefone" },
+        { title: "Data de nascimento", field: "dt_nascimento" },
+    ];
+    //   const [data, setData] = useState([]); //table data
+    // data = props.usuario;
+    const data = props.clinicas;
+    //for error handling
+    const [iserror, setIserror] = useState(false);
+    const [errorMessages, setErrorMessages] = useState([]);
+    const  handleOpenModal =(rowData) =>{
+        alert(rowData.id_clinica);
     }
 
+    //   useEffect(() => {
+    //     api.get(route('editar-usuario'))
+    //         .then(res => {
+    //             setData(res.data.data)
+    //          })
+    //          .catch(error=>{
+    //              console.log("Error")
+    //          })
+    //   }, [])
+
+    const handleRowUpdate = (newData, oldData, resolve) => {
+        //validation
+        let errorList = [];
+        console.log(newData);
+        if (newData.name === "") {
+            errorList.push("Please enter first name");
+        }
+        if (newData.cpf === "") {
+            errorList.push("Please enter last name");
+        }
+        if (newData.email === "" || validateEmail(newData.email) === false) {
+            errorList.push("Please enter a valid email");
+        }
+
+        if (errorList.length < 1) {
+            alert("oi");
+            //   api.get(route('editar-usuario')+'/'+newData.id, newData)
+            api.put(`/editar-usuario/${newData.id}`, newData)
+
+                .then((res) => {
+                    const dataUpdate = [...data];
+                    const index = oldData.tableData.id;
+                    dataUpdate[index] = newData;
+                    setData([...dataUpdate]);
+                    resolve();
+                    setIserror(false);
+                    setErrorMessages([]);
+                })
+                .catch((error) => {
+                    setErrorMessages(["Update failed! Server error"]);
+                    setIserror(true);
+                    resolve();
+                });
+        } else {
+            setErrorMessages(errorList);
+            setIserror(true);
+            resolve();
+        }
+    };
+
+    //   const handleRowAdd = (newData, resolve) => {
+    //     //validation
+    //     let errorList = []
+    //     if(newData.name === undefined){
+    //       errorList.push("Please enter first name")
+    //     }
+    //     if(newData.cpf === undefined){
+    //       errorList.push("Please enter last name")
+    //     }
+    //     if(newData.email === undefined || validateEmail(newData.email) === false){
+    //       errorList.push("Please enter a valid email")
+    //     }
+
+    //     if(errorList.length < 1){ //no error
+    //       api.post(`/delete-clinica/${newData.id}`)
+    //       .then(res => {
+    //         let dataToAdd = [...data];
+    //         dataToAdd.push(newData);
+    //         setData(dataToAdd);
+    //         resolve()
+    //         setErrorMessages([])
+    //         setIserror(false)
+    //       })
+    //       .catch(error => {
+    //         setErrorMessages(["Cannot add data. Server error!"])
+    //         setIserror(true)
+    //         resolve()
+    //       })
+    //     }else{
+    //       setErrorMessages(errorList)
+    //       setIserror(true)
+    //       resolve()
+    //     }
+
+    //   }
+
+    const handleRowDelete = (oldData, resolve) => {
+        // api.delete(route('editar-clinica')+'/'+oldData.id)
+        axios
+            .delete(`/delete-clinica/${oldData.id}`)
+
+            .then((res) => {
+                const dataDelete = [...data];
+                const index = oldData.tableData.id;
+                dataDelete.splice(index, 1);
+                setData([...dataDelete]);
+                resolve();
+            })
+            .catch((error) => {
+                setErrorMessages(["Delete failed! Server error"]);
+                setIserror(true);
+                resolve();
+            });
+    };
+
+    return (
+        <div className="App">
+         {/* <AuthenticatedLayout
+             auth={props.auth}
+             errors={props.errors}
+             header={
+                 <div>
+                     <NavLink href={route('dashboard')} active={route().current('dashboard')}>
+             Area Usuario
+         </NavLink>
+         <NavLink href={route('usuarios')} active={route().current('usuarios')}>
+             Clinicas
+         </NavLink>
+                 </div>
+             }
+         > */}
+            <Grid container spacing={1}>
+                <Grid item xs={3}></Grid>
+                <Grid item xs={12} sm={12} lg={6} sx={{ mt: 5 }}>
+                    <div>
+                        {iserror && (
+                            <Alert severity="error">
+                                {errorMessages.map((msg, i) => {
+                                    return <div key={i}>{msg}</div>;
+                                })}
+                            </Alert>
+                        )}
+                    </div>
+                    <ThemeProvider theme={defaultMaterialTheme}>
+                        <MaterialTable
+                            title="Pacientes"
+                            columns={columns}
+                            data={data}
+                            icons={tableIcons}
+                            localization={{
+                                body: {
+                                  emptyDataSourceMessage: 'Nenhum registro para exibir',
+                                  filterRow: {
+                                    filterTooltip: 'Filtro'
+                                }
+                                },
+                                header: {
+                                    actions: 'Ações'
+                                },
+                                toolbar: {
+                                  searchTooltip: 'Pesquisar',
+                                  searchPlaceholder: 'Pesquisar'
+                                },
+                                pagination: {
+                                  labelRowsPerPage:'Linhas por página',
+                                  labelRowsSelect: 'linhas',
+                                  labelDisplayedRows: '{count} de {from}-{to}',
+                                  firstTooltip: 'Primeira página',
+                                  previousTooltip: 'Página anterior',
+                                  nextTooltip: 'Próxima página',
+                                  lastTooltip: 'Última página'
+                                }
+                              }}
+                            options={{
+                                actionsColumnIndex: -1
+                              }}
+                            editable={{
+                                onRowUpdate: (newData, oldData) =>
+                                    new Promise((resolve) => {
+                                        handleRowUpdate(
+                                            newData,
+                                            oldData,
+                                            resolve
+                                        );
+                                    }),
+                                onRowAdd: (newData) =>
+                                  new Promise((resolve) => {
+                                    handleRowAdd(newData, resolve)
+                                  }),
+                                onRowDelete: (oldData) =>
+                                    new Promise((resolve) => {
+                                        handleRowDelete(oldData, resolve);
+                                    }),
+                            }}
+                            actions={[
+                                {
+                                  icon: tableIcons.medic,
+                                  tooltip: 'Especialidade',
+                                  onClick: (rowData) => onEditarClick(rowData)
+
+
+                                }
+                              ]}
+                        />
+                    </ThemeProvider>
+                </Grid>
+                <Grid item xs={3}></Grid>
+            </Grid>
+        {/* </AuthenticatedLayout> */}
+        </div>
+    );
 }

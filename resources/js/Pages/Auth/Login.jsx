@@ -203,7 +203,7 @@ export default function Login(props, { status, canResetPassword }) {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel forInput="password" value="Password" />
+                    <InputLabel forInput="password" value="Senha" />
 
                     <TextInput
                         type="password"

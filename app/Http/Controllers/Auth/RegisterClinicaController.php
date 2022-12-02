@@ -72,8 +72,8 @@ class RegisterClinicaController extends Controller
                 // dd($clinica);
                 // dd($usuario);
                 return Inertia::render('Area', [
-                    'dados' => Especialidade::all(),
-                    'clinicas' => Clinica::all(),
+                    'especialidades' => Especialidade::all(),
+                    'clinicas' => Clinica::all()->load(['especialidade']),
                     'id' => $usuario->id,
                     'cpf' => $usuario->cpf,
                     'nome' => $usuario->name,
@@ -132,7 +132,7 @@ class RegisterClinicaController extends Controller
             $pessoa->name = $input['name'];
             $pessoa->save();
             // dd($pessoa);
-            
+
 
         // $validator = Validator::make($request->all(), [
         //     'nome' => 'required|max:200',

@@ -85,7 +85,7 @@ export default function Img(props) {
             <Box
                 component="form"
                 onSubmit={handleSubmit}
-                sx={{ paddingTop: { lg: '150px', md: '130px', sm: '100px', xs: '100px' }, backgroundColor: "#FFFFF5" }}
+                sx={{ paddingTop: { lg: '150px', md: '130px', sm: '100px', xs: '100px' }, backgroundColor: "#FFEFE7" }}
             >
                 <Grid id="sobrenos" container spacing={2}>
                     <Grid item xs={12} sm={12} lg={6} >

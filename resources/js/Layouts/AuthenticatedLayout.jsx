@@ -15,7 +15,7 @@ export default function Authenticated({ auth, header, children }) {
     // console.log(auth);
 
     return (
-        <div style={{ backgroundColor: "#FFFFF0" }} className=" min-h-screen -100">
+        <div style={{ backgroundColor: "#FFEFE7" }} className=" min-h-screen -100">
             <nav className="position-fixed bg-white border-b border-black-100">
                 <div >
                     <div className="flex justify-between h-16.8">
@@ -70,7 +70,7 @@ export default function Authenticated({ auth, header, children }) {
 
                                     <Dropdown.Content>
                                         <Dropdown.Link href={route('logout')} method="post" as="button">
-                                            Deslogar
+                                            Sair
                                         </Dropdown.Link>
                                     </Dropdown.Content>
                                 </Dropdown>
@@ -106,7 +106,7 @@ export default function Authenticated({ auth, header, children }) {
                 <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
                     <div className="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
-                            Dashboard
+                            Painel
                         </ResponsiveNavLink>
                     </div>
 
@@ -118,7 +118,7 @@ export default function Authenticated({ auth, header, children }) {
 
                         <div className="mt-3 space-y-1">
                             <ResponsiveNavLink method="post" href={route('logout')} as="button">
-                                Log Out
+                                Sair
                             </ResponsiveNavLink>
                         </div>
                     </div>

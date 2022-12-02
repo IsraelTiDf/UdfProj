@@ -178,26 +178,26 @@ const ResponsiveAppBar = (props) => {
 
           <Box sx={{ flexGrow: 0 }}>
 
-            {/* {props.props.auth.user ? ( */}
+            {props.props.auth.user ? (
             <Link href={route('dashboard')} className="text-sm text-gray-700 dark:text-gray-500 underline">
                 {/* Dashboard */}
 
 
-            {/* {props.props.auth.user.cpf && (
+            {props.props.auth.user.cpf && (
                 <Tooltip title="Usuario">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <AccountCircleIcon alt="Remy Sharp" />
                 </IconButton>
                 </Tooltip>
             )}
-            {props.props.auth.user.cnpj && (
+            {/* {props.props.auth.user.cnpj && (
                 <Tooltip title="clinica">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <MedicalServicesIcon alt="Remy Sharp"/>
                 </IconButton>
                 </Tooltip>
             )} */}
-            <Menu
+            {/* <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
               anchorEl={anchorElUser}
@@ -218,10 +218,10 @@ const ResponsiveAppBar = (props) => {
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
-            </Menu>
+            </Menu> */}
 
             </Link>
-                {/* ) : ( */}
+                ) : (
                     <>
                         <Link href={route('login')}
                         style={styles.textFont}>
@@ -242,7 +242,7 @@ const ResponsiveAppBar = (props) => {
                            / Register-Clinica
                         </Link> */}
                     </>
-                {/* )} */}
+                )}
 
           </Box>
         </Toolbar>

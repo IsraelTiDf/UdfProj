@@ -14,7 +14,7 @@ const cnpj= props.auth.cnpj;
 const modalEditarInteressadoDefault = {
     open: false,
     interessado: {
-      id: 0,
+    id_clinica: 0,
       name: "",
       cpf: "",
       email: "",
@@ -48,7 +48,7 @@ const handleEditarClick = (interessado) => {
         <AuthenticatedLayout
             auth={props.auth}
             errors={props.errors}
-            header={ <h2 style={{marginTop:"-25px"}} className="font-semibold text-xl text-gray-800 leading-tight">Clinicas cadastradas</h2>}
+            header={<></>}
         >
             <Head title="Dashboard" />
 {/*
@@ -59,10 +59,10 @@ const handleEditarClick = (interessado) => {
                     </div>
                 </div>
             </div> */}
-            <AreaClinica value={props.auth.user.clinica} dados={props.clinicas} onEditarClick={handleEditarClick}
+            <AreaClinica value={props.auth.user.clinica} clinicas={props.clinicas} especialidade={props.clinicas.especialidade} onEditarClick={handleEditarClick}
             // clinicaId={props.auth.user.clinica.id_clinica}
             />
-            {/* <EditarInteressadoModal
+            <EditarInteressadoModal
                 formValues={{
                 nome: modalEditarInteressado.interessado.name,
                 cpf: modalEditarInteressado.interessado.cpf || "",
@@ -70,11 +70,12 @@ const handleEditarClick = (interessado) => {
                 dt_nascimento: modalEditarInteressado.interessado.dt_nascimento || "",
                 telefone: modalEditarInteressado.interessado.telefone || "",
                 }}
-                interessadoId={modalEditarInteressado.interessado.id}
+                interessadoId={modalEditarInteressado.interessado.id_clinica}
                 onClose={handleModalEditarClose}
+                especialidade={props.especialidades}
                 open={modalEditarInteressado.open}
                 // dispatch={dispatch}
-            /> */}
+            />
 
         </AuthenticatedLayout>
     );

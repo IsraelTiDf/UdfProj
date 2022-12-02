@@ -82,17 +82,17 @@ const handleEditarClick = (interessado) => {
         open: true,
     });
 };
-    
+
 const admin = props.auth.user.flg_admin;
 
   var columns = [
     {title: "id", field: "id", hidden: true},
     // {title: "Avatar", render: rowData => <Avatar maxInitials={1} size={40} round={true} name={rowData === undefined ? " " : rowData.first_name} />  },
-    {title: "name", field: "name"},
+    {title: "nome", field: "name"},
     {title: "cpf", field: "cpf"},
     {title: "email", field: "email"},
     {title: "telefone", field: "telefone"},
-    {title: "telefone", field: "dt_nascimento"}
+    {title: "Data de nascimento", field: "dt_nascimento"}
   ]
 //   const [data, setData] = useState([]); //table data
 // data = props.usuario;
@@ -101,9 +101,9 @@ const admin = props.auth.user.flg_admin;
   const [iserror, setIserror] = useState(false)
   const [errorMessages, setErrorMessages] = useState([])
 
-//   useEffect(() => { 
+//   useEffect(() => {
 //     api.get(route('editar-usuario'))
-//         .then(res => {               
+//         .then(res => {
 //             setData(res.data.data)
 //          })
 //          .catch(error=>{
@@ -143,7 +143,7 @@ const admin = props.auth.user.flg_admin;
         setErrorMessages(["Update failed! Server error"])
         setIserror(true)
         resolve()
-        
+
       })
     }else{
       setErrorMessages(errorList)
@@ -151,7 +151,7 @@ const admin = props.auth.user.flg_admin;
       resolve()
 
     }
-    
+
   }
 
 //   const handleRowAdd = (newData, resolve) => {
@@ -188,11 +188,11 @@ const admin = props.auth.user.flg_admin;
 //       resolve()
 //     }
 
-    
+
 //   }
 
   const handleRowDelete = (oldData, resolve) => {
-    
+
     // api.delete(route('editar-clinica')+'/'+oldData.id)
     axios.delete(`/delete-clinica/${oldData.id}`)
 
@@ -288,15 +288,15 @@ const admin = props.auth.user.flg_admin;
         >
           <Grid container spacing={1}>
               <Grid item xs={3}></Grid>
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={12} lg={6} sx={{ mt: 5 }}>
               <div>
-                {iserror && 
+                {iserror &&
                   <Alert severity="error">
                       {errorMessages.map((msg, i) => {
                           return <div key={i}>{msg}</div>
                       })}
                   </Alert>
-                }       
+                }
               </div>
               <ThemeProvider theme={defaultMaterialTheme}>
                 <MaterialTable
@@ -304,11 +304,38 @@ const admin = props.auth.user.flg_admin;
                   columns={columns}
                   data={data}
                   icons={tableIcons}
+                  localization={{
+                    body: {
+                      emptyDataSourceMessage: 'Nenhum registro para exibir',
+                      filterRow: {
+                        filterTooltip: 'Filtro'
+                    }
+                    },
+                    header: {
+                        actions: 'Ações'
+                    },
+                    toolbar: {
+                      searchTooltip: 'Pesquisar',
+                      searchPlaceholder: 'Pesquisar'
+                    },
+                    pagination: {
+                      labelRowsPerPage:'Linhas por página',
+                      labelRowsSelect: 'linhas',
+                      labelDisplayedRows: '{count} de {from}-{to}',
+                      firstTooltip: 'Primeira página',
+                      previousTooltip: 'Página anterior',
+                      nextTooltip: 'Próxima página',
+                      lastTooltip: 'Última página'
+                    }
+                  }}
+                options={{
+                    actionsColumnIndex: -1
+                  }}
                   editable={{
                     onRowUpdate: (newData, oldData) =>
                       new Promise((resolve) => {
                           handleRowUpdate(newData, oldData, resolve);
-                          
+
                       }),
                     // onRowAdd: (newData) =>
                     //   new Promise((resolve) => {
