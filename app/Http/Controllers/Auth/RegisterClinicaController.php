@@ -130,8 +130,13 @@ class RegisterClinicaController extends Controller
             $input = $request->all();
             $pessoa = User::findOrFail($id);
             $pessoa->name = $input['name'];
+            $pessoa->cpf = $input['cpf'];
+            $pessoa->telefone = $input['telefone'];
+            $pessoa->email = $input['email'];
+            $pessoa->dt_nascimento = $input['dt_nascimento'];
+            $pessoa->endereco = $input['endereco'];
+            // dd($input);
             $pessoa->save();
-            // dd($pessoa);
 
 
         // $validator = Validator::make($request->all(), [

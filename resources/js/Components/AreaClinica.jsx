@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 // import './App.css';
 import { forwardRef } from "react";
 // import Avatar from 'react-avatar';
-import { Grid } from "@mui/material";
+import { Grid,TextField, } from "@mui/material";
 import MaterialTable from "material-table";
 import {
     MedicalServices,
@@ -77,18 +77,27 @@ function validateEmail(email) {
 
 export default function AreaClinica(props) {
     const { value, onEditarClick } = props;
-    console.log(onEditarClick);
 
     const modalEditarInteressadoDefault = {
         open: false,
         interessado: {
             id: 0,
+            id_clinica: 0,
             id_area: 0,
             name: "",
             cpf: "",
             email: "",
             dt_nascimento: "",
             telefone: "",
+        },
+        clinica: {
+            id_clinica: 0,
+            // id_user: 0,
+            nome:"",
+            cnpj: "",
+            email:"",
+            longitude: "",
+            latitude: "",
         },
     };
     const [modalEditarInteressado, setModalEditarInteressado] = useState(
@@ -111,10 +120,18 @@ export default function AreaClinica(props) {
         { title: "id_clinica", field: "id_clinica", hidden: true },
         // {title: "Avatar", render: rowData => <Avatar maxInitials={1} size={40} round={true} name={rowData === undefined ? " " : rowData.first_name} />  },
         { title: "nome", field: "nome" },
-        { title: "cnpj", field: "cnpj" },
+        { title: "cnpj", field: "cnpj",
+        // editComponent: props => (
+        //     <TextField
+        //         // type="number"
+        //         value={{field: "cnpj"}}
+        //         onChange={e => props.onChange(e.target.value)}
+        //     />)
+        },
         { title: "endereco", field: "endereco" },
         { title: "telefone", field: "telefone" },
-        { title: "Data de nascimento", field: "dt_nascimento" },
+        { title: "especialidade", field: "especialidade.nome",editable: 'never' },
+        // { title: "Data de nascimento", field: "dt_nascimento" },
     ];
     //   const [data, setData] = useState([]); //table data
     // data = props.usuario;
@@ -138,97 +155,52 @@ export default function AreaClinica(props) {
 
     const handleRowUpdate = (newData, oldData, resolve) => {
         //validation
-        let errorList = [];
-        console.log(newData);
-        if (newData.name === "") {
-            errorList.push("Please enter first name");
+        let errorList = []
+        if(newData.name === ""){
+          errorList.push("Inserir o Nome")
         }
-        if (newData.cpf === "") {
-            errorList.push("Please enter last name");
+        if(newData.cnpj === ""){
+          errorList.push("Inserir o CNPJ")
         }
-        if (newData.email === "" || validateEmail(newData.email) === false) {
-            errorList.push("Please enter a valid email");
+        if(newData.endereco === "" || validateEmail(newData.email) === false){
+          errorList.push("Inserir o Endereço")
         }
 
-        if (errorList.length < 1) {
-            alert("oi");
-            //   api.get(route('editar-usuario')+'/'+newData.id, newData)
-            api.put(`/editar-usuario/${newData.id}`, newData)
+        // if(errorList.length < 1){
 
-                .then((res) => {
-                    const dataUpdate = [...data];
-                    const index = oldData.tableData.id;
-                    dataUpdate[index] = newData;
-                    setData([...dataUpdate]);
-                    resolve();
-                    setIserror(false);
-                    setErrorMessages([]);
-                })
-                .catch((error) => {
-                    setErrorMessages(["Update failed! Server error"]);
-                    setIserror(true);
-                    resolve();
-                });
-        } else {
-            setErrorMessages(errorList);
-            setIserror(true);
-            resolve();
-        }
-    };
+        api.put(`/editar-clinica/${newData.id_clinica}`,newData)
+        window.location.reload()
 
-    //   const handleRowAdd = (newData, resolve) => {
-    //     //validation
-    //     let errorList = []
-    //     if(newData.name === undefined){
-    //       errorList.push("Please enter first name")
-    //     }
-    //     if(newData.cpf === undefined){
-    //       errorList.push("Please enter last name")
-    //     }
-    //     if(newData.email === undefined || validateEmail(newData.email) === false){
-    //       errorList.push("Please enter a valid email")
-    //     }
 
-    //     if(errorList.length < 1){ //no error
-    //       api.post(`/delete-clinica/${newData.id}`)
-    //       .then(res => {
-    //         let dataToAdd = [...data];
-    //         dataToAdd.push(newData);
-    //         setData(dataToAdd);
-    //         resolve()
-    //         setErrorMessages([])
-    //         setIserror(false)
-    //       })
-    //       .catch(error => {
-    //         setErrorMessages(["Cannot add data. Server error!"])
-    //         setIserror(true)
-    //         resolve()
-    //       })
-    //     }else{
-    //       setErrorMessages(errorList)
-    //       setIserror(true)
-    //       resolve()
-    //     }
+        // }
+
+      }
+
+      const handleRowAdd = (newData, resolve) => {
+        //validation
+
+        // let errorList = []
+        // if(newData.nome === ""){
+        //     errorList.push("Inserir o Nome")
+        //   }
+        //   if(newData.cnpj === ""){
+        //     errorList.push("Inserir o CNPJ")
+        //   }
+        //   if(newData.endereco === "" || validateEmail(newData.email) === false){
+        //     errorList.push("Inserir o Endereço")
+        //   }
+
+        // if(errorList.length < 1){ //no error
+          api.put(`/adicionar-clinica/${newData.id_clinica}`,newData)
+          window.location.reload()
 
     //   }
+    }
 
     const handleRowDelete = (oldData, resolve) => {
         // api.delete(route('editar-clinica')+'/'+oldData.id)
-        axios
-            .delete(`/delete-clinica/${oldData.id}`)
-
-            .then((res) => {
-                const dataDelete = [...data];
-                const index = oldData.tableData.id;
-                dataDelete.splice(index, 1);
-                setData([...dataDelete]);
-                resolve();
-            })
-            .catch((error) => {
-                setErrorMessages(["Delete failed! Server error"]);
-                setIserror(true);
-                resolve();
-            });
+        axios.delete(`/deletar-clinica/${oldData.id_clinica}`)
+        window.location.reload()
     };
 
     return (
@@ -261,7 +233,7 @@ export default function AreaClinica(props) {
                     </div>
                     <ThemeProvider theme={defaultMaterialTheme}>
                         <MaterialTable
-                            title="Pacientes"
+                            title="Clinicas"
                             columns={columns}
                             data={data}
                             icons={tableIcons}
@@ -270,7 +242,13 @@ export default function AreaClinica(props) {
                                   emptyDataSourceMessage: 'Nenhum registro para exibir',
                                   filterRow: {
                                     filterTooltip: 'Filtro'
-                                }
+                                    },
+                                  editRow :{
+                                      deleteText: 'Tem certeza que deseja excluir esta linha'
+                                  },
+                                  addTooltip : 'Adicionar Clinica',
+                                  deleteTooltip : 'Deletar',
+                                  editTooltip  :'Editar'
                                 },
                                 header: {
                                     actions: 'Ações'
@@ -314,9 +292,7 @@ export default function AreaClinica(props) {
                                 {
                                   icon: tableIcons.medic,
                                   tooltip: 'Especialidade',
-                                  onClick: (rowData) => onEditarClick(rowData)
-
-
+                                  onClick: (event, rowData) => onEditarClick(rowData.id_clinica),
                                 }
                               ]}
                         />

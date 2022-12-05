@@ -1,12 +1,14 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterClinicaController;
+use App\Http\Controllers\Auth\UsuarioController;
+use App\Http\Controllers\Auth\ClinicaController;
+use App\Http\Controllers\MapaController;
+use App\Models\Especialidade;
+use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use App\Models\Especialidade;
 use Inertia\Inertia;
-use App\Models\User;
-use App\Http\Controllers\Auth\RegisterClinicaController;
-use App\Http\Controllers\MapaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +19,7 @@ use App\Http\Controllers\MapaController;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -33,23 +35,27 @@ Route::get('/', function () {
 Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard',[
-            'usuario' => User::all()
+        return Inertia::render('Dashboard', [
+            'usuario' => User::all(),
         ]);
     })->name('dashboard');
 
-    Route::get('/usuarios', [RegisterClinicaController::class, 'index'])->name('usuarios');
     Route::get('/clinicas', [RegisterClinicaController::class, 'view_clinica'])->name('clinicas');
-    Route::get('/mapa', [MapaController::class,'view'])->name('mapa');
+    Route::get('/mapa', [MapaController::class, 'view'])->name('mapa');
 
-Route::put('/editar-usuario/{id}', [RegisterClinicaController::class,'update'])->name('editar-usuario');
-// Route::put('/editar-usuario/', [RegisterClinicaController::class,'update'])->name('editar-usuario');
-Route::delete('/deletar-usuario/{id}', [RegisterClinicaController::class,'delete'])->name('deletar-usuario');
-// ->only(['store'  , 'update']);
+    Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios');
+    Route::put('/editar-usuario/{id}', [UsuarioController::class, 'update'])->name('editar-usuario');
+    Route::delete('/deletar-usuario/{id}', [UsuarioController::class, 'delete'])->name('deletar-usuario');
+
+    // Route::get('/', [UsuarioController::class, 'index'])->name('usuarios');
+    Route::put('/adicionar-clinica/{id}', [ClinicaController::class, 'create'])->name('adicionar-clinica');
+    Route::put('/editar-clinica/{id}', [ClinicaController::class, 'update'])->name('editar-clinica');
+    Route::delete('/deletar-clinica/{id}', [ClinicaController::class, 'delete'])->name('deletar-clinica');
+    Route::put('/salvar-especialidade/{id}', [ClinicaController::class, 'salvar_esp'])->name('salvar-especialidade');
 
 
 // Route::apiResource('interessados', InteressadosController::class)
-// ->only(['update']);
+    // ->only(['update']);
 
 });
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

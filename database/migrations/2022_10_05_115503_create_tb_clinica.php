@@ -17,10 +17,10 @@ return new class extends Migration
             $table->integerIncrements('id_clinica');
             $table->string('nome', 50);
             $table->string('endereco', 50);
-            $table->string('cnpj', 20);
+            $table->string('cnpj', 25);
             $table->integer('id_user')->unsigned()->nullable();
             $table->foreign('id_user')->references('id')->on('users');
-            $table->string('telefone', 11);
+            $table->string('telefone', 15);
             $table->integer('id_especialidade')->unsigned()->nullable();
             $table->foreign('id_especialidade')->references('id_especialidade')->on('tb_especialidade');
             $table->decimal('longitude', 10,4)->nullable();

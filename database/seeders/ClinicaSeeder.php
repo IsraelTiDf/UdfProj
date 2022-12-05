@@ -32,18 +32,17 @@ class ClinicaSeeder extends Seeder
             'cnpj' => '41717',
             'endereco' => 'RUA gama loja 03',
             'telefone' => '994103232',
-            'longitude' => '-15.7801',
-            'latitude' => '-47.9292',
+            'longitude' => '-47.894650228519936',
+            'latitude' => '-15.797166044576098',
         ],
-
         [
             'nome' => 'Boa vista',
             'id_especialidade' => '6',
             'cnpj' => '2020202020',
             'endereco' => 'shopping Conjunto Nacional loja 03',
             'telefone' => '6135032983',
-            'longitude' => '-15.7801',
-            'latitude' => '-47.9292',
+            'longitude' => '-47.88318430047759',
+            'latitude' => '-15.79091474725314',
         ],
 
         ]);

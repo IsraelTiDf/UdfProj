@@ -7,14 +7,13 @@ import EditarInteressadoModal from './EditarDados';
 
 export default function Area(props) {
 
-console.log(props);
 const cpf= props.auth.cpf;
 const cnpj= props.auth.cnpj;
 
 const modalEditarInteressadoDefault = {
     open: false,
     interessado: {
-    id_clinica: 0,
+    id: 0,
       name: "",
       cpf: "",
       email: "",
@@ -23,7 +22,7 @@ const modalEditarInteressadoDefault = {
     },
     clinica: {
         id_clinica: 0,
-        id_user: 0,
+        // id_user: 0,
         nome:"",
         cnpj: "",
         email:"",
@@ -38,12 +37,14 @@ const [modalEditarInteressado, setModalEditarInteressado] = useState(
 const handleModalEditarClose = () =>
     setModalEditarInteressado(modalEditarInteressadoDefault);
 
-const handleEditarClick = (interessado) => {
+const handleEditarClick = (id_clinica) => {
+    // console.log(id_clinica);
     setModalEditarInteressado({
-      interessado,
+        id_clinica,
       open: true,
     });
   };
+//   console.log(modalEditarInteressado.clinica);
     return (
         <AuthenticatedLayout
             auth={props.auth}
@@ -63,14 +64,12 @@ const handleEditarClick = (interessado) => {
             // clinicaId={props.auth.user.clinica.id_clinica}
             />
             <EditarInteressadoModal
-                formValues={{
-                nome: modalEditarInteressado.interessado.name,
-                cpf: modalEditarInteressado.interessado.cpf || "",
-                email: modalEditarInteressado.interessado.email || "",
-                dt_nascimento: modalEditarInteressado.interessado.dt_nascimento || "",
-                telefone: modalEditarInteressado.interessado.telefone || "",
-                }}
-                interessadoId={modalEditarInteressado.interessado.id_clinica}
+                // formValues={{
+                // nome: modalEditarInteressado.clinica.nome,
+                // cpf: modalEditarInteressado.clinica.cnpj || "",
+                // telefone: modalEditarInteressado.clinica.telefone || "",
+                // }}
+                interessadoId={modalEditarInteressado.id_clinica}
                 onClose={handleModalEditarClose}
                 especialidade={props.especialidades}
                 open={modalEditarInteressado.open}

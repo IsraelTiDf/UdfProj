@@ -116,39 +116,40 @@ const admin = props.auth.user.flg_admin;
     let errorList = []
     console.log(newData);
     if(newData.name === ""){
-      errorList.push("Please enter first name")
+      errorList.push("Inserir o Nome")
     }
     if(newData.cpf === ""){
-      errorList.push("Please enter last name")
+      errorList.push("Inserir o CPF")
     }
     if(newData.email === "" || validateEmail(newData.email) === false){
-      errorList.push("Please enter a valid email")
+      errorList.push("Inserir o Email")
     }
 
     if(errorList.length < 1){
-        alert('oi');
+
     //   api.get(route('editar-usuario')+'/'+newData.id, newData)
     api.put(`/editar-usuario/${newData.id}`,newData)
+    window.location.reload()
 
-      .then(res => {
-        const dataUpdate = [...data];
-        const index = oldData.tableData.id;
-        dataUpdate[index] = newData;
-        setData([...dataUpdate]);
-        resolve()
-        setIserror(false)
-        setErrorMessages([])
-      })
-      .catch(error => {
-        setErrorMessages(["Update failed! Server error"])
-        setIserror(true)
-        resolve()
+    //   .then(res => {
+    //     const dataUpdate = [...data];
+    //     const index = oldData.tableData.id;
+    //     dataUpdate[index] = newData;
+    //     setData([...dataUpdate]);
+    //     resolve()
+    //     setIserror(false)
+    //     setErrorMessages([])
+    //   })
+    //   .catch(error => {
+    //     setErrorMessages(["Update failed! Server error"])
+    //     setIserror(true)
+    //     resolve()
 
-      })
-    }else{
-      setErrorMessages(errorList)
-      setIserror(true)
-      resolve()
+    //   })
+    // }else{
+    //   setErrorMessages(errorList)
+    //   setIserror(true)
+    //   resolve()
 
     }
 
@@ -195,19 +196,19 @@ const admin = props.auth.user.flg_admin;
 
     // api.delete(route('editar-clinica')+'/'+oldData.id)
     axios.delete(`/delete-clinica/${oldData.id}`)
-
-      .then(res => {
-        const dataDelete = [...data];
-        const index = oldData.tableData.id;
-        dataDelete.splice(index, 1);
-        setData([...dataDelete]);
-        resolve()
-      })
-      .catch(error => {
-        setErrorMessages(["Delete failed! Server error"])
-        setIserror(true)
-        resolve()
-      })
+    window.location.reload()
+    //   .then(res => {
+    //     const dataDelete = [...data];
+    //     const index = oldData.tableData.id;
+    //     dataDelete.splice(index, 1);
+    //     setData([...dataDelete]);
+    //     resolve()
+    //   })
+    //   .catch(error => {
+    //     setErrorMessages(["Delete failed! Server error"])
+    //     setIserror(true)
+    //     resolve()
+    //   })
   }
 
   if(admin != 1){
@@ -309,7 +310,12 @@ const admin = props.auth.user.flg_admin;
                       emptyDataSourceMessage: 'Nenhum registro para exibir',
                       filterRow: {
                         filterTooltip: 'Filtro'
-                    }
+                        },
+                        editRow :{
+                            deleteText: 'Tem certeza que deseja excluir esta linha?'
+                        },
+                        deleteTooltip : 'Deletar',
+                        editTooltip  :'Editar'
                     },
                     header: {
                         actions: 'Ações'

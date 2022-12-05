@@ -43,7 +43,7 @@ class UserSeeder extends Seeder
             'endereco' => 'QNM 03 Conjunto H apt 22',
             'telefone' => '994103232',
             'email' => 'admin@gmail.com',
-            'password' => 'admin',
+            'password' => Hash::make('admin123'),
             'dt_nascimento' => '1986-06-02',
             'flg_admin' => '1',
 

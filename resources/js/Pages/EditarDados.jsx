@@ -17,6 +17,11 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
 
+
+const api = axios.create({
+    //   baseURL: `https://reqres.in/api`
+    })
+
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -53,7 +58,7 @@ function EditarDados({
         mode: "onChange",
         defaultValues: formValues,
     });
-      console.log(especialidade);
+
     const [{ error }, editar] = useEditar();
 
     const { isSubmitting, isValid, isDirty } = formState;
@@ -95,14 +100,19 @@ function EditarDados({
     const handleFormSubmit = async (data, event) => {
         // event.preventDefault();
         // alert('Ainda nao');
+        // console.log(interessadoId);
 
-        await editar(interessadoId, data, resultDispatch, onClose);
+        // await editar(interessadoId, data, resultDispatch, onClose);
 
-        // await axios({
-        //     method: "post",
-        //     url: `/editar-usuario/${interessadoId}`,
+        // await api({
+        //     method: "put",
+        //     url: `/salvar-especialidade/${interessadoId}`,
         //     data: data,
         // });
+
+        api.put(`/salvar-especialidade/${interessadoId}`,data)
+        window.location.reload()
+
         // });
     };
 
@@ -172,6 +182,7 @@ function EditarDados({
                             )}
                         />
                     </Grid>
+
                 </Grid>
             </form>
         </Modal>

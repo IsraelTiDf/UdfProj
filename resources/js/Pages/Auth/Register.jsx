@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import GuestLayout from '@/Layouts/GuestLayout';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
@@ -8,7 +8,8 @@ import { Head, Link, useForm } from '@inertiajs/inertia-react';
 import NavBar from '/resources/js/Pages/NavBar.jsx';
 import TabPainel from '/resources/js/Pages/TabPainel.jsx';
 import { cpf } from 'cpf-cnpj-validator';
-import { cpfMask } from '@/Layouts/input-mask';
+import { cpfMask,celularMask } from '@/Layouts/input-mask';
+import { Controller } from "react-hook-form";
 
 const rules = {
     cpf: {
@@ -17,7 +18,7 @@ const rules = {
     }
 };
 export default function Register(props) {
-    console.log(props);
+
     const { data, setData, post, processing, errors, reset } = useForm({
         name:'',
         cpf:'',
@@ -35,16 +36,41 @@ export default function Register(props) {
         };
     }, []);
 
+    console.log(errors);
+    const [cpfInvalid, setcpfInvalid] = useState(null);
     const onHandleChange = (event) => {
+        const {name} = event.target;
+        let {value} = event.target;
+        console.log(cpf.isValid(value));
+
+        switch(name){
+            case "cpf":
+                value =cpfMask(value);
+                setcpfInvalid(cpf.isValid(value));
+                // if(cpf.isValid(value) === false){
+                //     return <InputError message={'O CPF inserida é invalido'} className="mt-2" />
+                // }
+            break;
+            case "telefone":
+                value =celularMask(value);
+            break;
+
+        }
+        event.target.value = value;
         setData(event.target.name, event.target.type === 'checkbox' ? event.target.checked : event.target.value);
         // alert(event.target.value);
-        event.target.value = cpfMask(event.target.value);
+        // event.target.value = cpfMask(event.target.value);
     };
+    console.log(cpfInvalid);
 
     const submit = (e) => {
         e.preventDefault();
 
-        post(route('register'));
+        post(route('register')).catch(error => {
+            setError('cpf', { message: error });
+        });
+
+        ;
     };
 
     const handleCPFChange = (event) => {
@@ -89,7 +115,14 @@ export default function Register(props) {
                         className="mt-1 block w-full"
                         autoComplete="cpf"
                         isFocused={true}
+                        // rules={{
+                        //     required: true,
+                        // }}
+                        // rules={rules.cpf}
+                        required
                         handleChange={onHandleChange}
+
+                        // helperText={error ? rules.cpf[error.type] : ""}
 
                         // inputRef={cpfField.ref}
                         // inputProps={{ minLength: 14, maxLength: 14 }}
@@ -103,7 +136,7 @@ export default function Register(props) {
                         // }}
                     />
 
-                    <InputError message={rules.cpf[errors.type]} className="mt-2" />
+                    <InputError message={cpfInvalid === false && "CPF é invalido" ||errors.cpf} className="mt-2" />
                 </div>
 
                 <div>

@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->string('name', 50);
-            $table->string('cpf', 14);
+            $table->string('cpf', 17);
             $table->string('flg_admin', 1)->nullable();
-            $table->string('telefone', 11);
+            $table->string('telefone', 15);
             $table->string('email', 50);
             $table->string('endereco', 50);
             $table->string('password');

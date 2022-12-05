@@ -37,7 +37,7 @@ useEffect(() => {
 }, []);
 
 useEffect(() => {
-    const filtered = places.filter((place) => Number(place.rating) > rating);
+    const filtered = clinicas.filter((clinica) => Number(5) > rating);
     console.log(filtered);
     setFilteredPlaces(filtered);
 }, [rating]);
@@ -53,7 +53,7 @@ useEffect(() => {
 
         getPlacesData(type, bounds.sw, bounds.ne).then((data) => {
             setPlaces(
-                data.filter((place) => place.name && place.num_reviews > 0)
+                data.filter((clinica) => clinica.name)
             );
             setFilteredPlaces([]);
             setRating("");
