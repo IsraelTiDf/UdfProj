@@ -145,7 +145,7 @@ const ResponsiveAppBar = (props) => {
                     }}>Especialidade médica</Button>
 
 
-                  <Button
+                  {/* <Button
                     href="#emergencia"
                     onClick={handleCloseNavMenu}
                     sx={{
@@ -156,7 +156,7 @@ const ResponsiveAppBar = (props) => {
                         fontSize: '14px',
                         fontWeight: 600,
                         letterSpacing: '.1rem',
-                    }}>Emergência</Button>
+                    }}>Emergência</Button> */}
 
             <Button
               href="#contatos"

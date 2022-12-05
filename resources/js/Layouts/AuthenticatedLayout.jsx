@@ -131,13 +131,13 @@ export default function Authenticated({ auth, header, children }) {
                         {admin != 1 ? (
                             <div style={{ marginLeft: "200px" }} className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                    Area Usuario
+                                    Area Paciente
                                 </NavLink>
                             </div>
                         ) : (
                             <div style={{ marginLeft: "200px" }} className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                    Area Usuario
+                                    Area Pacientes
                                 </NavLink>
                                 <NavLink href={route('usuarios')} active={route().current('usuarios')}>
                                     Clinicas

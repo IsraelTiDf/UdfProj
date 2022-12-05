@@ -17,6 +17,7 @@ import NavLink from '@/Components/NavLink';
 import { Head } from '@inertiajs/inertia-react';
 import Crud from '../Components/Crud.jsx';
 import EditarInteressadoModal from './EditarDados';
+import EditarUser from './EditarUser';
 
 
 
@@ -89,10 +90,10 @@ const admin = props.auth.user.flg_admin;
     {title: "id", field: "id", hidden: true},
     // {title: "Avatar", render: rowData => <Avatar maxInitials={1} size={40} round={true} name={rowData === undefined ? " " : rowData.first_name} />  },
     {title: "nome", field: "name"},
-    {title: "cpf", field: "cpf"},
+    {title: "cpf", field: "cpf", editable: 'never'},
     {title: "email", field: "email"},
     {title: "telefone", field: "telefone"},
-    {title: "Data de nascimento", field: "dt_nascimento"}
+    {title: "Data de nascimento", field: "dt_nascimento",editable: 'never'}
   ]
 //   const [data, setData] = useState([]); //table data
 // data = props.usuario;
@@ -125,33 +126,10 @@ const admin = props.auth.user.flg_admin;
       errorList.push("Inserir o Email")
     }
 
-    if(errorList.length < 1){
-
-    //   api.get(route('editar-usuario')+'/'+newData.id, newData)
+    // if(errorList.length < 1){
     api.put(`/editar-usuario/${newData.id}`,newData)
     window.location.reload()
 
-    //   .then(res => {
-    //     const dataUpdate = [...data];
-    //     const index = oldData.tableData.id;
-    //     dataUpdate[index] = newData;
-    //     setData([...dataUpdate]);
-    //     resolve()
-    //     setIserror(false)
-    //     setErrorMessages([])
-    //   })
-    //   .catch(error => {
-    //     setErrorMessages(["Update failed! Server error"])
-    //     setIserror(true)
-    //     resolve()
-
-    //   })
-    // }else{
-    //   setErrorMessages(errorList)
-    //   setIserror(true)
-    //   resolve()
-
-    }
 
   }
 
@@ -194,21 +172,9 @@ const admin = props.auth.user.flg_admin;
 
   const handleRowDelete = (oldData, resolve) => {
 
-    // api.delete(route('editar-clinica')+'/'+oldData.id)
-    axios.delete(`/delete-clinica/${oldData.id}`)
+    axios.delete(`/deletar-usuario/${oldData.id}`)
     window.location.reload()
-    //   .then(res => {
-    //     const dataDelete = [...data];
-    //     const index = oldData.tableData.id;
-    //     dataDelete.splice(index, 1);
-    //     setData([...dataDelete]);
-    //     resolve()
-    //   })
-    //   .catch(error => {
-    //     setErrorMessages(["Delete failed! Server error"])
-    //     setIserror(true)
-    //     resolve()
-    //   })
+
   }
 
   if(admin != 1){
@@ -248,12 +214,24 @@ const admin = props.auth.user.flg_admin;
                 </div>
             </div> */}
             {/* <Grid> */}
-            <Box sx={{ p: { md: 10, sm: 5, xs: 4 } }}>
-                <Button style={{backgroundColor:'Green',color:'Black'}} href={route('mapa')}>Buscar Clinica</Button>
-            </Box>
-            {/* </Grid> */}
+
             <Crud value={props.auth.user} onEditarClick={handleEditarClick} />
-            <EditarInteressadoModal
+            {/* </Grid> */}
+            {/* <EditarInteressadoModal
+                formValues={{
+                    nome: modalEditarInteressado.interessado.name,
+                    cpf: modalEditarInteressado.interessado.cpf || "",
+                    email: modalEditarInteressado.interessado.email || "",
+                    dt_nascimento: modalEditarInteressado.interessado.dt_nascimento || "",
+                    telefone: modalEditarInteressado.interessado.telefone || "",
+                }}
+                interessadoId={modalEditarInteressado.interessado.id}
+                onClose={handleModalEditarClose}
+                open={modalEditarInteressado.open}
+            // dispatch={dispatch}
+            // dispatch={dispatch}
+            /> */}
+            <EditarUser
                 formValues={{
                     nome: modalEditarInteressado.interessado.name,
                     cpf: modalEditarInteressado.interessado.cpf || "",

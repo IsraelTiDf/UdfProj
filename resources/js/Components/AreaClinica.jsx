@@ -75,6 +75,12 @@ function validateEmail(email) {
     return re.test(String(email).toLowerCase());
 }
 
+function validateLatLng(latitude, longitude) {
+    let pattern = new RegExp('^-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}');
+
+    return pattern.test(latitude) && pattern.test(longitude);
+  }
+
 export default function AreaClinica(props) {
     const { value, onEditarClick } = props;
 
@@ -130,6 +136,8 @@ export default function AreaClinica(props) {
         },
         { title: "endereco", field: "endereco" },
         { title: "telefone", field: "telefone" },
+        { title: "latitude", field: "latitude" },
+        { title: "longitude", field: "longitude" },
         { title: "especialidade", field: "especialidade.nome",editable: 'never' },
         // { title: "Data de nascimento", field: "dt_nascimento" },
     ];
@@ -162,39 +170,51 @@ export default function AreaClinica(props) {
         if(newData.cnpj === ""){
           errorList.push("Inserir o CNPJ")
         }
-        if(newData.endereco === "" || validateEmail(newData.email) === false){
+        if(newData.endereco === ""){
           errorList.push("Inserir o Endereço")
         }
+        if(validateLatLng(newData.latitude, newData.longitude)=== false){
+            errorList.push("Latitude e longitude incorretas")
+          }
 
-        // if(errorList.length < 1){
-
+        if(errorList.length < 1){
         api.put(`/editar-clinica/${newData.id_clinica}`,newData)
         window.location.reload()
-
-
-        // }
+        }else{
+            setErrorMessages(errorList)
+            setIserror(true)
+            resolve()
+          }
 
       }
 
       const handleRowAdd = (newData, resolve) => {
         //validation
+        console.log(newData);
+        let errorList = []
+        if(newData.nome === undefined){
+            errorList.push("Inserir o Nome")
+            alert(errorList);
+          }
+          if(newData.cnpj === undefined){
+            errorList.push("Inserir o CNPJ")
+          }
+          if(newData.endereco === undefined){
+            errorList.push("Inserir o Endereço")
+          }
+          if(validateLatLng(newData.latitude, newData.longitude)=== false){
+            errorList.push("Latitude e longitude incorretas")
+          }
 
-        // let errorList = []
-        // if(newData.nome === ""){
-        //     errorList.push("Inserir o Nome")
-        //   }
-        //   if(newData.cnpj === ""){
-        //     errorList.push("Inserir o CNPJ")
-        //   }
-        //   if(newData.endereco === "" || validateEmail(newData.email) === false){
-        //     errorList.push("Inserir o Endereço")
-        //   }
-
-        // if(errorList.length < 1){ //no error
+        if(errorList.length < 1){ //no error
           api.put(`/adicionar-clinica/${newData.id_clinica}`,newData)
           window.location.reload()
 
-    //   }
+        }else{
+                  setErrorMessages(errorList)
+                  setIserror(true)
+                  resolve()
+                }
     }
 
     const handleRowDelete = (oldData, resolve) => {

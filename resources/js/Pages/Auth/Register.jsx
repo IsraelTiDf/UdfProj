@@ -5,11 +5,22 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/inertia-react';
-import NavBar from '/resources/js/Pages/NavBar.jsx';
+// import NavBar from '/resources/js/Pages/NavBar.jsx';
 import TabPainel from '/resources/js/Pages/TabPainel.jsx';
 import { cpf } from 'cpf-cnpj-validator';
 import { cpfMask,celularMask } from '@/Layouts/input-mask';
 import { Controller } from "react-hook-form";
+import {Menu,Grid,Button} from '@mui/material';
+import AppBar from '@mui/material/AppBar';
+import Container from '@mui/material/Container';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import Box from '@mui/material/Box';
+import MenuIcon from '@mui/icons-material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
+import NavBar from '../NavBar.jsx';
 
 const rules = {
     cpf: {
@@ -17,7 +28,16 @@ const rules = {
         pattern: "A CPF inserida é invalido"
     }
 };
+const pages = ['Home', 'Sobre nós', 'Contato'];
 export default function Register(props) {
+
+    const [anchorElNav, setAnchorElNav] = React.useState(null);
+    const handleOpenNavMenu = (event) => {
+        setAnchorElNav(event.currentTarget);
+      };
+      const handleCloseNavMenu = () => {
+        setAnchorElNav(null);
+      };
 
     const { data, setData, post, processing, errors, reset } = useForm({
         name:'',
@@ -82,13 +102,12 @@ export default function Register(props) {
 
     return (
         <>
-        {/* <NavBar props = {props}/> */}
-        {/* <GuestLayout> */}
-        {/* <TabPainel/> */}
+        <NavBar props = {props}/>
+        <GuestLayout>
             <Head title="Register" />
 
             <form onSubmit={submit}>
-                <div>
+                <Grid>
                     <InputLabel forInput="name" value="Nome" />
 
                     <TextInput
@@ -103,9 +122,9 @@ export default function Register(props) {
                     />
 
                     <InputError message={errors.name} className="mt-2" />
-                </div>
+                </Grid>
 
-                <div>
+                <Grid>
                     <InputLabel forInput="cpf" value="CPF" inputProps={{ minLength: 14, maxLength: 14 }} />
 
                     <TextInput
@@ -137,9 +156,9 @@ export default function Register(props) {
                     />
 
                     <InputError message={cpfInvalid === false && "CPF é invalido" ||errors.cpf} className="mt-2" />
-                </div>
+                </Grid>
 
-                <div>
+                <Grid>
                     <InputLabel forInput="telefone" value="Telefone" />
 
                     <TextInput
@@ -154,9 +173,9 @@ export default function Register(props) {
                     />
 
                     <InputError message={errors.name} className="mt-2" />
-                </div>
+                </Grid>
 
-                <div>
+                <Grid>
                     <InputLabel forInput="dt_nascimento" value="Data de nascimento" />
 
                     <TextInput
@@ -171,9 +190,9 @@ export default function Register(props) {
                     />
 
                     <InputError message={errors.name} className="mt-2" />
-                </div>
+                </Grid>
 
-                <div>
+                <Grid>
                     <InputLabel forInput="endereco" value="Endereço" />
 
                     <TextInput
@@ -188,9 +207,9 @@ export default function Register(props) {
                     />
 
                     <InputError message={errors.endereco} className="mt-2" />
-                </div>
+                </Grid>
 
-                <div className="mt-4">
+                <Grid className="mt-4">
                     <InputLabel forInput="email" value="Email" />
 
                     <TextInput
@@ -204,9 +223,9 @@ export default function Register(props) {
                     />
 
                     <InputError message={errors.email} className="mt-2" />
-                </div>
+                </Grid>
 
-                <div className="mt-4">
+                <Grid className="mt-4">
                     <InputLabel forInput="password" value="Senha" />
 
                     <TextInput
@@ -220,9 +239,9 @@ export default function Register(props) {
                     />
 
                     <InputError message={errors.password} className="mt-2" />
-                </div>
+                </Grid>
 
-                <div className="mt-4">
+                <Grid className="mt-4">
                     <InputLabel forInput="password_confirmation" value="Confirmar Senha" />
 
                     <TextInput
@@ -235,9 +254,9 @@ export default function Register(props) {
                     />
 
                     <InputError message={errors.password_confirmation} className="mt-2" />
-                </div>
+                </Grid>
 
-                <div className="flex items-center justify-end mt-4">
+                <Grid className="flex items-center justify-end mt-4">
                     <Link href={route('login')} className="underline text-sm text-gray-600 hover:text-gray-900">
                         Ja sou cadastrado
                     </Link>
@@ -246,9 +265,9 @@ export default function Register(props) {
                     <PrimaryButton className="ml-5" processing={processing}>
                         CADASTRAR
                     </PrimaryButton>
-                </div>
+                </Grid>
             </form>
-        {/* </GuestLayout> */}
+        </GuestLayout>
         </>
     );
 }

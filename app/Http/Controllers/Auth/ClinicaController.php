@@ -45,6 +45,8 @@ class ClinicaController extends Controller
             $pessoa->cnpj = $input['cnpj'];
             $pessoa->telefone = $input['telefone'];
             $pessoa->endereco = $input['endereco'];
+            $pessoa->latitude = $input['latitude'];
+            $pessoa->longitude = $input['longitude'];
             // dd($pessoa);
             $pessoa->save();
 
@@ -80,11 +82,11 @@ class ClinicaController extends Controller
 
         try {
 
-            $usuario = User::destroy($id);
-            return $this->respondSuccess(null, 'Usuario excluído com sucesso.');
+            $usuario = Clinica::destroy($id);
+            return $this->respondSuccess(null, 'Clinica excluído com sucesso.');
 
         } catch (Throwable $e) {
-            Log::error('Editando usuario.', ['Usuario_id' => $id]);
+            Log::error('Editando usuario.', ['clinica_id' => $id]);
             throw $e;
         }
     }
@@ -99,10 +101,10 @@ class ClinicaController extends Controller
             $usuario->id_especialidade = $input['id_especialidade'];
             $usuario->save();
             // dd($usuario);
-            return $this->respondSuccess(null, 'Usuario excluído com sucesso.');
+            return $this->respondSuccess(null, 'Clinica salva com sucesso.');
 
         } catch (Throwable $e) {
-            Log::error('Editando usuario.', ['Usuario_id' => $id]);
+            Log::error('Editando usuario.', ['clinica_id' => $id]);
             throw $e;
         }
     }

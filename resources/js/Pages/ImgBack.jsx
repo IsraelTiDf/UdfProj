@@ -300,7 +300,7 @@ export default function Img(props) {
                         spacing={1}
                         style={{ paddingTop: "170px" }}
                     >
-                        <Grid item xs={12}>
+                        {/* <Grid item xs={12}>
                             <Box
                                 style={{
                                     display: "flex",
@@ -319,9 +319,9 @@ export default function Img(props) {
                                     de urgência
                                 </Typography>
                             </Box>
-                        </Grid>
+                        </Grid> */}
 
-                        <Grid item xs={12} style={{ marginTop: "50px" }}>
+                        {/* <Grid item xs={12} style={{ marginTop: "50px" }}>
                             <Box
                                 style={{
                                     marginBottom: "15px",
@@ -336,9 +336,9 @@ export default function Img(props) {
                                     o serviço de urgência mais proximo?
                                 </Typography>
                             </Box>
-                        </Grid>
+                        </Grid> */}
 
-                        <Grid
+                        {/* <Grid
                             item
                             xs={12}
 
@@ -376,7 +376,7 @@ export default function Img(props) {
                                 <Grid xs>
                                 </Grid>
                             </Grid>
-                        </Grid>
+                        </Grid> */}
                     </Grid>
                 </Grid>
 
