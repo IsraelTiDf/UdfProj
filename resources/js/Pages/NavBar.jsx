@@ -117,7 +117,7 @@ const ResponsiveAppBar = (props) => {
           <LocalHospitalIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <Button
-              href="#sobrenos"
+              href="/#sobrenos"
               onClick={handleCloseNavMenu}
               sx={{
                 my: 2,
@@ -132,7 +132,7 @@ const ResponsiveAppBar = (props) => {
             </Button>
 
                   <Button
-                    href="#especialidade"
+                    href="/#especialidade"
                     onClick={handleCloseNavMenu}
                     sx={{
                         my: 2,
@@ -159,7 +159,7 @@ const ResponsiveAppBar = (props) => {
                     }}>Emergência</Button> */}
 
             <Button
-              href="#contatos"
+              href="/#contatos"
               onClick={handleCloseNavMenu}
               sx={{
                 my: 2,

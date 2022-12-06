@@ -65,14 +65,15 @@ function EditarUser({
     // event.preventDefault();
     // alert('Ainda nao');
 
-    await editar(interessadoId, data, resultDispatch, onClose);
+    // await editar(interessadoId, data, resultDispatch, onClose);
 
-    // await axios({
-    //     method: "post",
-    //     url: `/editar-usuario/${interessadoId}`,
-    //     data: data,
-    // });
-    // });
+    await axios({
+        method: "put",
+        url: `/editar-usuario/${interessadoId}`,
+        data: data,
+       
+    });
+  
   };
   console.log(formValues);
   return (
@@ -98,9 +99,9 @@ function EditarUser({
         <Grid container spacing={2}>
           {/* nome */}
           <Grid item xs={12}>
-            {/* <Controller
+            <Controller
               control={control}
-              name="nome"
+              name="name"
               rules={{ required: true }}
               render={({ field: { value, name, ref, onBlur, onChange } }) => (
                 <TextField
@@ -119,15 +120,15 @@ function EditarUser({
                   }}
                 />
               )}
-            /> */}
-            <TextField
+            />
+            {/* <TextField
                 key="name"
                 fullWidth
                 label="Nome"
                 variant="standard"
                 inputProps={{ readOnly: true }}
                 defaultValue={formValues.nome}
-              />
+              /> */}
           </Grid>
           <Box width="100%" />
           <>
@@ -147,7 +148,7 @@ function EditarUser({
 
             {/* email */}
             <Grid item xs={12}>
-              {/* <Controller
+              <Controller
                 control={control}
                 name="email"
                 render={({ field: { value, name, ref, onBlur, onChange } }) => (
@@ -166,15 +167,15 @@ function EditarUser({
                     }}
                   />
                 )}
-              /> */}
-              <TextField
+              />
+              {/* <TextField
                 key="email"
                 fullWidth
                 label="EMAIL"
                 variant="standard"
                 inputProps={{ readOnly: true }}
                 defaultValue={formValues.email}
-              />
+              /> */}
             </Grid>
 
 
@@ -183,7 +184,7 @@ function EditarUser({
 
             {/* celular */}
             <Grid item xs={12} sm={6}>
-              {/* <Controller
+              <Controller
                 control={control}
                 name="celular"
                 render={({ field: { value, name, ref, onBlur, onChange } }) => (
@@ -202,15 +203,15 @@ function EditarUser({
                     }}
                   />
                 )}
-              /> */}
-              <TextField
+              />
+              {/* <TextField
                 key="telefone"
                 fullWidth
                 label="Telefone"
                 variant="standard"
                 inputProps={{ readOnly: true }}
                 defaultValue={formValues.telefone}
-              />
+              /> */}
             </Grid>
 
             {/* telefone fixo */}

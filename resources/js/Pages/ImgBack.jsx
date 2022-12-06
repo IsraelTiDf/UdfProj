@@ -85,7 +85,7 @@ export default function Img(props) {
             <Box
                 component="form"
                 onSubmit={handleSubmit}
-                sx={{ paddingTop: { lg: '150px', md: '130px', sm: '100px', xs: '100px' }, backgroundColor: "#FFEFE7" }}
+                sx={{pb:10, paddingTop: { lg: '150px', md: '130px', sm: '100px', xs: '100px' }, backgroundColor: "#FFEFE7" }}
             >
                 <Grid id="sobrenos" container spacing={2}>
                     <Grid item xs={12} sm={12} lg={6} >
@@ -126,12 +126,8 @@ export default function Img(props) {
                                     }}
                                 >
                                     <Typography sx={{ typography: { md: 'h5', sm: 'h6', xs: 'subtitle1' } }}>
-                                        A ferramenta de busca de especialidades
-                                        médicas tem o propósito de reunir e
-                                        disponibilizar de maneira rápida e fácil a
-                                        descrição simplificada das principais
-                                        especialidades médicas que são
-                                        regulamentadas no Brasil.
+                                    Essa ferramenta tem o propósito de reunir e localizar diversas especialidades médicas 
+                                            que são regulamentadas no Brasil de maneira fácil e rápida.
                                     </Typography>
                                 </Box>
                             </Grid>
@@ -147,14 +143,13 @@ export default function Img(props) {
                                     }}
                                 >
                                     <Typography sx={{ typography: { md: 'h5', sm: 'h6', xs: 'subtitle1' } }}>
-                                        Além disso, a ferramenta localiza e traça
-                                        uma rota entre você e a unidade médica mais
-                                        próxima, ou a de sua preferência.
+                                        Selecione a especialidade médica e localize
+                                        a unidade credenciada mais próxima de você.
                                     </Typography>
                                 </Box>
                             </Grid>
 
-                            <Grid item xs={12}>
+                            {/* <Grid item xs={12}>
                                 <Box
                                     style={{
                                         textAlign: "justify",
@@ -169,7 +164,7 @@ export default function Img(props) {
                                     </Typography>
                                 </Box>
 
-                            </Grid>
+                            </Grid> */}
 
                             <Grid item xs={12} sx={{ mt: 3 }}>
                                 <Grid container spacing={2}>
@@ -189,7 +184,7 @@ export default function Img(props) {
                     </Grid>
                     <Grid item xs={12} sm={12} lg={6} sx={{ mt: 7 }}>
                         <Box sx={{ display: { md: 'flex', sm: 'none', xs: 'none' }, justifyContent: 'center', height: 500 }}>
-                            <img src={gpsAmb} alt="gps-amb" />;
+                            <img src={gpsAmb} alt="gps-amb" />
                         </Box>
                     </Grid>
                 </Grid>
@@ -198,7 +193,7 @@ export default function Img(props) {
                     id="especialidade"
                     container
                     spacing={3}
-                    sx={{ p: { md: 10, sm: 5, xs: 4 }, mt: { md: 10, sm: 1, xs: 1 } }}
+                    sx={{ p: { md: 15, sm: 5, xs: 4 }, mt: { md: 10, sm: 1, xs: 1 } }}
                 >
                     <Grid item xs={12} sm={12} md={12} lg={12}>
                         <Box
@@ -254,7 +249,7 @@ export default function Img(props) {
                     </Grid>
                     <Grid item xs={12} sm={3} md={2} lg={2} sx={{ mt: 1 }}>
                         <Button style={{ color: "white", backgroundColor: '#ea1212', width: '100%' }} href={route("mapa")} >
-                            Buscar
+                            Buscar no Mapa
                         </Button>
                     </Grid>
                     <Grid item xs={12} sm={12} md={6} lg={6}>

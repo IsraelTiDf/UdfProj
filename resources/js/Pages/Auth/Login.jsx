@@ -64,6 +64,7 @@ export default function Login(props, { status, canResetPassword }) {
             {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
 
             <form onSubmit={submit}>
+            <Grid item xs={6} sm={6} lg={6}>
                 <Grid>
                     <InputLabel forInput="email" value="Email" />
 
@@ -71,7 +72,7 @@ export default function Login(props, { status, canResetPassword }) {
                         type="text"
                         name="email"
                         value={data.email}
-                        className="mt-1 block w-full"
+                        className="mt-1 mb-4 p-2 block w-full"
                         autoComplete="username"
                         isFocused={true}
                         handleChange={onHandleChange}
@@ -87,7 +88,7 @@ export default function Login(props, { status, canResetPassword }) {
                         type="password"
                         name="password"
                         value={data.password}
-                        className="mt-1 block w-full"
+                        className="mt-1 mb-4 p-2 block w-full"
                         autoComplete="current-password"
                         handleChange={onHandleChange}
                     />
@@ -116,6 +117,7 @@ export default function Login(props, { status, canResetPassword }) {
                     <PrimaryButton className="ml-4" processing={processing}>
                         Entrar
                     </PrimaryButton>
+                </Grid>
                 </Grid>
             </form>
         </GuestLayout>

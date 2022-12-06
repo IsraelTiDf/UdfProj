@@ -85,7 +85,7 @@ const Header = ({ onPlaceChanged, onLoad }) => {
     // </AppBar>
 
 
-<AppBar position="static" style={{ background: '#FFFFFF' }}>
+<AppBar position="fixed" style={{ background: '#FFFFFF' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters >
 

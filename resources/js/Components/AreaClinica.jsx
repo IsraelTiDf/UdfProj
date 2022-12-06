@@ -240,8 +240,8 @@ export default function AreaClinica(props) {
              }
          > */}
             <Grid container spacing={1}>
-                <Grid item xs={3}></Grid>
-                <Grid item xs={12} sm={12} lg={6} sx={{ mt: 5 }}>
+                <Grid item xs={2}></Grid>
+                <Grid item xs={12} sm={12} lg={8} sx={{ mt: 5 }}>
                     <div>
                         {iserror && (
                             <Alert severity="error">

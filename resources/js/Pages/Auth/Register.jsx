@@ -114,7 +114,7 @@ export default function Register(props) {
                         type="text"
                         name="name"
                         value={data.name}
-                        className="mt-1 block w-full"
+                        className="mt-0.5 mb-4 p-2 block w-full"
                         autoComplete="name"
                         isFocused={true}
                         handleChange={onHandleChange}
@@ -131,7 +131,7 @@ export default function Register(props) {
                         type="text"
                         name="cpf"
                         value={data.cpf}
-                        className="mt-1 block w-full"
+                        className="mt-0.5 mb-2 p-2 block w-full"
                         autoComplete="cpf"
                         isFocused={true}
                         // rules={{
@@ -155,7 +155,7 @@ export default function Register(props) {
                         // }}
                     />
 
-                    <InputError message={cpfInvalid === false && "CPF é invalido" ||errors.cpf} className="mt-2" />
+                    <InputError message={cpfInvalid === false && "CPF é invalido" ||errors.cpf} className="mb-2" />
                 </Grid>
 
                 <Grid>
@@ -165,7 +165,7 @@ export default function Register(props) {
                         type="text"
                         name="telefone"
                         value={data.telefone}
-                        className="mt-1 block w-full"
+                        className="mt-0.5 mb-4 p-2  block w-full"
                         autoComplete="telefone"
                         isFocused={true}
                         handleChange={onHandleChange}
@@ -182,7 +182,7 @@ export default function Register(props) {
                         type="date"
                         name="dt_nascimento"
                         value={data.dt_nascimento}
-                        className="mt-1 block w-full"
+                        className="mt-0.5 mb-4 p-2  block w-full"
                         autoComplete="dt_nascimento"
                         isFocused={true}
                         handleChange={onHandleChange}
@@ -199,7 +199,7 @@ export default function Register(props) {
                         type="text"
                         name="endereco"
                         value={data.endereco}
-                        className="mt-1 block w-full"
+                        className="mt-0.5 mb-4 p-2  block w-full"
                         autoComplete="endereco"
                         isFocused={true}
                         handleChange={onHandleChange}
@@ -209,14 +209,14 @@ export default function Register(props) {
                     <InputError message={errors.endereco} className="mt-2" />
                 </Grid>
 
-                <Grid className="mt-4">
+                <Grid>
                     <InputLabel forInput="email" value="Email" />
 
                     <TextInput
                         type="email"
                         name="email"
                         value={data.email}
-                        className="mt-1 block w-full"
+                        className="mt-0.5 mb-4 p-2 block w-full "
                         autoComplete="username"
                         handleChange={onHandleChange}
                         required
@@ -232,7 +232,7 @@ export default function Register(props) {
                         type="password"
                         name="password"
                         value={data.password}
-                        className="mt-1 block w-full"
+                        className="mt-0.5 mb-4 p-2 block w-full"
                         autoComplete="new-password"
                         handleChange={onHandleChange}
                         required
@@ -248,7 +248,7 @@ export default function Register(props) {
                         type="password"
                         name="password_confirmation"
                         value={data.password_confirmation}
-                        className="mt-1 block w-full"
+                        className="mt-0.5 mb-4 p-2 block w-full"
                         handleChange={onHandleChange}
                         required
                     />

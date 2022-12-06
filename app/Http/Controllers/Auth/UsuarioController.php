@@ -46,7 +46,7 @@ class UsuarioController extends Controller
             $pessoa->telefone = $input['telefone'];
             $pessoa->email = $input['email'];
             $pessoa->dt_nascimento = $input['dt_nascimento'];
-            $pessoa->endereco = $input['endereco'];
+            // $pessoa->endereco = $input['endereco'];
             $pessoa->save();
 
             return $this->respondSuccess(null, 'Usuario alterado.');
