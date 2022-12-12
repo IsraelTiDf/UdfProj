@@ -4,7 +4,6 @@ import Img from '/resources/js/Pages/ImgBack.jsx';
 import NavBar from '/resources/js/Pages/NavBar.jsx';
 
 export default function Welcome(props) {
-    // console.log(props);
     return (
         <>
             <Head title="DIND" />

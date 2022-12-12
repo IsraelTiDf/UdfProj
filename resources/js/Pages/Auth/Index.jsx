@@ -5,7 +5,6 @@ import TabPainel from '../TabPainel.jsx';
 import NavBar from '../NavBar.jsx';
 
 function Index(props) {
-console.log(props);
 
 return (
     <>

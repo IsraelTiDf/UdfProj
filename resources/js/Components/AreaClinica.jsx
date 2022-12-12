@@ -190,7 +190,6 @@ export default function AreaClinica(props) {
 
       const handleRowAdd = (newData, resolve) => {
         //validation
-        console.log(newData);
         let errorList = []
         if(newData.nome === undefined){
             errorList.push("Inserir o Nome")

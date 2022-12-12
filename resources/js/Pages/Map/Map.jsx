@@ -76,7 +76,6 @@ const Map = ({
                             lng={Number(clinica.longitude)}
                             key={i}
                             >
-                              {console.log(clinica)}
                             {!matches
                               ? <LocationOnOutlinedIcon color="primary" fontSize="large" />
                               : (

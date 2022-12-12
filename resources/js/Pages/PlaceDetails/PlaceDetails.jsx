@@ -4,13 +4,13 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneIcon from '@mui/icons-material/Phone';
 import Rating from '@mui/lab/Rating';
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
+import PlaceIcon from '@mui/icons-material/Place';
 
 // import useStyles from './styles.js';
 import Imagem from '/public/img/clinica.jpg';
 // import Imagem from '/public/img/amb.png';
 
-const PlaceDetails = ({ place, selected, refProp,clinica }) => {
-    console.log(clinica);
+const PlaceDetails = ({ place, selected, refProp,clinica,onPlaceLocal }) => {
   if (selected) refProp?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   const classes = {
       chip: {
@@ -59,9 +59,13 @@ const PlaceDetails = ({ place, selected, refProp,clinica }) => {
             <LocalHospitalIcon /> {clinica.especialidade.nome}
         </Typography>
 
+        <Typography variant="body2" color="textSecondary" className={classes.spacing}>
+            <PlaceIcon /> {clinica.endereco}
+        </Typography>
+
       </CardContent>
       <CardActions>
-        <Button size="small" color="primary" onClick={''}>
+        <Button size="small" color="primary" onClick={()=>{onPlaceLocal(clinica.latitude,clinica.longitude)}}>
           Local
         </Button>
         {/* <Button size="small" color="primary" onClick={() => window.open(place.website, '_blank')}>

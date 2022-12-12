@@ -22,9 +22,9 @@ class UserSeeder extends Seeder
             'cpf' => '877.516.553-80',
             'endereco' => 'QJ 19 Conjunto E casa 03',
             'telefone' => '(61)98483-1372',
-            'email' => Str::random(10).'@gmail.com',
+            'email' => 'teste@gmail.com',
             'password' => Hash::make('password'),
-            'dt_nascimento' => '1986-06-02',
+            'dt_nascimento' => '1990-04-02',
             'flg_admin' => '0',
         ],
         [

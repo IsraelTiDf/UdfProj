@@ -13,7 +13,6 @@ import Map from "../Map/Map";
 
 export default function MapView(props) {
     const clinicas = props.clinca;
-    console.log(clinicas);
 const [type, setType] = useState("restaurants");
 const [rating, setRating] = useState("");
 
@@ -38,7 +37,6 @@ useEffect(() => {
 
 useEffect(() => {
     const filtered = clinicas.filter((clinica) => Number(5) > rating);
-    console.log(filtered);
     setFilteredPlaces(filtered);
 }, [rating]);
 
@@ -67,10 +65,12 @@ const onLoad = (autoC) => setAutocomplete(autoC);
 const onPlaceChanged = () => {
     const lat = autocomplete.getPlace().geometry.location.lat();
     const lng = autocomplete.getPlace().geometry.location.lng();
-    // console.log(lat,lng);
     setCoords({ lat, lng });
 };
-    console.log(coords);
+const onPlaceLocal = (latitude,longitude) => {
+    
+    
+};
     return (
         <>
             <>
@@ -89,6 +89,7 @@ const onPlaceChanged = () => {
                             setType={setType}
                             rating={rating}
                             setRating={setRating}
+                            onPlaceLocal={onPlaceLocal}
                         />
                     </Grid>
                     <Grid

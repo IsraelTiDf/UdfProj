@@ -65,15 +65,19 @@ const stylou = {
 
 export default function Img(props) {
     const { handleSubmit, reset, setValue, control } = useForm();
-    const [value, setValueP] = useState("");
+    const [value, setValueEspe] = useState("");
+    const [nomeEspe, setValueNome] = useState("");
     const dados = props.props.dados;
+    const auth = props.props.auth.user;
 
     const handleChange = (data) => {
-        console.log(data);
-
-        setValueP(data.ds_especialidade);
+        setValueEspe(data.ds_especialidade);
+        setValueNome(data.nome);
     };
 
+    const handleAlert = () => {
+        alert('Logar No Sistema')
+    };
     const methods = useForm({
         mode: "all",
         shouldUnregister: false,
@@ -171,9 +175,11 @@ export default function Img(props) {
                                     <Grid xs>
                                     </Grid>
                                     <Grid xs={10} md={8} lg={6}>
+                                     
                                         <Button style={{ color: "white", backgroundColor: '#ea1212', width: '100%' }} href="#especialidade" >
-                                            ir até ferramenta
+                                            Buscar Especialidade
                                         </Button>
+                                        
                                     </Grid>
                                     <Grid xs>
                                     </Grid>
@@ -248,9 +254,14 @@ export default function Img(props) {
                         </Box>
                     </Grid>
                     <Grid item xs={12} sm={3} md={2} lg={2} sx={{ mt: 1 }}>
+                                        
+                        {auth?
                         <Button style={{ color: "white", backgroundColor: '#ea1212', width: '100%' }} href={route("mapa")} >
                             Buscar no Mapa
-                        </Button>
+                        </Button> :(<Button style={{ color: "white", backgroundColor: '#ea1212', width: '100%' }} onClick={handleAlert} >
+                            Buscar no Mapa
+                        </Button>)}
+
                     </Grid>
                     <Grid item xs={12} sm={12} md={6} lg={6}>
                         <Box
@@ -386,7 +397,7 @@ export default function Img(props) {
                         xs={12} sm={12} lg={12}
                         sx={{ display: 'flex', justifyContent: 'center', mt: 15, mb: 3 }}
                     >
-                        <Typography sx={{ typography: { sm: 'h4', xs: 'h5' }, color: "#1976D2 " }}>
+                        <Typography sx={{ typography: { sm: 'h4', xs: 'h5' }, color: "#591010" }}>
                             Contatos
                         </Typography>
                     </Grid>
@@ -395,7 +406,7 @@ export default function Img(props) {
                             href="https://www.facebook.com/"
                             target="_blank"
                         >
-                            <FacebookIcon style={{ fontSize: "70px" }} />
+                            <FacebookIcon style={{ fontSize: "70px" }} sx={{color: "#591010"}} />
                         </Button>
                     </Grid>
                     <Grid item xs={4} sm={4} lg={4} sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -403,7 +414,7 @@ export default function Img(props) {
                             href="https://www.whatsapp.com/"
                             target="_blank"
                         >
-                            <WhatsAppIcon style={{ fontSize: "70px" }} />
+                            <WhatsAppIcon style={{ fontSize: "70px" }} sx={{color: "#591010"}}/>
                         </Button>
                     </Grid>
                     <Grid item xs={4} sm={4} lg={4} sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -411,7 +422,7 @@ export default function Img(props) {
                             href="https://www.instagram.com/"
                             target="_blank"
                         >
-                            <InstagramIcon style={{ fontSize: "70px" }} />
+                            <InstagramIcon style={{ fontSize: "70px" }} sx={{color: "#591010"}}/>
                         </Button>
                     </Grid>
                 </Grid>

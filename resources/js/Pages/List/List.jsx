@@ -1,12 +1,12 @@
 import React, { useState, useEffect, createRef } from 'react';
-import { CircularProgress, Grid, Typography, InputLabel, MenuItem, FormControl, Select,createTheme } from '@mui/material';
+import { CircularProgress, Grid, Typography, InputLabel, MenuItem, FormControl, Select,createTheme,Tabs,Box } from '@mui/material';
 
 import PlaceDetails from '../PlaceDetails/PlaceDetails';
 // import useStyles from './styles.js';
 
 const theme = createTheme();
 
-const List = ({ places, type, setType, rating, setRating, childClicked, isLoading,clinicas }) => {
+const List = ({ places, type, setType, rating, setRating, childClicked, isLoading,clinicas,onPlaceLocal }) => {
   const [elRefs, setElRefs] = useState([]);
   const classes = {
     formControl: {
@@ -27,16 +27,24 @@ const List = ({ places, type, setType, rating, setRating, childClicked, isLoadin
       list: {
         height: '60vh', overflow: 'auto',
       },
-  };
+    };
 
   useEffect(() => {
     setElRefs((refs) => Array(clinicas.length).fill().map((_, i) => refs[i] || createRef()));
   }, [clinicas]);
 
-  console.log(places);
   return (
     <div className={classes.container}>
       <Typography variant="h4">Clinicas & Especialidades</Typography>
+      <Box
+      sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 550 }}
+      > 
+      <Tabs
+              orientation="vertical"
+              variant="scrollable"
+              aria-label="Vertical tabs example"
+              sx={{ borderRight: 1, borderColor: 'divider' }}
+            >
 
         <>
           {/* <FormControl className={classes.formControl}>
@@ -56,15 +64,22 @@ const List = ({ places, type, setType, rating, setRating, childClicked, isLoadin
               <MenuItem value="4.5">Above 4.5</MenuItem>
             </Select>
           </FormControl> */}
+            
+            
           <Grid container spacing={3} className={classes.list}>
             {clinicas?.map((clinica, i) => (
-                // console.log(clinicas)
-              <Grid ref={elRefs[i]} key={i} item xs={8}>
-                <PlaceDetails selected={Number(childClicked) === i} refProp={elRefs[i]} clinica={clinica} />
+              <Grid ref={elRefs[i]} key={i} item xs={10}>
+                <PlaceDetails selected={Number(childClicked) === i} refProp={elRefs[i]} clinica={clinica} onPlaceLocal={onPlaceLocal} />
               </Grid>
-            ))}
+              ))}
           </Grid>
+              
+              
+              
+          
         </>
+              </Tabs>
+              </Box>
 
     </div>
   );

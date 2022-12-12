@@ -41,7 +41,12 @@ class UsuarioController extends Controller
         try {
             $input = $request->all();
             $pessoa = User::findOrFail($id);
+            if(isset($input['name'])){
             $pessoa->name = $input['name'];
+            }
+            if(isset($input['nome'])){
+            $pessoa->name = $input['nome'];    
+            }
             $pessoa->cpf = $input['cpf'];
             $pessoa->telefone = $input['telefone'];
             $pessoa->email = $input['email'];

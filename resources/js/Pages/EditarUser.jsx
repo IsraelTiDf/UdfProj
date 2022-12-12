@@ -2,14 +2,16 @@ import { Box, Grid, TextField } from "@mui/material";
 import React, { useEffect } from "react";
 // import PropTypes from "prop-types";
 import { useForm, Controller } from "react-hook-form";
-// import {
-//   celularMask,
-//   cpfMask,
-//   telefoneFixoMask,
-// } from "@/shared/utils/input-mask";
+import {
+  celularMask,
+  cpfMask,
+  // telefoneFixoMask,
+} from '@/Layouts/input-mask';
 import Modal from "../Layouts/Modal.jsx";
+import axios from "axios";
 
 import useEditar from "./clinica/useEditar";
+const api = axios.create({});
 
 function EditarUser({
   formValues,
@@ -41,11 +43,11 @@ function EditarUser({
       case "cpf":
         value = cpfMask(value);
         break;
-      case "celular":
-        value = celularMask(value);
-        break;
+      // case "celular":
+      //   value = celularMask(value);
+      //   break;
       case "telefone":
-        value = telefoneFixoMask(value);
+        value = celularMask(value);
         break;
       default:
         break;
@@ -62,20 +64,18 @@ function EditarUser({
   };
 
   const handleFormSubmit = async (data, event) => {
-    // event.preventDefault();
-    // alert('Ainda nao');
+    api.put(`/editar-usuario/${interessadoId}`,data)
+    window.location.reload()
 
-    // await editar(interessadoId, data, resultDispatch, onClose);
-
-    await axios({
-        method: "put",
-        url: `/editar-usuario/${interessadoId}`,
-        data: data,
+    // await axios({
+    //     method: "put",
+    //     url: `/editar-usuario/${interessadoId}`,
+    //     data: data,
        
-    });
+    // });
   
   };
-  console.log(formValues);
+
   return (
     <Modal
       open={open}
@@ -101,7 +101,7 @@ function EditarUser({
           <Grid item xs={12}>
             <Controller
               control={control}
-              name="name"
+              name="nome"
               rules={{ required: true }}
               render={({ field: { value, name, ref, onBlur, onChange } }) => (
                 <TextField
@@ -186,7 +186,7 @@ function EditarUser({
             <Grid item xs={12} sm={6}>
               <Controller
                 control={control}
-                name="celular"
+                name="telefone"
                 render={({ field: { value, name, ref, onBlur, onChange } }) => (
                   <TextField
                     name={name}

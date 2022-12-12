@@ -142,7 +142,7 @@ const ResponsiveAppBar = (props) => {
                         fontSize: '14px',
                         fontWeight: 600,
                         letterSpacing: '.1rem',
-                    }}>Especialidade médica</Button>
+                    }}>Especialidades</Button>
 
 
                   {/* <Button

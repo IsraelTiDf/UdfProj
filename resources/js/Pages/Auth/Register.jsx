@@ -56,12 +56,10 @@ export default function Register(props) {
         };
     }, []);
 
-    console.log(errors);
     const [cpfInvalid, setcpfInvalid] = useState(null);
     const onHandleChange = (event) => {
         const {name} = event.target;
         let {value} = event.target;
-        console.log(cpf.isValid(value));
 
         switch(name){
             case "cpf":
@@ -81,7 +79,6 @@ export default function Register(props) {
         // alert(event.target.value);
         // event.target.value = cpfMask(event.target.value);
     };
-    console.log(cpfInvalid);
 
     const submit = (e) => {
         e.preventDefault();

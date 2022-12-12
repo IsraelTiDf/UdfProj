@@ -38,14 +38,13 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function Crud(props) {
-    // console.log(props);
     const { value, onEditarClick } = props;
 
     return (
         <Box sx={{ flexGrow: 1, mt: 5 }}>
             <Grid container spacing={2}>
                 <Grid item xs></Grid>
-                <Grid item xs={12} md={8} lg={6}>
+                <Grid item xs={12} md={8} lg={8}>
                     <Item>
                         <Box>
                             <Button
